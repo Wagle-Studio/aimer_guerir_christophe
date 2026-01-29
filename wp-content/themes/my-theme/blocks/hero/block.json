@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "my-theme/hero",
+  "title": "Hero",
+  "category": "design",
+  "icon": "cover-image",
+  "description": "Hero section with image and buttons.",
+  "keywords": ["hero", "banner"],
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "text": {
+      "type": "string",
+      "default": ""
+    },
+    "imageId": {
+      "type": "number"
+    },
+    "primaryButtonLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "primaryButtonUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "secondaryButtonLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "secondaryButtonUrl": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": false,
+    "anchor": false,
+    "customClassName": false,
+    "color": {
+      "text": false,
+      "background": false,
+      "link": false,
+      "gradients": false,
+      "defaultPalette": false,
+      "defaultGradients": false
+    },
+    "spacing": {
+      "margin": false,
+      "padding": false,
+      "blockGap": false,
+      "defaultSpacingSizes": false
+    },
+    "typography": {
+      "fontSize": false,
+      "lineHeight": false,
+      "fontStyle": false,
+      "fontWeight": false,
+      "letterSpacing": false,
+      "textDecoration": false,
+      "textTransform": false,
+      "writingMode": false,
+      "defaultFontSizes": false,
+      "defaultFontStyles": false
+    },
+    "dimensions": {
+      "minHeight": false
+    },
+    "border": false,
+    "shadow": false,
+    "layout": false,
+    "duotone": false
+  },
+  "editorScript": ["file:./edit.js", "file:./index.js"],
+  "style": "file:./style.css",
+  "editorStyle": "file:./editor.css",
+  "render": "file:./render.php"
+}

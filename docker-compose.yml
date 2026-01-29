@@ -1,0 +1,50 @@
+services:
+  db:
+    image: mariadb:11.3
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME:-wordpress}
+      MYSQL_USER: ${WORDPRESS_DB_USER:-wordpress}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
+      MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_ROOT_PASSWORD:-root}
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -u root -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  wordpress:
+    image: wordpress:php8.2-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WORDPRESS_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: "${WORDPRESS_DB_HOST:-db:3306}"
+      WORDPRESS_DB_USER: "${WORDPRESS_DB_USER:-wordpress}"
+      WORDPRESS_DB_PASSWORD: "${WORDPRESS_DB_PASSWORD:-wordpress}"
+      WORDPRESS_DB_NAME: "${WORDPRESS_DB_NAME:-wordpress}"
+      WORDPRESS_TABLE_PREFIX: "${WORDPRESS_TABLE_PREFIX:-wp_}"
+      WORDPRESS_DEBUG: "${WORDPRESS_DEBUG:-false}"
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "${PHPMYADMIN_PORT:-8081}:80"
+    environment:
+      PMA_HOST: "${WORDPRESS_DB_HOST:-db}"
+      PMA_USER: "${WORDPRESS_DB_USER:-wordpress}"
+      PMA_PASSWORD: "${WORDPRESS_DB_PASSWORD:-wordpress}"
+    volumes:
+      - ./.docker/phpmyadmin/servername.conf:/etc/apache2/conf-enabled/servername.conf:ro
+
+volumes:
+  db_data:
