@@ -1,0 +1,132 @@
+.services {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 0;
+  gap: 80px;
+}
+
+.services__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.services__pill {
+  width: max-content;
+  text-align: center;
+  padding: 6px 24px;
+  margin: 0 auto;
+  border-radius: 24px;
+  background-color: var(--primary-25);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.services__header {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  text-align: center;
+}
+
+.services__title {
+  font-size: 40px;
+}
+
+.services__introduction {
+  text-align: justify;
+}
+
+.services__card-title {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.services__card-title > svg {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  min-width: 18px;
+  max-width: 18px;
+  height: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  padding: 9px;
+  color: var(--white);
+  background-color: var(--primary-75);
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+
+.services__card-description {
+  text-align: justify;
+}
+
+.services__main-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+.services__card--main,
+.services__card--other {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px;
+  border-radius: 6px;
+  border: 1px solid var(--primary-25);
+  background-color: var(--cream);
+}
+
+.services__card--other {
+  max-width: max-content;
+  margin: 0 auto;
+}
+
+.services__card--other > .services__card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.services__card--other > .services__card-list > .services__card-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  text-align: start;
+}
+
+.services__card--other > .services__card-list > .services__card-item  > svg {
+  width: 18px;
+  min-width: 18px;
+  max-width: 18px;
+  height: 18px;
+  min-height: 18px;
+  max-height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .services__card-title {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .services__introduction {
+    text-align: center;
+  }
+
+  .services__main-cards {
+    grid-template-columns: repeat(2, 48%);
+  }
+}

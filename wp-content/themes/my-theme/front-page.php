@@ -2,28 +2,23 @@
 
 <main>
 	<?php
-	$title = get_theme_mod('my_theme_hero_title', '');
-	$text  = get_theme_mod('my_theme_hero_text', '');
-	$image_id = (int) get_theme_mod('my_theme_hero_image_id', 0);
+	$render = function (string $path): void {
+		$out = require get_theme_file_path($path);
+		echo "\n<!-- $path => " . gettype($out) . " : " . (is_scalar($out) ? $out : '') . " -->\n";
+		if (is_string($out) && $out !== '') {
+			echo $out;
+		}
+	};
 
-	$primary_label = get_theme_mod('my_theme_hero_primary_label', '');
-	$primary_url   = get_theme_mod('my_theme_hero_primary_url', '');
-
-	$secondary_label = get_theme_mod('my_theme_hero_secondary_label', '');
-	$secondary_url   = get_theme_mod('my_theme_hero_secondary_url', '');
-
-	// Reuse your existing hero markup rules
-	$attributes = [
-		'title' => $title,
-		'text' => $text,
-		'imageId' => $image_id,
-		'primaryButtonLabel' => $primary_label,
-		'primaryButtonUrl' => $primary_url,
-		'secondaryButtonLabel' => $secondary_label,
-		'secondaryButtonUrl' => $secondary_url,
-	];
-
-	echo (string) require get_theme_file_path('/blocks/hero/render.php');
+	$render('/blocks/hero/render.php');
+	$render('/blocks/pains/render.php');
+	$render('/blocks/therapeutic-support/render.php');
+	$render('/blocks/services/render.php');
+	$render('/blocks/cta/render.php');
+	$render('/blocks/about/render.php');
+	$render('/blocks/testimonials/render.php');
+	$render('/blocks/choose-practitioner/render.php');
+	$render('/blocks/newsletter/render.php');
 	?>
 </main>
 

@@ -1,26 +1,41 @@
 <?php
 
-// $attributes is provided by the block render callback.
-$title_raw       = isset($attributes['title']) ? $attributes['title'] : '';
-$text_raw        = isset($attributes['text']) ? $attributes['text'] : '';
-$image_id        = isset($attributes['imageId']) ? (int) $attributes['imageId'] : 0;
-$primary_label   = isset($attributes['primaryButtonLabel']) ? $attributes['primaryButtonLabel'] : '';
-$primary_url     = isset($attributes['primaryButtonUrl']) ? $attributes['primaryButtonUrl'] : '';
-$secondary_label = isset($attributes['secondaryButtonLabel']) ? $attributes['secondaryButtonLabel'] : '';
-$secondary_url   = isset($attributes['secondaryButtonUrl']) ? $attributes['secondaryButtonUrl'] : '';
+$title_raw        = get_theme_mod('my_theme_hero_title', '');
+$sub_title_raw    = get_theme_mod('my_theme_hero_sub_title', '');
+$introduction_raw = get_theme_mod('my_theme_hero_introduction', '');
+$identity_raw     = get_theme_mod('my_theme_hero_identity', '');
+$occupation_raw   = get_theme_mod('my_theme_hero_occupation', '');
+$image_id         = (int) get_theme_mod('my_theme_hero_image_id', 0);
+$primary_label    = get_theme_mod('my_theme_hero_primary_label', '');
+$primary_url      = get_theme_mod('my_theme_hero_primary_url', '');
+$secondary_label  = get_theme_mod('my_theme_hero_secondary_label', '');
+$secondary_url    = get_theme_mod('my_theme_hero_secondary_url', '');
 
-$title_has_content = '' !== trim(wp_strip_all_tags($title_raw));
-$text_has_content  = '' !== trim(wp_strip_all_tags($text_raw));
-$primary_label     = trim($primary_label);
-$primary_url       = trim($primary_url);
-$secondary_label   = trim($secondary_label);
-$secondary_url     = trim($secondary_url);
+$title_has_content         = '' !== trim(wp_strip_all_tags($title_raw));
+$sub_title_has_content     = '' !== trim(wp_strip_all_tags($sub_title_raw));
+$introduction_has_content  = '' !== trim(wp_strip_all_tags($introduction_raw));
+$identity_has_content      = '' !== trim(wp_strip_all_tags($identity_raw));
+$occupation_has_content    = '' !== trim(wp_strip_all_tags($occupation_raw));
+$primary_label             = trim($primary_label);
+$primary_url               = trim($primary_url);
+$secondary_label           = trim($secondary_label);
+$secondary_url             = trim($secondary_url);
 
-if (! $title_has_content || ! $text_has_content || ! $image_id || '' === $primary_label || '' === $primary_url) {
+if (
+	! $title_has_content ||
+	! $sub_title_has_content ||
+	! $introduction_has_content ||
+	! $identity_has_content ||
+	! $occupation_has_content ||
+	! $image_id ||
+	'' === $primary_label ||
+	'' === $primary_url
+) {
 	return '';
 }
 
-// Force a real URL for front output (avoids relative-only values like "/").
+$introduction_html = wpautop(wp_kses_post($introduction_raw));
+
 $primary_url = esc_url($primary_url);
 if ('' === $primary_url) {
 	return '';
@@ -29,11 +44,24 @@ if ('' === $primary_url) {
 $secondary_url = esc_url($secondary_url);
 $has_secondary = '' !== $secondary_label && '' !== $secondary_url;
 
+$image_meta = wp_get_attachment_metadata($image_id);
+$ratio_style = '';
+if (! empty($image_meta['width']) && ! empty($image_meta['height'])) {
+	$ratio_style = sprintf(
+		' style="--hero-image-ratio: %d / %d;"',
+		(int) $image_meta['width'],
+		(int) $image_meta['height']
+	);
+}
+
 $image_html = wp_get_attachment_image(
 	$image_id,
 	'full',
 	false,
-	array('class' => 'hero__image')
+	array(
+		'class' => 'identity__image',
+		'sizes' => '(max-width: 767px) 360px, 300px',
+	)
 );
 
 if (! $image_html) {
@@ -43,22 +71,37 @@ if (! $image_html) {
 ob_start();
 ?>
 <section class="hero">
-	<div class="hero__content">
-		<h1 class="hero__title"><?php echo wp_kses_post($title_raw); ?></h1>
-		<p class="hero__text"><?php echo wp_kses_post($text_raw); ?></p>
-		<div class="hero__actions">
-			<a class="hero__button hero__button--primary" href="<?php echo $primary_url; ?>">
-				<?php echo esc_html($primary_label); ?>
-			</a>
-			<?php if ($has_secondary) : ?>
-				<a class="hero__button hero__button--secondary" href="<?php echo $secondary_url; ?>">
-					<?php echo esc_html($secondary_label); ?>
+	<div class="hero__wrapper">
+		<div class="hero__content">
+			<div class="hero__header">
+				<h1 class="header__title"><?php echo wp_kses_post($title_raw); ?></h1>
+				<h2 class="header__subtitle"><?php echo wp_kses_post($sub_title_raw); ?></h2>
+			</div>
+			<div class="hero__intro"><?php echo $introduction_html; ?></div>
+			<div class="hero__actions">
+				<a class="btn btn--primary btn--icon" href="<?php echo $primary_url; ?>">
+					<?php echo esc_html($primary_label); ?>
+					<?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
 				</a>
-			<?php endif; ?>
+				<?php if ($has_secondary) : ?>
+					<a class="btn btn--secondary" href="<?php echo $secondary_url; ?>">
+						<?php echo esc_html($secondary_label); ?>
+					</a>
+				<?php endif; ?>
+			</div>
 		</div>
-	</div>
-	<div class="hero__media">
-		<?php echo $image_html; ?>
+		<div class="hero__identity">
+			<div class="identity__media" <?php echo $ratio_style; ?>>
+				<?php echo $image_html; ?>
+			</div>
+			<h3 class="identity__title">
+				<?php echo wp_kses_post($identity_raw); ?>
+				</br>
+				<span class="identity__subtitle">
+					<?php echo wp_kses_post($occupation_raw); ?>
+				</span>
+			</h3>
+		</div>
 	</div>
 </section>
 <?php
