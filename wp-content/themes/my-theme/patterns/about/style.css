@@ -73,11 +73,23 @@ img.about__image {
   gap: 32px;
 }
 
+.pattern-about .content__wrapper {
+  height: 100%;
+}
+
 .about__subpart {
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-top: 16px;
+}
+
+.pattern-about .about__subpart {
+  flex: 1;
+}
+
+.pattern-about .about__subpart .wp-block-buttons {
+  margin-top: auto;
 }
 
 @media screen and (min-width: 768px) {

@@ -27,6 +27,43 @@ add_action('after_setup_theme', function () {
 
 add_filter('should_load_remote_block_patterns', '__return_false');
 
+add_action('init', function () {
+	if (!is_admin()) {
+		return;
+	}
+
+	$theme = wp_get_theme();
+	$pattern_dir = wp_normalize_path($theme->get_stylesheet_directory() . '/patterns');
+	if (!is_dir($pattern_dir)) {
+		return;
+	}
+
+	$pattern_files = array_merge(
+		glob($pattern_dir . '/*.php') ?: [],
+		glob($pattern_dir . '/*/*.php') ?: []
+	);
+
+	if (empty($pattern_files)) {
+		return;
+	}
+
+	$signature_parts = [];
+	foreach ($pattern_files as $file) {
+		$mtime = filemtime($file);
+		$signature_parts[] = $file . '|' . ($mtime ? $mtime : 0);
+	}
+	sort($signature_parts);
+	$signature = md5(implode(';', $signature_parts));
+
+	$option_key = 'my_theme_patterns_signature';
+	$stored_signature = (string) get_option($option_key, '');
+	if ($signature !== $stored_signature) {
+		$cache_hash = md5($theme->get_theme_root() . '/' . $theme->get_stylesheet());
+		delete_site_transient('wp_theme_files_patterns-' . $cache_hash);
+		update_option($option_key, $signature, false);
+	}
+}, 1);
+
 add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context) {
 	if (! isset($editor_context->post) || $editor_context->post->post_type !== 'page') {
 		return $allowed_blocks;

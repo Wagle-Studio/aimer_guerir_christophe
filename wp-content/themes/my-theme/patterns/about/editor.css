@@ -1,8 +1,11 @@
-.about {
+.editor-styles-wrapper .about {
   background-color: var(--cream);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
-.about__wrapper {
+.editor-styles-wrapper .about__wrapper {
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -11,29 +14,29 @@
   padding: 120px 24px;
 }
 
-.content__header {
+.editor-styles-wrapper .content__header {
   display: flex;
   flex-direction: column;
 }
 
-.header__title {
+.editor-styles-wrapper .header__title {
   font-size: 40px;
 }
 
-.header__subtitle {
+.editor-styles-wrapper .header__subtitle {
   color: var(--primary);
   font-family: var(--font-body);
   font-size: 24px;
 }
 
-.about__content {
+.editor-styles-wrapper .about__content {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
   text-align: justify;
 }
 
-.content__media {
+.editor-styles-wrapper .content__media {
   display: block;
   width: 100%;
   aspect-ratio: var(--about-image-ratio, auto);
@@ -41,7 +44,7 @@
   margin: 0 auto;
 }
 
-.about__image {
+.editor-styles-wrapper .about__image {
   display: block;
   width: 100%;
   margin: 0;
@@ -51,41 +54,53 @@
   overflow: hidden;
 }
 
-.about__image img {
+.editor-styles-wrapper .about__image img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-img.about__image {
+.editor-styles-wrapper img.about__image {
   height: auto;
   object-fit: contain;
 }
 
-.about__image figcaption {
+.editor-styles-wrapper .about__image figcaption {
   display: none;
 }
 
-.content__wrapper {
+.editor-styles-wrapper .content__wrapper {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-.about__subpart {
+.editor-styles-wrapper .pattern-about .content__wrapper {
+  height: 100%;
+}
+
+.editor-styles-wrapper .about__subpart {
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-top: 16px;
 }
 
+.editor-styles-wrapper .pattern-about .about__subpart {
+  flex: 1;
+}
+
+.editor-styles-wrapper .pattern-about .about__subpart .wp-block-buttons {
+  margin-top: auto;
+}
+
 @media screen and (min-width: 768px) {
-  .about__content {
+  .editor-styles-wrapper .about__content {
     grid-template-columns: minmax(0, clamp(280px, 40vw, 520px)) minmax(0, 1fr);
   }
 
-  .content__media {
+  .editor-styles-wrapper .content__media {
     margin: 0;
     max-width: 100%;
   }
