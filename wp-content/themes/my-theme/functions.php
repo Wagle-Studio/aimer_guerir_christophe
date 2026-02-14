@@ -1,8 +1,61 @@
 <?php
 
+add_action('after_setup_theme', function () {
+	add_theme_support('editor-styles');
+	$editor_styles = ['assets/css/editor.css'];
+	$theme_dir     = wp_normalize_path(get_theme_file_path());
+	$pattern_css   = glob($theme_dir . '/patterns/*/editor.css');
+	if (is_array($pattern_css)) {
+		sort($pattern_css);
+		foreach ($pattern_css as $path) {
+			$path = wp_normalize_path($path);
+			$relative = ltrim(str_replace($theme_dir . '/', '', $path), '/');
+			$editor_styles[] = $relative;
+		}
+	}
+	add_editor_style($editor_styles);
+	add_theme_support('align-wide');
+	add_theme_support('wp-block-styles');
+	add_theme_support('responsive-embeds');
+
+	register_block_pattern_category('my-theme', [
+		'label' => 'My Theme',
+	]);
+
+	remove_theme_support('core-block-patterns');
+});
+
+add_filter('should_load_remote_block_patterns', '__return_false');
+
+add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context) {
+	if (! isset($editor_context->post) || $editor_context->post->post_type !== 'page') {
+		return $allowed_blocks;
+	}
+
+	return [
+		'core/heading',
+		'core/paragraph',
+		'core/list',
+		'core/quote',
+		'core/details',
+		'core/image',
+		'core/gallery',
+		'core/columns',
+		'core/column',
+		'core/group',
+		'core/buttons',
+		'core/button',
+		'core/spacer',
+		'core/separator',
+		'core/html',
+		'core/embed',
+	];
+}, 10, 2);
+
 add_action('wp_enqueue_scripts', function () {
 	$theme   = wp_get_theme();
 	$version = $theme->get('Version');
+	$theme_dir = wp_normalize_path(get_theme_file_path());
 
 	wp_enqueue_style(
 		'my-theme-main',
@@ -80,6 +133,22 @@ add_action('wp_enqueue_scripts', function () {
 		['my-theme-main'],
 		$version
 	);
+
+	$pattern_css = glob($theme_dir . '/patterns/*/style.css');
+	if (is_array($pattern_css)) {
+		sort($pattern_css);
+		foreach ($pattern_css as $path) {
+			$path = wp_normalize_path($path);
+			$relative = ltrim(str_replace($theme_dir . '/', '', $path), '/');
+			$handle = 'my-theme-pattern-' . sanitize_title(basename(dirname($path)));
+			wp_enqueue_style(
+				$handle,
+				get_theme_file_uri($relative),
+				['my-theme-main'],
+				$version
+			);
+		}
+	}
 
 	wp_enqueue_style(
 		'my-theme-choose-practitioner',

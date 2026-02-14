@@ -1,0 +1,81 @@
+:root {
+  --font-heading:
+    "Playfair Display", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  --font-body:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --primary: #861118;
+  --primary-05: #b7273c05;
+  --primary-15: #b7273c15;
+  --primary-25: #b7273c25;
+  --primary-50: #b7273c50;
+  --cream: #f5efe6;
+  --beige: #efe6d875;
+  --black: #440e0e;
+  --white: #ffffff;
+  --background: #faf9f6;
+
+  --picture-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.18);
+  --card-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+}
+
+.editor-styles-wrapper {
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--black);
+  background: var(--background);
+  padding: 32px 24px 96px;
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--black);
+}
+
+.editor-styles-wrapper a {
+  color: var(--primary);
+}
+
+.editor-styles-wrapper .wp-block-button__link {
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid var(--primary);
+  background: var(--primary);
+  color: var(--white);
+}
+
+.editor-styles-wrapper .wp-block-button__link.btn--secondary {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--primary-50);
+}
+
+.editor-styles-wrapper .aligncenter,
+.editor-styles-wrapper .wp-block-image.aligncenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.editor-styles-wrapper .wp-block-image.aligncenter {
+  align-self: center;
+}
+
+.editor-styles-wrapper .wp-block-image.aligncenter img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link {
+  background: transparent;
+  color: var(--black);
+  border-color: var(--primary-50);
+}

@@ -78,6 +78,21 @@ svg {
   max-width: 100%;
 }
 
+.aligncenter,
+.wp-block-image.aligncenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wp-block-image.aligncenter {
+  align-self: center;
+}
+
+.wp-block-image.aligncenter img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 input,
 button,
 textarea,
@@ -149,4 +164,26 @@ ol {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+.wp-block-button__link {
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid var(--primary);
+  background: var(--primary);
+  color: var(--white);
+}
+
+.wp-block-button__link.btn--secondary {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--primary-50);
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link {
+  background: transparent;
+  color: var(--black);
+  border-color: var(--primary-50);
 }
