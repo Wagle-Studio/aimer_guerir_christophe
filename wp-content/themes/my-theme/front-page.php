@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<main>
+<main id="main-content">
 	<?php
 	$render = function (string $path): void {
 		$out = require get_theme_file_path($path);

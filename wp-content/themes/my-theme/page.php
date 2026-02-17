@@ -1,11 +1,15 @@
 <?php get_header(); ?>
 
-<main>
+<main id="main-content">
 	<?php
 	if (have_posts()) :
 		while (have_posts()) :
 			the_post();
-			the_content();
+			?>
+			<div class="entry-content">
+				<?php the_content(); ?>
+			</div>
+			<?php
 		endwhile;
 	endif;
 	?>
