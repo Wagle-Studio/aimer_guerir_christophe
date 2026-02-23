@@ -81,6 +81,7 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 		'core/heading',
 		'core/paragraph',
 		'core/list',
+		'core/list-item',
 		'core/quote',
 		'core/details',
 		'core/image',

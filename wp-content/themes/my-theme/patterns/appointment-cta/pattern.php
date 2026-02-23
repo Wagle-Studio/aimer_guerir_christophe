@@ -12,7 +12,7 @@
   <!-- wp:group {"className":"appointment-cta__header","layout":{"type":"default"}} -->
   <div class="wp-block-group appointment-cta__header">
     <!-- wp:heading {"level":2} -->
-    <h2>Horaires d'ouverture du cabinet</h2>
+    <h1>Horaires d'ouverture du cabinet</h1>
     <!-- /wp:heading -->
 
     <!-- wp:group {"className":"appointment-cta__schedules","layout":{"type":"default"}} -->
@@ -33,7 +33,6 @@
       <div class="wp-block-button">
         <a class="wp-block-button__link btn btn--primary btn--icon" href="#">
           Réserver une séance
-          <?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
         </a>
       </div>
       <!-- /wp:button -->
@@ -116,8 +115,8 @@
       <div class="wp-block-group appointment-cta__session-gallery-row">
           <!-- wp:columns {"className":"appointment-cta__session-gallery"} -->
         <div class="wp-block-columns appointment-cta__session-gallery">
-          <!-- wp:column {"width":"50%","className":"appointment-cta__session-gallery-item appointment-cta__session-gallery-item--primary"} -->
-          <div class="wp-block-column appointment-cta__session-gallery-item appointment-cta__session-gallery-item--primary" style="flex-basis:50%">
+          <!-- wp:column {"width":"33.33%","className":"appointment-cta__session-gallery-item"} -->
+          <div class="wp-block-column appointment-cta__session-gallery-item" style="flex-basis:33.33%">
             <!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"appointment-cta__session-image"} -->
             <figure class="wp-block-image size-large appointment-cta__session-image">
               <img src="<?php echo esc_url(get_theme_file_uri('assets/images/pattern-placeholder-400.svg')); ?>" alt="" />
@@ -126,8 +125,8 @@
           </div>
           <!-- /wp:column -->
 
-          <!-- wp:column {"width":"25%","className":"appointment-cta__session-gallery-item"} -->
-          <div class="wp-block-column appointment-cta__session-gallery-item" style="flex-basis:25%">
+          <!-- wp:column {"width":"33.33%","className":"appointment-cta__session-gallery-item"} -->
+          <div class="wp-block-column appointment-cta__session-gallery-item" style="flex-basis:33.33%">
             <!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"appointment-cta__session-image"} -->
             <figure class="wp-block-image size-large appointment-cta__session-image">
               <img src="<?php echo esc_url(get_theme_file_uri('assets/images/pattern-placeholder-400.svg')); ?>" alt="" />
@@ -136,8 +135,8 @@
           </div>
           <!-- /wp:column -->
 
-          <!-- wp:column {"width":"25%","className":"appointment-cta__session-gallery-item"} -->
-          <div class="wp-block-column appointment-cta__session-gallery-item" style="flex-basis:25%">
+          <!-- wp:column {"width":"33.33%","className":"appointment-cta__session-gallery-item"} -->
+          <div class="wp-block-column appointment-cta__session-gallery-item" style="flex-basis:33.33%">
             <!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"appointment-cta__session-image"} -->
             <figure class="wp-block-image size-large appointment-cta__session-image">
               <img src="<?php echo esc_url(get_theme_file_uri('assets/images/pattern-placeholder-400.svg')); ?>" alt="" />

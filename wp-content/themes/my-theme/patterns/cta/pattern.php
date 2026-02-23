@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Title: Appel à l'action
  * Slug: my-theme/cta
@@ -20,11 +21,10 @@
 
     <!-- wp:buttons -->
     <div class="wp-block-buttons">
-      <!-- wp:button -->
-      <div class="wp-block-button">
-        <a class="wp-block-button__link cta__btn btn btn--secondary btn--icon" href="#">
+      <!-- wp:button {"className":"btn--secondary"} -->
+      <div class="wp-block-button btn--secondary">
+        <a class="wp-block-button__link cta__btn btn" href="#">
           Réserver une séance
-          <?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
         </a>
       </div>
       <!-- /wp:button -->

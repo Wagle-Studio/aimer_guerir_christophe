@@ -19,6 +19,19 @@
   margin-top: 8px;
 }
 
+.editor-styles-wrapper .pattern-appointment-cta .btn--icon::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  display: inline-block;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%200%2024%2024' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5%2012h14'/%3E%3Cpath d='m12%205%207%207-7%207'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%200%2024%2024' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5%2012h14'/%3E%3Cpath d='m12%205%207%207-7%207'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+}
+
 .editor-styles-wrapper .appointment-cta__header {
   display: flex;
   flex-direction: column;

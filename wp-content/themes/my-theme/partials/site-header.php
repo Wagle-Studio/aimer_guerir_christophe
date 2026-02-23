@@ -50,13 +50,13 @@
 						<a href="<?php echo esc_url(home_url('/')); ?>">Accueil</a>
 					</li>
 					<li class="site-nav__item">
+						<a href="<?php echo esc_url(home_url('/prendre-rendez-vous')); ?>">Rendez-vous</a>
+					</li>
+					<li class="site-nav__item">
 						<a href="<?php echo esc_url(home_url('/les-seances/')); ?>">Les s&eacute;ances</a>
 					</li>
 					<li class="site-nav__item">
 						<a href="<?php echo esc_url(home_url('/qui-suis-je/')); ?>">Qui suis-je</a>
-					</li>
-					<li class="site-nav__item">
-						<a href="<?php echo esc_url(home_url('/temoignages/')); ?>">T&eacute;moignages</a>
 					</li>
 					<li class="site-nav__item">
 						<a href="<?php echo esc_url(home_url('/articles/')); ?>">Articles</a>

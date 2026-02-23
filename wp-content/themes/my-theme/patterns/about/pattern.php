@@ -27,7 +27,7 @@
         <!-- wp:group {"className":"content__header","layout":{"type":"default"}} -->
         <div class="wp-block-group content__header">
           <!-- wp:heading {"level":2,"className":"header__title"} -->
-          <h2 class="header__title">Je suis Christophe Rebours</h2>
+          <h1 class="header__title">Je suis Christophe Rebours</h1>
           <!-- /wp:heading -->
 
           <!-- wp:paragraph {"className":"header__subtitle"} -->

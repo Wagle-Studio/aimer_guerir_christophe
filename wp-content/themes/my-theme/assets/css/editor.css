@@ -53,7 +53,8 @@
   color: var(--white);
 }
 
-.editor-styles-wrapper .wp-block-button__link.btn--secondary {
+.editor-styles-wrapper .wp-block-button__link.btn--secondary,
+.editor-styles-wrapper .wp-block-button.btn--secondary .wp-block-button__link {
   background: var(--white);
   color: var(--black);
   border-color: var(--primary-50);
