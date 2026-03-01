@@ -51,6 +51,7 @@
   border: 2px solid var(--primary);
   background: var(--primary);
   color: var(--white);
+  transition: 100ms ease-out;
 }
 
 .editor-styles-wrapper .wp-block-button__link.btn--secondary,

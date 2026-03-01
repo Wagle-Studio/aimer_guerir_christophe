@@ -5,13 +5,13 @@
   --font-body:
     "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
-  --primary: #861118;
+  --primary: #A40027;
   --primary-05: #b7273c05;
   --primary-15: #b7273c15;
   --primary-25: #b7273c25;
   --primary-50: #b7273c50;
   --primary-75: #b7273c75;
-  --cream: #f5efe650;
+  --cream: #d4c9b950;
   --beige: #efe6d875;
   --black: #440e0e;
   --white: #ffffff;
@@ -175,18 +175,31 @@ button {
   border-radius: 4px;
   font-weight: 600;
   text-align: center;
+  width: max-content;
 }
 
 .btn--primary {
   background: var(--primary);
   color: var(--white);
   border: 2px solid var(--primary);
+  transition: 100ms ease-out;
+}
+
+.btn--primary:hover {
+  background-color: var(--white);
+  color: var(--primary);
 }
 
 .btn.btn--secondary {
   background: var(--white);
   color: var(--black);
   border: 2px solid var(--primary-50);
+  transition: 100ms ease-out;
+}
+
+.btn--secondary:hover {
+  border: 2px solid var(--primary);
+  color: var(--primary);
 }
 
 .btn--icon {
@@ -195,6 +208,7 @@ button {
   justify-content: center;
   align-items: center;
   gap: 8px;
+  transition: 100ms ease-out;
 }
 
 .btn--icon > svg {
@@ -237,6 +251,7 @@ table {
   border: 2px solid var(--primary);
   background: var(--primary);
   color: var(--white);
+  transition: 100ms ease-out;
 }
 
 .wp-block-button__link.btn--secondary,
@@ -250,4 +265,18 @@ table {
   background: transparent;
   color: var(--black);
   border-color: var(--primary-50);
+}
+
+.wp-block-button__link.btn--primary:hover,
+.wp-block-button:not(.btn--secondary) .wp-block-button__link:hover,
+.wp-block-button__link:not(.btn--secondary):hover {
+  background-color: var(--white);
+  color: var(--primary);
+}
+
+.wp-block-button__link.btn--secondary:hover,
+.wp-block-button.btn--secondary .wp-block-button__link:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--white);
 }

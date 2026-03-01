@@ -59,7 +59,7 @@
 						<a href="<?php echo esc_url(home_url('/qui-suis-je/')); ?>">Qui suis-je</a>
 					</li>
 					<li class="site-nav__item">
-						<a href="<?php echo esc_url(home_url('/articles/')); ?>">Articles</a>
+						<a href="<?php echo esc_url(home_url('/blog/')); ?>">Articles</a>
 					</li>
 				</ul>
 				<?php
