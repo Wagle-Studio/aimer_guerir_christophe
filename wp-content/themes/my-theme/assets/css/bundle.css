@@ -1,0 +1,31 @@
+/* =============================================================
+   Bundle CSS — point d'entrée unique du thème.
+   Ne pas modifier ce fichier directement : éditer chaque source.
+   ============================================================= */
+
+/* Fondations */
+@import './main.css';
+
+/* Partials */
+@import '../../partials/site-header.css';
+@import '../../partials/site-footer.css';
+
+/* Blocs (page d'accueil) */
+@import '../../blocks/hero/style.css';
+@import '../../blocks/pains/style.css';
+@import '../../blocks/therapeutic-support/style.css';
+@import '../../blocks/cta/style.css';
+@import '../../blocks/about/style.css';
+@import '../../blocks/testimonials/style.css';
+@import '../../blocks/choose-practitioner/style.css';
+@import '../../blocks/services/style.css';
+@import '../../blocks/newsletter/style.css';
+
+/* Patterns (éditeur + front) */
+@import '../../patterns/about/style.css';
+@import '../../patterns/about-cabinet/style.css';
+@import '../../patterns/appointment-cta/style.css';
+@import '../../patterns/blog-home/style.css';
+@import '../../patterns/cta/style.css';
+@import '../../patterns/newsletter/style.css';
+@import '../../patterns/pains/style.css';
