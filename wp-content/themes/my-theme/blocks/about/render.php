@@ -63,13 +63,13 @@ ob_start();
 <section class="about">
     <div class="about__wrapper">
         <div class="about__content">
-            <div class="content__media" <?php echo $ratio_style; ?>>
+            <div class="about_content_media" <?php echo $ratio_style; ?>>
                 <?php echo $image_html; ?>
             </div>
-            <div class="content__wrapper">
-                <div class="content__header">
-                    <h2 class="header__title"><?php echo esc_html($title); ?></h2>
-                    <p class="header__subtitle"><?php echo esc_html($subtitle); ?></p>
+            <div class="about_content_wrapper">
+                <div class="about_content_header">
+                    <h2 class="about_header_title"><?php echo esc_html($title); ?></h2>
+                    <p class="about_header_subtitle"><?php echo esc_html($subtitle); ?></p>
                 </div>
                 <p class="about__presentation"><?php echo nl2br(esc_html($presentation)); ?></p>
                 <a class="btn btn--secondary" href="<?php echo $primary_url; ?>">
