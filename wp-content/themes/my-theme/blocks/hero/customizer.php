@@ -50,20 +50,6 @@ add_action('customize_register', function ($wp_customize) {
         ]
     ));
 
-    $wp_customize->add_setting('my_theme_hero_identity', ['default' => '']);
-    $wp_customize->add_control('my_theme_hero_identity', [
-        'label'   => 'Identité',
-        'section' => 'my_theme_home_hero',
-        'type'    => 'text',
-    ]);
-
-    $wp_customize->add_setting('my_theme_hero_occupation', ['default' => '']);
-    $wp_customize->add_control('my_theme_hero_occupation', [
-        'label'   => 'Profession',
-        'section' => 'my_theme_home_hero',
-        'type'    => 'text',
-    ]);
-
     $wp_customize->add_setting('my_theme_hero_primary_label', ['default' => '']);
     $wp_customize->add_control('my_theme_hero_primary_label', [
         'label'   => 'Bouton principal - libellé',

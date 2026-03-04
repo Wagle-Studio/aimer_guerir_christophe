@@ -23,9 +23,8 @@ if (!defined('ABSPATH')) {
                 <label class="newsletter__label" for="newsletter-email">Email</label>
                 <input class="newsletter__input" type="email" id="newsletter-email" name="email" placeholder="Email" autocomplete="email">
             </div>
-            <button class="newsletter__btn btn btn--secondary btn--icon" type="submit">
+            <button class="newsletter__btn btn btn--secondary" type="submit">
                 S'inscrire
-                <?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
             </button>
         </form>
     </div>

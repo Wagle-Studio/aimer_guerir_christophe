@@ -5,14 +5,14 @@
   --font-body:
     "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
-  --primary: #A40027;
+  --primary: #a40027;
   --primary-05: #b7273c05;
   --primary-15: #b7273c15;
   --primary-25: #b7273c25;
   --primary-50: #b7273c50;
   --primary-75: #b7273c75;
-  --cream: #d4c9b950;
-  --beige: #efe6d875;
+  --beige: #d4c9b9b3;
+  --cream: #efe6d8b3;
   --black: #440e0e;
   --white: #ffffff;
   --background: #faf9f6;
@@ -103,7 +103,8 @@ main {
   margin-bottom: var(--wp--preset--spacing--l, 48px);
 } */
 
-.entry-content > :where(.wp-block-image.alignright, figure.alignright, img.alignright) {
+.entry-content
+  > :where(.wp-block-image.alignright, figure.alignright, img.alignright) {
   margin-left: 24px;
   margin-bottom: 16px;
 }
@@ -121,7 +122,7 @@ h6 {
 
 h1 {
   font-size: 40px;
-  letter-spacing: 1.25px;
+  letter-spacing: 1px;
 }
 
 h2 {
@@ -175,7 +176,13 @@ button {
   border-radius: 4px;
   font-weight: 600;
   text-align: center;
-  width: max-content;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .btn {
+    width: max-content;
+  }
 }
 
 .btn--primary {

@@ -54,9 +54,8 @@
           <div class="wp-block-buttons">
             <!-- wp:button -->
             <div class="wp-block-button">
-              <a class="wp-block-button__link btn btn--primary btn--icon" href="#">
+              <a class="wp-block-button__link btn btn--primary" href="#">
                 Prendre rendez-vous
-                <?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
               </a>
             </div>
             <!-- /wp:button -->

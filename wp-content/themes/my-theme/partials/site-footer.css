@@ -1,5 +1,5 @@
 .site-footer {
-  background: #f2f2f2;
+  background: var(--white);
 }
 
 .site-footer__wrapper {

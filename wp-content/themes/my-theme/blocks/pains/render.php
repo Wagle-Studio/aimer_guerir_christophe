@@ -74,9 +74,8 @@ ob_start();
 			<div class="pains_content_actions">
 				<h3 class="pains_actions_tag_line"><?php echo wp_kses_post($tag_line_raw); ?></h3>
 				<div class="pains_actions_btns">
-					<a class="btn btn--primary btn--icon" href="<?php echo $primary_url; ?>">
+					<a class="btn btn--primary" href="<?php echo $primary_url; ?>">
 						<?php echo esc_html($primary_label); ?>
-						<?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
 					</a>
 					<?php if ($secondary_label && $secondary_url) : ?>
 						<a class="btn btn--secondary" href="<?php echo $secondary_url; ?>">

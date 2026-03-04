@@ -73,9 +73,8 @@ ob_start();
 			</div>
 			<div class="hero__intro"><?php echo $introduction_html; ?></div>
 			<div class="hero__actions">
-				<a class="btn btn--primary btn--icon" href="<?php echo $primary_url; ?>">
+				<a class="btn btn--primary" href="<?php echo $primary_url; ?>">
 					<?php echo esc_html($primary_label); ?>
-					<?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
 				</a>
 				<?php if ($has_secondary) : ?>
 					<a class="btn btn--secondary" href="<?php echo $secondary_url; ?>">

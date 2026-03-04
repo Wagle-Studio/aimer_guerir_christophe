@@ -27,9 +27,8 @@ if (
     <div class="cta__wrapper">
         <h2 class="cta__title"><?php echo esc_html($title); ?></h2>
         <p class="cta__subtitle"><?php echo nl2br(esc_html($subtitle)); ?></p>
-        <a class="cta__btn btn btn--secondary btn--icon" href="<?php echo $url; ?>">
+        <a class="cta__btn btn btn--secondary" href="<?php echo $url; ?>">
             <?php echo esc_html($label); ?>
-            <?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
         </a>
     </div>
 </section>
