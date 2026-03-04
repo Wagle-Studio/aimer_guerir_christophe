@@ -18,7 +18,10 @@ add_action('customize_register', function ($wp_customize) {
         'priority' => 20,
     ]);
 
-    $wp_customize->add_setting('my_theme_pains_title', ['default' => 0,]);
+    $wp_customize->add_setting('my_theme_pains_title', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
     $wp_customize->add_control('my_theme_pains_title', [
         'label'   => 'Titre de section',
         'section' => 'my_theme_home_pains',
@@ -54,35 +57,51 @@ add_action('customize_register', function ($wp_customize) {
         ]
     ));
 
-    $wp_customize->add_setting('my_theme_pains_tag_line', ['default' => '',]);
+    $wp_customize->add_setting('my_theme_pains_tag_line', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
     $wp_customize->add_control('my_theme_pains_tag_line', [
-        'label'   => 'Accroche',
-        'section' => 'my_theme_home_pains',
-        'type'    => 'text',
+        'label'       => 'Accroche',
+        'description' => 'Phrase d\'accroche affichée au-dessus des boutons.',
+        'section'     => 'my_theme_home_pains',
+        'type'        => 'text',
     ]);
 
-    $wp_customize->add_setting('my_theme_pains_primary_label', ['default' => '']);
+    $wp_customize->add_setting('my_theme_pains_primary_label', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
     $wp_customize->add_control('my_theme_pains_primary_label', [
         'label'   => 'Bouton principal - libellé',
         'section' => 'my_theme_home_pains',
         'type'    => 'text',
     ]);
 
-    $wp_customize->add_setting('my_theme_pains_primary_url', ['default' => '']);
+    $wp_customize->add_setting('my_theme_pains_primary_url', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_url',
+    ]);
     $wp_customize->add_control('my_theme_pains_primary_url', [
         'label'   => 'Bouton principal - URL',
         'section' => 'my_theme_home_pains',
         'type'    => 'url',
     ]);
 
-    $wp_customize->add_setting('my_theme_pains_secondary_label', ['default' => '']);
+    $wp_customize->add_setting('my_theme_pains_secondary_label', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
     $wp_customize->add_control('my_theme_pains_secondary_label', [
         'label'   => 'Bouton secondaire - libellé (optionnel)',
         'section' => 'my_theme_home_pains',
         'type'    => 'text',
     ]);
 
-    $wp_customize->add_setting('my_theme_pains_secondary_url', ['default' => '']);
+    $wp_customize->add_setting('my_theme_pains_secondary_url', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_url',
+    ]);
     $wp_customize->add_control('my_theme_pains_secondary_url', [
         'label'   => 'Bouton secondaire - URL (optionnel)',
         'section' => 'my_theme_home_pains',

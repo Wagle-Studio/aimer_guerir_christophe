@@ -43,17 +43,6 @@ add_action('customize_register', function ($wp_customize) {
         'description' => 'Texte (sauts de ligne autorisés).',
     ]);
 
-    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_main', ['default' => 0,]);
-    $wp_customize->add_control(new WP_Customize_Media_Control(
-        $wp_customize,
-        'my_theme_therapeutic_support_image_id_main',
-        [
-            'label'     => 'Carte 1 – Illustration',
-            'section'   => 'my_theme_home_therapeutic_support',
-            'mime_type' => 'image',
-        ]
-    ));
-
     $wp_customize->add_setting('my_theme_therapeutic_support_second_title', [
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
@@ -79,12 +68,12 @@ add_action('customize_register', function ($wp_customize) {
         'description' => 'Texte (sauts de ligne autorisés).',
     ]);
 
-    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_third', ['default' => 0,]);
+    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_main', ['default' => 0,]);
     $wp_customize->add_control(new WP_Customize_Media_Control(
         $wp_customize,
-        'my_theme_therapeutic_support_image_id_third',
+        'my_theme_therapeutic_support_image_id_main',
         [
-            'label'     => 'Carte 2 – Illustration',
+            'label'     => 'Carte 1 – Illustration',
             'section'   => 'my_theme_home_therapeutic_support',
             'mime_type' => 'image',
         ]
@@ -114,4 +103,15 @@ add_action('customize_register', function ($wp_customize) {
         'type'        => 'textarea',
         'description' => 'Texte (sauts de ligne autorisés).',
     ]);
+
+    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_third', ['default' => 0,]);
+    $wp_customize->add_control(new WP_Customize_Media_Control(
+        $wp_customize,
+        'my_theme_therapeutic_support_image_id_third',
+        [
+            'label'     => 'Carte 2 – Illustration',
+            'section'   => 'my_theme_home_therapeutic_support',
+            'mime_type' => 'image',
+        ]
+    ));
 });

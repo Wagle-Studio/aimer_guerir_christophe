@@ -48,7 +48,7 @@ add_action('customize_register', function ($wp_customize) {
         'sanitize_callback' => 'sanitize_text_field',
     ]);
     $wp_customize->add_control('my_theme_services_main_card_title', [
-        'label'   => 'Carte principale - titre',
+        'label'   => 'Carte 1 – Titre',
         'section' => 'my_theme_home_services',
         'type'    => 'text',
     ]);
@@ -62,7 +62,7 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_services_main_card_description', [
-        'label'       => 'Carte principale - description',
+        'label'       => 'Carte 1 – Description',
         'section'     => 'my_theme_home_services',
         'type'        => 'textarea',
         'description' => 'Texte (sauts de ligne autorisés).',
@@ -73,7 +73,7 @@ add_action('customize_register', function ($wp_customize) {
         'sanitize_callback' => 'sanitize_text_field',
     ]);
     $wp_customize->add_control('my_theme_services_second_main_card_title', [
-        'label'   => 'Seconde carte principale - titre',
+        'label'   => 'Carte 2 – Titre',
         'section' => 'my_theme_home_services',
         'type'    => 'text',
     ]);
@@ -87,7 +87,7 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_services_second_main_card_description', [
-        'label'       => 'Seconde carte principale - description',
+        'label'       => 'Carte 2 – Description',
         'section'     => 'my_theme_home_services',
         'type'        => 'textarea',
         'description' => 'Texte (sauts de ligne autorisés).',
@@ -98,7 +98,7 @@ add_action('customize_register', function ($wp_customize) {
         'sanitize_callback' => 'sanitize_text_field',
     ]);
     $wp_customize->add_control('my_theme_services_third_main_card_title', [
-        'label'   => 'Troisième carte - titre',
+        'label'   => 'Carte 3 – Titre',
         'section' => 'my_theme_home_services',
         'type'    => 'text',
     ]);
@@ -112,7 +112,7 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_services_third_main_card_description', [
-        'label'       => 'Troisième carte - description',
+        'label'       => 'Carte 3 – Description',
         'section'     => 'my_theme_home_services',
         'type'        => 'textarea',
         'description' => 'Texte (sauts de ligne autorisés).',
@@ -123,7 +123,7 @@ add_action('customize_register', function ($wp_customize) {
         'sanitize_callback' => 'sanitize_text_field',
     ]);
     $wp_customize->add_control('my_theme_services_fourth_main_card_title', [
-        'label'   => 'Quatrième carte - titre',
+        'label'   => 'Carte 4 – Titre',
         'section' => 'my_theme_home_services',
         'type'    => 'text',
     ]);
@@ -137,7 +137,7 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_services_fourth_main_card_description', [
-        'label'       => 'Quatrième carte - description',
+        'label'       => 'Carte 4 – Description',
         'section'     => 'my_theme_home_services',
         'type'        => 'textarea',
         'description' => 'Texte (sauts de ligne autorisés).',

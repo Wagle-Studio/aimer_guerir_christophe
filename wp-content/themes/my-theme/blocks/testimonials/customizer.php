@@ -74,9 +74,10 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_testimonials_customer_1_feedback', [
-        'label'   => 'Client 1 - Retour',
-        'section' => 'my_theme_home_testimonials',
-        'type'    => 'textarea',
+        'label'       => 'Client 1 - Retour',
+        'description' => 'Témoignage (sauts de ligne autorisés).',
+        'section'     => 'my_theme_home_testimonials',
+        'type'        => 'textarea',
     ]);
 
     $wp_customize->add_setting('my_theme_testimonials_customer_2_name', [
@@ -99,9 +100,10 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_testimonials_customer_2_feedback', [
-        'label'   => 'Client 2 - Retour',
-        'section' => 'my_theme_home_testimonials',
-        'type'    => 'textarea',
+        'label'       => 'Client 2 - Retour',
+        'description' => 'Témoignage (sauts de ligne autorisés).',
+        'section'     => 'my_theme_home_testimonials',
+        'type'        => 'textarea',
     ]);
 
     $wp_customize->add_setting('my_theme_testimonials_customer_3_name', [
@@ -124,19 +126,26 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_testimonials_customer_3_feedback', [
-        'label'   => 'Client 3 - Retour',
-        'section' => 'my_theme_home_testimonials',
-        'type'    => 'textarea',
+        'label'       => 'Client 3 - Retour',
+        'description' => 'Témoignage (sauts de ligne autorisés).',
+        'section'     => 'my_theme_home_testimonials',
+        'type'        => 'textarea',
     ]);
 
-    $wp_customize->add_setting('my_theme_testimonials_primary_label', ['default' => '']);
+    $wp_customize->add_setting('my_theme_testimonials_primary_label', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
     $wp_customize->add_control('my_theme_testimonials_primary_label', [
         'label'   => 'Bouton principal - libellé',
         'section' => 'my_theme_home_testimonials',
         'type'    => 'text',
     ]);
 
-    $wp_customize->add_setting('my_theme_testimonials_primary_url', ['default' => '']);
+    $wp_customize->add_setting('my_theme_testimonials_primary_url', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_url',
+    ]);
     $wp_customize->add_control('my_theme_testimonials_primary_url', [
         'label'   => 'Bouton principal - URL',
         'section' => 'my_theme_home_testimonials',

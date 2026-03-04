@@ -43,14 +43,20 @@ add_action('customize_register', function ($wp_customize) {
         'description' => 'Texte (sauts de ligne autorisés).',
     ]);
 
-    $wp_customize->add_setting('my_theme_cta_primary_label', ['default' => '']);
+    $wp_customize->add_setting('my_theme_cta_primary_label', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
     $wp_customize->add_control('my_theme_cta_primary_label', [
         'label'   => 'Bouton - libellé',
         'section' => 'my_theme_home_cta',
         'type'    => 'text',
     ]);
 
-    $wp_customize->add_setting('my_theme_cta_primary_url', ['default' => '']);
+    $wp_customize->add_setting('my_theme_cta_primary_url', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_url',
+    ]);
     $wp_customize->add_control('my_theme_cta_primary_url', [
         'label'   => 'Bouton - URL',
         'section' => 'my_theme_home_cta',
