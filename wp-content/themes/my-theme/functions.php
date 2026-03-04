@@ -173,13 +173,6 @@ add_action('wp_enqueue_scripts', function () {
 		$version
 	);
 
-	wp_enqueue_style(
-		'my-theme-choose-testimonials',
-		get_theme_file_uri('/blocks/testimonials/style.css'),
-		['my-theme-main'],
-		$version
-	);
-
 	$pattern_css = glob($theme_dir . '/patterns/*/style.css');
 	if (is_array($pattern_css)) {
 		sort($pattern_css);
@@ -227,3 +220,4 @@ require_once get_theme_file_path('/blocks/about/customizer.php');
 require_once get_theme_file_path('/blocks/testimonials/customizer.php');
 require_once get_theme_file_path('/blocks/choose-practitioner/customizer.php');
 require_once get_theme_file_path('/blocks/services/customizer.php');
+require_once get_theme_file_path('/partials/customizer.php');

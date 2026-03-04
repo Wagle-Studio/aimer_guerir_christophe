@@ -10,7 +10,7 @@
       "customGradient": false,
       "defaultPalette": false,
       "palette": [
-        { "slug": "primary", "color": "#861118", "name": "Bordeaux" },
+        { "slug": "primary", "color": "#A40027", "name": "Bordeaux" },
         { "slug": "primary-soft", "color": "#b7273c25", "name": "Bordeaux doux" },
         { "slug": "black", "color": "#440e0e", "name": "Noir" },
         { "slug": "white", "color": "#ffffff", "name": "Blanc" },
