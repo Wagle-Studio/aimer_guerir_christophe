@@ -12,16 +12,16 @@ if (!defined('ABSPATH')) {
         </div>
         <form class="newsletter__form" action="#" method="post">
             <div class="newsletter__field">
+                <label class="newsletter__label" for="newsletter-firstname">Prénom</label>
+                <input class="newsletter__input" type="text" id="newsletter-firstname" name="firstname" placeholder="Prénom" autocomplete="given-name">
+            </div>
+            <div class="newsletter__field">
                 <label class="newsletter__label" for="newsletter-name">Nom</label>
-                <input class="newsletter__input" type="text" id="newsletter-name" name="name" placeholder="Nom" autocomplete="name">
+                <input class="newsletter__input" type="text" id="newsletter-name" name="name" placeholder="Nom" autocomplete="family-name">
             </div>
             <div class="newsletter__field">
                 <label class="newsletter__label" for="newsletter-email">Email</label>
                 <input class="newsletter__input" type="email" id="newsletter-email" name="email" placeholder="Email" autocomplete="email">
-            </div>
-            <div class="newsletter__field">
-                <label class="newsletter__label" for="newsletter-phone">Telephone</label>
-                <input class="newsletter__input" type="tel" id="newsletter-phone" name="phone" placeholder="Telephone" autocomplete="tel">
             </div>
             <button class="newsletter__btn btn btn--secondary btn--icon" type="submit">
                 S'inscrire
