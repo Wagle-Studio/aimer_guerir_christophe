@@ -7,7 +7,7 @@ add_action('customize_register', function ($wp_customize) {
     if (!$wp_customize->get_panel('my_theme_home')) {
         $wp_customize->add_panel('my_theme_home', [
             'title'       => 'Accueil',
-            'description' => 'Configuration des sections de la page d\'accueil',
+            'description' => 'Configuration des sections de la page d’accueil',
             'priority'    => 30,
         ]);
     }
@@ -43,23 +43,12 @@ add_action('customize_register', function ($wp_customize) {
         'description' => 'Texte (sauts de ligne autorisés).',
     ]);
 
-    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_main', ['default' => 0,]);
-    $wp_customize->add_control(new WP_Customize_Media_Control(
-        $wp_customize,
-        'my_theme_therapeutic_support_image_id_main',
-        [
-            'label'     => 'Carte 1 – Illustration',
-            'section'   => 'my_theme_home_therapeutic_support',
-            'mime_type' => 'image',
-        ]
-    ));
-
     $wp_customize->add_setting('my_theme_therapeutic_support_second_title', [
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
     ]);
     $wp_customize->add_control('my_theme_therapeutic_support_second_title', [
-        'label'   => 'Carte 1 – Titre',
+        'label'   => 'Titre secondaire',
         'section' => 'my_theme_home_therapeutic_support',
         'type'    => 'text',
     ]);
@@ -73,29 +62,18 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_therapeutic_support_second_content', [
-        'label'       => 'Carte 1 – Contenu',
+        'label'       => 'Contenu secondaire',
         'section'     => 'my_theme_home_therapeutic_support',
         'type'        => 'textarea',
         'description' => 'Texte (sauts de ligne autorisés).',
     ]);
-
-    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_third', ['default' => 0,]);
-    $wp_customize->add_control(new WP_Customize_Media_Control(
-        $wp_customize,
-        'my_theme_therapeutic_support_image_id_third',
-        [
-            'label'     => 'Carte 2 – Illustration',
-            'section'   => 'my_theme_home_therapeutic_support',
-            'mime_type' => 'image',
-        ]
-    ));
 
     $wp_customize->add_setting('my_theme_therapeutic_support_third_title', [
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
     ]);
     $wp_customize->add_control('my_theme_therapeutic_support_third_title', [
-        'label'   => 'Carte 2 – Titre',
+        'label'   => 'Titre tertiaire',
         'section' => 'my_theme_home_therapeutic_support',
         'type'    => 'text',
     ]);
@@ -109,9 +87,56 @@ add_action('customize_register', function ($wp_customize) {
         },
     ]);
     $wp_customize->add_control('my_theme_therapeutic_support_third_content', [
-        'label'       => 'Carte 2 – Contenu',
+        'label'       => 'Contenu tertiaire',
         'section'     => 'my_theme_home_therapeutic_support',
         'type'        => 'textarea',
         'description' => 'Texte (sauts de ligne autorisés).',
     ]);
+
+    $wp_customize->add_setting('my_theme_therapeutic_support_third_hook', [
+        'default'           => '',
+        'sanitize_callback' => function ($value) {
+            $value = (string) $value;
+            $value = wp_strip_all_tags($value);
+            return trim($value);
+        },
+    ]);
+    $wp_customize->add_control('my_theme_therapeutic_support_third_hook', [
+        'label'   => "Phrase d'accroche tertiaire",
+        'section' => 'my_theme_home_therapeutic_support',
+        'type'    => 'text',
+    ]);
+
+    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_main', ['default' => 0,]);
+    $wp_customize->add_control(new WP_Customize_Media_Control(
+        $wp_customize,
+        'my_theme_therapeutic_support_image_id_main',
+        [
+            'label'     => 'Illustration n°1',
+            'section'   => 'my_theme_home_therapeutic_support',
+            'mime_type' => 'image',
+        ]
+    ));
+
+    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_second', ['default' => 0,]);
+    $wp_customize->add_control(new WP_Customize_Media_Control(
+        $wp_customize,
+        'my_theme_therapeutic_support_image_id_second',
+        [
+            'label'     => 'Illustration n°2',
+            'section'   => 'my_theme_home_therapeutic_support',
+            'mime_type' => 'image',
+        ]
+    ));
+
+    $wp_customize->add_setting('my_theme_therapeutic_support_image_id_third', ['default' => 0,]);
+    $wp_customize->add_control(new WP_Customize_Media_Control(
+        $wp_customize,
+        'my_theme_therapeutic_support_image_id_third',
+        [
+            'label'     => 'Illustration n°3',
+            'section'   => 'my_theme_home_therapeutic_support',
+            'mime_type' => 'image',
+        ]
+    ));
 });

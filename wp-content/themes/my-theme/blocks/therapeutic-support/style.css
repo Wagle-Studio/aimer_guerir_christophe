@@ -7,9 +7,7 @@
   background-color: var(--beige);
 }
 
-.therapeutic-support-main__wrapper,
-.therapeutic-support-second__wrapper,
-.therapeutic-support-third__sub_wrapper {
+.therapeutic-support-main__wrapper {
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -17,20 +15,7 @@
   margin: 0 auto;
   padding: 0 24px;
   text-align: center;
-}
-
-.therapeutic-support-main__wrapper {
   align-items: center;
-}
-
-.therapeutic-support-third__wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-  text-align: center;
 }
 
 .therapeutic-support-main__pill {
@@ -44,40 +29,10 @@
 }
 
 .therapeutic-support-main__title {
-  font-size: 40px;
-}
-
-.therapeutic-support-second__title,
-.therapeutic-support-third__title {
   position: relative;
-  font-size: 32px;
 }
 
-.therapeutic-support-main__intro {
-  text-align: center;
-}
-
-.therapeutic-support-second__intro,
-.therapeutic-support-third__intro {
-  text-align: justify;
-}
-
-.therapeutic-support-second__intro,
-.therapeutic-support-third__intro {
-  margin-top: 60px;
-  text-align: justify;
-}
-
-.therapeutic-support-second__content,
-.therapeutic-support-third__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.therapeutic-support-second__title::after,
-.therapeutic-support-third__title::after {
+.therapeutic-support-main__title::after {
   position: absolute;
   bottom: -15px;
   left: 50%;
@@ -88,121 +43,69 @@
   background-color: var(--primary-75);
 }
 
-.therapeutic-support-second__illustrations,
-.therapeutic-support-third__illustrations {
-  position: relative;
-  width: 100%;
-  max-width: 460px;
-  margin: 0 auto;
-  --therapeutic-support-image-offset: 16px;
+.therapeutic-support-main__intro {
+  text-align: justify;
 }
 
-.therapeutic-support-second__illustrations {
+.therapeutic-support__cards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: end;
-  gap: 16px;
-  padding: var(--therapeutic-support-image-offset) 8px;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
 }
 
-.therapeutic-support-third__illustrations {
+.therapeutic-support__card {
   display: flex;
-  justify-content: center;
-  padding: 8px;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid var(--primary-25);
+  background-color: var(--white);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
 }
 
-.therapeutic-support__media {
-  position: relative;
+.therapeutic-support__card-media {
+  width: 100%;
+  aspect-ratio: var(--ts-image-ratio, 4 / 3);
+  overflow: hidden;
+}
+
+.therapeutic-support__card-image {
   display: block;
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 6px;
-  box-shadow: var(--picture-shadow);
+  height: 100%;
+  object-fit: cover;
 }
 
-.therapeutic-support__image_main {
-  position: static;
-  width: 100%;
-  aspect-ratio: var(--therapeutic-support-image-ratio, auto);
-  transform: translateY(calc(-1 * var(--therapeutic-support-image-offset)));
+.therapeutic-support__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  text-align: justify;
 }
 
-.therapeutic-support__image_second {
-  position: static;
-  width: 100%;
-  aspect-ratio: var(--therapeutic-support-image-ratio, auto);
-  transform: translateY(var(--therapeutic-support-image-offset));
+.therapeutic-support__card-title {
+  font-family: var(--font-heading);
 }
 
-.therapeutic-support__image_third {
-  position: static;
-  width: 100%;
-  aspect-ratio: var(--therapeutic-support-image-ratio, auto);
-}
+/* @media screen and (min-width: 768px) {
+  .therapeutic-support__cards {
+    grid-template-rows: repeat(2, 1fr);
+  }
+} */
 
 @media screen and (min-width: 768px) {
-  .therapeutic-support-second__wrapper,
-  .therapeutic-support-third__sub_wrapper {
-    flex-direction: row;
-  }
-
-  .therapeutic-support-second__content,
-  .therapeutic-support-third__content {
-    flex: 0 1 clamp(280px, 40vw, 560px);
-    max-width: clamp(280px, 40vw, 560px);
-  }
-
-  .therapeutic-support-second__illustrations,
-  .therapeutic-support-third__illustrations {
-    margin: 0;
-  }
-
-  .therapeutic-support-main__title,
-  .therapeutic-support-second__title,
-  .therapeutic-support-third__title {
-    max-width: 75%;
-  }
-
-  .therapeutic-support-second__content .therapeutic-support-second__title,
-  .therapeutic-support-third__content .therapeutic-support-third__title,
-  .therapeutic-support-second__content .therapeutic-support-second__intro,
-  .therapeutic-support-third__content .therapeutic-support-third__intro {
-    max-width: 100%;
-  }
-
-  .therapeutic-support-main__intro,
-  .therapeutic-support-second__intro,
-  .therapeutic-support-third__intro {
-    max-width: 75%;
-  }
-
-  .therapeutic-support-second__illustrations {
-    grid-template-rows: repeat(2, minmax(0, max-content));
-    grid-template-columns: 1fr;
-  }
-
-  .therapeutic-support-second__illustrations,
-  .therapeutic-support-third__illustrations {
-    max-width: clamp(288px, 28.8vw, 468px);
-    flex: 0 0 clamp(288px, 28.8vw, 468px);
-  }
-
-  .therapeutic-support__image_third {
-    margin-top: 60px;
+  .therapeutic-support__cards {
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .therapeutic-support-main__title,
-  .therapeutic-support-second__title,
-  .therapeutic-support-third__title {
-    max-width: 55%;
-  }
-
-  .therapeutic-support-second__illustrations,
-  .therapeutic-support-third__illustrations {
-    max-width: clamp(324px, 25.2vw, 504px);
-    flex-basis: clamp(324px, 25.2vw, 504px);
+  .therapeutic-support-main__intro {max-width: 75%;
   }
 }
