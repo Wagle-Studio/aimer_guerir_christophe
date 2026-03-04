@@ -12,6 +12,11 @@ $main_desc_raw  = get_theme_mod('my_theme_services_main_card_description', '');
 $second_main_title_raw = get_theme_mod('my_theme_services_second_main_card_title', '');
 $second_main_desc_raw  = get_theme_mod('my_theme_services_second_main_card_description', '');
 
+$third_main_title_raw = get_theme_mod('my_theme_services_third_main_card_title', '');
+$third_main_desc_raw  = get_theme_mod('my_theme_services_third_main_card_description', '');
+$fourth_main_title_raw = get_theme_mod('my_theme_services_fourth_main_card_title', '');
+$fourth_main_desc_raw  = get_theme_mod('my_theme_services_fourth_main_card_description', '');
+
 $other_title_raw = get_theme_mod('my_theme_services_other_card_title', '');
 $other_items_raw = get_theme_mod('my_theme_services_other_card_items', '');
 
@@ -23,6 +28,11 @@ $main_desc  = trim(wp_strip_all_tags((string) $main_desc_raw));
 
 $second_main_title = trim(wp_strip_all_tags((string) $second_main_title_raw));
 $second_main_desc  = trim(wp_strip_all_tags((string) $second_main_desc_raw));
+
+$third_main_title = trim(wp_strip_all_tags((string) $third_main_title_raw));
+$third_main_desc  = trim(wp_strip_all_tags((string) $third_main_desc_raw));
+$fourth_main_title = trim(wp_strip_all_tags((string) $fourth_main_title_raw));
+$fourth_main_desc  = trim(wp_strip_all_tags((string) $fourth_main_desc_raw));
 
 $other_title = trim(wp_strip_all_tags((string) $other_title_raw));
 
@@ -37,6 +47,10 @@ if (
     $main_desc === '' ||
     $second_main_title === '' ||
     $second_main_desc === '' ||
+    $third_main_title === '' ||
+    $third_main_desc === '' ||
+    $fourth_main_title === '' ||
+    $fourth_main_desc === '' ||
     $other_title === '' ||
     count($other_items) === 0
 ) {
@@ -64,6 +78,20 @@ if (
                     <h3><?php echo esc_html($second_main_title); ?></h3>
                 </div>
                 <p class="services__card-description"><?php echo nl2br(esc_html($second_main_desc)); ?></p>
+            </article>
+            <article class="services__card services__card--main">
+                <div class="services__card-title">
+                    <?php include get_theme_file_path('assets/icons/clinic.php'); ?>
+                    <h3><?php echo esc_html($third_main_title); ?></h3>
+                </div>
+                <p class="services__card-description"><?php echo nl2br(esc_html($third_main_desc)); ?></p>
+            </article>
+            <article class="services__card services__card--main">
+                <div class="services__card-title">
+                    <?php include get_theme_file_path('assets/icons/skin.php'); ?>
+                    <h3><?php echo esc_html($fourth_main_title); ?></h3>
+                </div>
+                <p class="services__card-description"><?php echo nl2br(esc_html($fourth_main_desc)); ?></p>
             </article>
         </div>
         <div class="services__other">

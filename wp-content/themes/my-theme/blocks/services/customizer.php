@@ -93,6 +93,56 @@ add_action('customize_register', function ($wp_customize) {
         'description' => 'Texte (sauts de ligne autorisés).',
     ]);
 
+    $wp_customize->add_setting('my_theme_services_third_main_card_title', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('my_theme_services_third_main_card_title', [
+        'label'   => 'Troisième carte - titre',
+        'section' => 'my_theme_home_services',
+        'type'    => 'text',
+    ]);
+
+    $wp_customize->add_setting('my_theme_services_third_main_card_description', [
+        'default'           => '',
+        'sanitize_callback' => function ($value) {
+            $value = (string) $value;
+            $value = wp_strip_all_tags($value);
+            return trim($value);
+        },
+    ]);
+    $wp_customize->add_control('my_theme_services_third_main_card_description', [
+        'label'       => 'Troisième carte - description',
+        'section'     => 'my_theme_home_services',
+        'type'        => 'textarea',
+        'description' => 'Texte (sauts de ligne autorisés).',
+    ]);
+
+    $wp_customize->add_setting('my_theme_services_fourth_main_card_title', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('my_theme_services_fourth_main_card_title', [
+        'label'   => 'Quatrième carte - titre',
+        'section' => 'my_theme_home_services',
+        'type'    => 'text',
+    ]);
+
+    $wp_customize->add_setting('my_theme_services_fourth_main_card_description', [
+        'default'           => '',
+        'sanitize_callback' => function ($value) {
+            $value = (string) $value;
+            $value = wp_strip_all_tags($value);
+            return trim($value);
+        },
+    ]);
+    $wp_customize->add_control('my_theme_services_fourth_main_card_description', [
+        'label'       => 'Quatrième carte - description',
+        'section'     => 'my_theme_home_services',
+        'type'        => 'textarea',
+        'description' => 'Texte (sauts de ligne autorisés).',
+    ]);
+
     $wp_customize->add_setting('my_theme_services_other_card_title', [
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
