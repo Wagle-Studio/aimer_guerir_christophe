@@ -61,9 +61,4 @@
   .choose-practitioner__title {
     width: 75%;
   }
-
-  .choose-practitioner__content,
-  .choose-practitioner__second-content {
-    text-align: center;
-  }
 }
