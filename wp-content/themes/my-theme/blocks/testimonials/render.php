@@ -55,11 +55,11 @@ ob_start();
 ?>
 <section class="testimonials">
     <header class="testimonials__header">
-        <div class="header__wrapper">
-            <h2 class="testimonials__title">
+        <div class="testimonials_header_wrapper">
+            <p class="testimonials__title">
                 <?php echo esc_html($title); ?>
-            </h2>
-            <p class="testimonials__subtitle"><?php echo esc_html($subtitle); ?></p>
+            </p>
+            <h2 class="testimonials__subtitle"><?php echo esc_html($subtitle); ?></h2>
         </div>
         <p class="testimonials__intro"><?php echo nl2br(esc_html($introduction)); ?></p>
     </header>

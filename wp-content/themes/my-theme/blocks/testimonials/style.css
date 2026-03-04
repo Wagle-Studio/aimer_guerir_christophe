@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.header__wrapper {
+.testimonials_header_wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +33,6 @@
 
 .testimonials__subtitle {
   position: relative;
-  font-size: 40px;
   letter-spacing: 1.25px;
   font-family: var(--font-heading);
   font-weight: 700;
@@ -96,11 +95,12 @@
     width: 75%;
   }
 
-  .testimonials__list {
-    grid-template-columns: repeat(3, 1fr);
+  .testimonials__intro {
+    max-width: 85%;
+    margin: 0 auto;
   }
 
-  .testimonials__intro {
-    text-align: center;
+  .testimonials__list {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
