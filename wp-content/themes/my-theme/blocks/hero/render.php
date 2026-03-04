@@ -3,8 +3,6 @@
 $title_raw        = get_theme_mod('my_theme_hero_title', '');
 $sub_title_raw    = get_theme_mod('my_theme_hero_sub_title', '');
 $introduction_raw = get_theme_mod('my_theme_hero_introduction', '');
-$identity_raw     = get_theme_mod('my_theme_hero_identity', '');
-$occupation_raw   = get_theme_mod('my_theme_hero_occupation', '');
 $image_id         = (int) get_theme_mod('my_theme_hero_image_id', 0);
 $primary_label    = get_theme_mod('my_theme_hero_primary_label', '');
 $primary_url      = get_theme_mod('my_theme_hero_primary_url', '');
@@ -14,8 +12,6 @@ $secondary_url    = get_theme_mod('my_theme_hero_secondary_url', '');
 $title_has_content         = '' !== trim(wp_strip_all_tags($title_raw));
 $sub_title_has_content     = '' !== trim(wp_strip_all_tags($sub_title_raw));
 $introduction_has_content  = '' !== trim(wp_strip_all_tags($introduction_raw));
-$identity_has_content      = '' !== trim(wp_strip_all_tags($identity_raw));
-$occupation_has_content    = '' !== trim(wp_strip_all_tags($occupation_raw));
 $primary_label             = trim($primary_label);
 $primary_url               = trim($primary_url);
 $secondary_label           = trim($secondary_label);
@@ -25,8 +21,6 @@ if (
 	! $title_has_content ||
 	! $sub_title_has_content ||
 	! $introduction_has_content ||
-	! $identity_has_content ||
-	! $occupation_has_content ||
 	! $image_id ||
 	'' === $primary_label ||
 	'' === $primary_url
@@ -59,7 +53,7 @@ $image_html = wp_get_attachment_image(
 	'full',
 	false,
 	array(
-		'class' => 'identity__image',
+		'class' => 'hero_identity_image',
 		'sizes' => '(max-width: 767px) 360px, 300px',
 	)
 );
@@ -75,7 +69,7 @@ ob_start();
 		<div class="hero__content">
 			<div class="hero__header">
 				<h1 class="header__title"><?php echo wp_kses_post($title_raw); ?></h1>
-				<h2 class="header__subtitle"><?php echo wp_kses_post($sub_title_raw); ?></h2>
+				<h2 class="hero_header_subtitle"><?php echo wp_kses_post($sub_title_raw); ?></h2>
 			</div>
 			<div class="hero__intro"><?php echo $introduction_html; ?></div>
 			<div class="hero__actions">
@@ -91,16 +85,9 @@ ob_start();
 			</div>
 		</div>
 		<div class="hero__identity">
-			<div class="identity__media" <?php echo $ratio_style; ?>>
+			<div class="hero_identity_media" <?php echo $ratio_style; ?>>
 				<?php echo $image_html; ?>
 			</div>
-			<h3 class="identity__title">
-				<?php echo wp_kses_post($identity_raw); ?>
-				</br>
-				<span class="identity__subtitle">
-					<?php echo wp_kses_post($occupation_raw); ?>
-				</span>
-			</h3>
 		</div>
 	</div>
 </section>
