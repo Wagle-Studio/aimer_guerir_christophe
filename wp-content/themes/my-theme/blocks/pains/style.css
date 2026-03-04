@@ -18,7 +18,7 @@
   gap: 48px;
 }
 
-.content__title {
+.pains_content_title {
   position: relative;
   max-width: 90%;
   margin: 0 auto;
@@ -26,7 +26,7 @@
   letter-spacing: 1.25px;
 }
 
-.content__title::after {
+.pains_content_title::after {
   position: absolute;
   bottom: -15px;
   left: 50%;
@@ -37,23 +37,24 @@
   background-color: var(--primary-75);
 }
 
-.content__list {
+.pains_content_list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   margin-top: 16px;
+  padding: 12px 0;
+  border-radius: 6px;
+  border: 1px solid var(--primary-15);
+  background-color: var(--primary-05);
 }
 
 .pains__item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 16px;
-  padding: 12px 16px;
+  gap: 8px;
+  padding: 0 16px;
   text-align: justify;
-  border-radius: 6px;
-  border: 1px solid var(--primary-15);
-  background-color: var(--primary-05);
 }
 
 .pains__item > svg {
@@ -65,13 +66,17 @@
   max-height: 18px;
 }
 
-.content__actions {
+.pains_content_actions {
   display: flex;
   flex-direction: column;
   gap: 48px;
+
+  .btn {
+    width: 100%;
+  }
 }
 
-.actions__tag_line {
+.pains_actions_tag_line {
   max-width: 80%;
   margin: 0 auto;
   font-family: var(--font-body);
@@ -79,7 +84,7 @@
   text-align: center;
 }
 
-.actions__btns {
+.pains_actions_btns {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -112,7 +117,11 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .actions__btns {
+  .pains_actions_btns {
     flex-direction: row;
+
+    .btn {
+      width: max-content;
+    }
   }
 }

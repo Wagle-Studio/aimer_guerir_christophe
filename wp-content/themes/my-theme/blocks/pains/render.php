@@ -62,8 +62,8 @@ ob_start();
 <div class="pains">
 	<section class="pains__wrapper">
 		<div class="pains__content">
-			<h2 class="content__title"><?php echo wp_kses_post($title_raw); ?></h2>
-			<ul class="content__list">
+			<h2 class="pains_content_title"><?php echo wp_kses_post($title_raw); ?></h2>
+			<ul class="pains_content_list">
 				<?php foreach ($items as $item) : ?>
 					<li class="pains__item">
 						<?php include get_theme_file_path('assets/icons/check.php'); ?>
@@ -71,9 +71,9 @@ ob_start();
 					</li>
 				<?php endforeach; ?>
 			</ul>
-			<div class="content__actions">
-				<h3 class="actions__tag_line"><?php echo wp_kses_post($tag_line_raw); ?></h3>
-				<div class="actions__btns">
+			<div class="pains_content_actions">
+				<h3 class="pains_actions_tag_line"><?php echo wp_kses_post($tag_line_raw); ?></h3>
+				<div class="pains_actions_btns">
 					<a class="btn btn--primary btn--icon" href="<?php echo $primary_url; ?>">
 						<?php echo esc_html($primary_label); ?>
 						<?php include get_theme_file_path('assets/icons/arrow-right.php'); ?>
