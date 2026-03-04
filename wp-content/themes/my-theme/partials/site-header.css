@@ -41,12 +41,14 @@ body.admin-bar .site-header {
 
 .site-header__logo {
   display: block;
+  width: 100%;
   max-width: 300px;
   height: auto;
 }
 
 .custom-logo {
   display: block;
+  width: 100%;
   max-width: 300px;
   height: auto;
 }
@@ -79,6 +81,8 @@ body.admin-bar .site-header {
 .site-header__contact-value {
   font-weight: 500;
   font-size: 16px;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .site-nav {
@@ -218,14 +222,21 @@ html.js .site-nav.is-open .site-nav__menu {
     gap: 32px;
   }
 
+  .site-header__brand {
+    flex-shrink: 0;
+  }
+
   .site-header__contact {
     flex-direction: row;
     align-items: flex-start;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+    min-width: 0;
   }
 
   .site-header__contact-item {
-    padding-left: 24px;
+    min-width: 0;
+    padding-left: 16px;
     border-left: 1px solid var(--primary-15);
   }
 
@@ -265,6 +276,20 @@ html.js .site-nav.is-open .site-nav__menu {
 @media screen and (max-width: 767px) {
   .site-header__contact {
     display: none;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .site-header__contact-item--email {
+    display: none;
+  }
+
+  .site-header__contact-value {
+    font-size: 14px;
+  }
+
+  .site-header__contact-label {
+    font-size: 11px;
   }
 }
 
