@@ -1,0 +1,105 @@
+.therapeutic-support {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 0;
+  gap: 80px;
+  background-color: var(--beige);
+}
+
+.therapeutic-support-main__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  align-items: center;
+}
+
+.therapeutic-support-main__pill {
+  width: max-content;
+  text-align: center;
+  padding: 6px 24px;
+  border-radius: 24px;
+  background-color: var(--primary-25);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.therapeutic-support-main__title {
+  position: relative;
+}
+
+.therapeutic-support-main__title::after {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  width: 100px;
+  height: 5px;
+  background-color: var(--primary-75);
+}
+
+.therapeutic-support-main__intro {
+  text-align: justify;
+}
+
+.therapeutic-support__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.therapeutic-support__card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid var(--primary-25);
+  background-color: var(--white);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.therapeutic-support__card-media {
+  width: 100%;
+  aspect-ratio: var(--ts-image-ratio, 4 / 3);
+  overflow: hidden;
+}
+
+.therapeutic-support__card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.therapeutic-support__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  text-align: justify;
+}
+
+.therapeutic-support__card-title {
+  font-family: var(--font-heading);
+}
+
+@media screen and (min-width: 768px) {
+  .therapeutic-support__cards {
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .therapeutic-support-main__intro {max-width: 75%;
+  }
+}

@@ -75,17 +75,17 @@ jobs:
 
       - name: Pull and Restart
         run: |
-          SSH_USER=${{ secrets.SFTP_PROD_USERNAME }}
-          SSH_HOST=${{ secrets.REMOTE_HOST }}
-          APP_DIR=${{ secrets.REMOTE_PROD_PROJECT_FOLDER_PATH }}
-          GHCR_NAMESPACE=${{ secrets.GHCR_NAMESPACE }}
-          IMAGE_TAG=${{ needs.build_and_push.outputs.image_tag }}
-          CONTAINER_PREFIX=${{ secrets.CONTAINER_PREFIX }}
-          DIST_PORT=${{ secrets.REMOTE_DIST_PORT }}
-          DB_NAME=${{ secrets.WORDPRESS_DB_NAME }}
-          DB_USER=${{ secrets.WORDPRESS_DB_USER }}
-          DB_PASSWORD=${{ secrets.WORDPRESS_DB_PASSWORD }}
-          DB_ROOT_PASSWORD=${{ secrets.WORDPRESS_DB_ROOT_PASSWORD }}
+          SSH_USER="${{ secrets.SFTP_PROD_USERNAME }}"
+          SSH_HOST="${{ secrets.REMOTE_HOST }}"
+          APP_DIR="${{ secrets.REMOTE_PROD_PROJECT_FOLDER_PATH }}"
+          GHCR_NAMESPACE="${{ secrets.GHCR_NAMESPACE }}"
+          IMAGE_TAG="${{ needs.build_and_push.outputs.image_tag }}"
+          CONTAINER_PREFIX="${{ secrets.CONTAINER_PREFIX }}"
+          DIST_PORT="${{ secrets.REMOTE_DIST_PORT }}"
+          DB_NAME="${{ secrets.WORDPRESS_DB_NAME }}"
+          DB_USER="${{ secrets.WORDPRESS_DB_USER }}"
+          DB_PASSWORD="${{ secrets.WORDPRESS_DB_PASSWORD }}"
+          DB_ROOT_PASSWORD="${{ secrets.WORDPRESS_DB_ROOT_PASSWORD }}"
 
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST << EOF
             cd "$APP_DIR"
