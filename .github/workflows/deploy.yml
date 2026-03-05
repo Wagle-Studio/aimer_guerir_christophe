@@ -44,8 +44,7 @@ jobs:
           file: ./Dockerfile.prod
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          no-cache: true
 
   deploy_prod:
     runs-on: ubuntu-latest
