@@ -5,4 +5,5 @@ COPY wp-content/plugins /var/www/html/wp-content/plugins
 COPY wp-content/languages /var/www/html/wp-content/languages
 COPY wp-content/index.php /var/www/html/wp-content/index.php
 
+RUN find /var/www/html/wp-content/themes -maxdepth 1 -mindepth 1 -type d ! -name 'aimer-guerir' -exec rm -rf {} +
 RUN chown -R www-data:www-data /var/www/html/wp-content
