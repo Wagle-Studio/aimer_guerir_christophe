@@ -85,11 +85,14 @@
   flex-direction: column;
   gap: 16px;
   padding: 24px;
-  text-align: justify;
 }
 
 .therapeutic-support__card-title {
   font-family: var(--font-heading);
+}
+
+.therapeutic-support__card-intro {
+  text-align: justify;
 }
 
 @media screen and (min-width: 768px) {

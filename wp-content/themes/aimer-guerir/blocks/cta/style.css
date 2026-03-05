@@ -15,13 +15,21 @@
 .cta__title,
 .cta__subtitle {
   color: var(--white);
+}
+
+.cta__title {
   text-align: center;
+}
+
+.cta__subtitle {
+  text-align: justify;
 }
 
 @media screen and (min-width: 768px) {
   .cta__title,
   .cta__subtitle {
-    max-width: 75%;
+    text-align: center;
+    max-width: 50%;
     margin: 0 auto;
   }
 

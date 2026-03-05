@@ -30,7 +30,6 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
-  text-align: justify;
 }
 
 .about_content_media {
@@ -71,6 +70,11 @@ img.about__image {
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+.about__subpart_description,
+.about__presentation {
+  text-align: justify;
 }
 
 .about__subpart {
