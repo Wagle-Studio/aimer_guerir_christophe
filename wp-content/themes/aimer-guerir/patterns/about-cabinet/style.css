@@ -1,13 +1,13 @@
-.pattern-about-cabinet {
+.pattern_about_cabinet {
   display: flex;
   flex-direction: column;
   gap: 64px;
   max-width: 1280px;
-  padding: 0 24px;
-  margin: 100px auto;
+  padding: 100px 24px;
+  margin: 0 auto;
 }
 
-.pattern-about-cabinet .testimonials__header {
+.pattern_about_cabinet__header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.pattern-about-cabinet .header__wrapper {
+.pattern_about_cabinet__header_wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +23,7 @@
   text-align: center;
 }
 
-.pattern-about-cabinet .testimonials__title {
+.pattern_about_cabinet__title {
   color: var(--primary);
   text-transform: uppercase;
   font-family: var(--font-body);
@@ -31,16 +31,11 @@
   font-weight: 600;
 }
 
-.pattern-about-cabinet .testimonials__subtitle {
+.pattern_about_cabinet__subtitle {
   position: relative;
-  font-size: 40px;
-  letter-spacing: 1.25px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  color: var(--black);
 }
 
-.pattern-about-cabinet .testimonials__subtitle::after {
+.pattern_about_cabinet__subtitle::after {
   position: absolute;
   bottom: -15px;
   left: 50%;
@@ -51,16 +46,17 @@
   background-color: var(--primary-75);
 }
 
-.pattern-about-cabinet .testimonials__intro {
+.pattern_about_cabinet__intro {
   text-align: justify;
 }
 
 @media screen and (min-width: 900px) {
-  .pattern-about-cabinet .testimonials__subtitle {
+  .pattern_about_cabinet__subtitle {
     width: 75%;
   }
 
-  .pattern-about-cabinet .testimonials__intro {
-    text-align: center;
+  .pattern_about_cabinet__intro {
+    max-width: 85%;
+    margin: 0 auto;
   }
 }

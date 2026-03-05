@@ -9,13 +9,15 @@ add_action('after_setup_theme', function () {
 	]);
 	$editor_styles = ['assets/css/editor.css'];
 	$theme_dir     = wp_normalize_path(get_theme_file_path());
-	$pattern_css   = glob($theme_dir . '/patterns/*/editor.css');
-	if (is_array($pattern_css)) {
-		sort($pattern_css);
-		foreach ($pattern_css as $path) {
-			$path = wp_normalize_path($path);
-			$relative = ltrim(str_replace($theme_dir . '/', '', $path), '/');
-			$editor_styles[] = $relative;
+	$pattern_dirs  = glob($theme_dir . '/patterns/*', GLOB_ONLYDIR) ?: [];
+	sort($pattern_dirs);
+	foreach ($pattern_dirs as $dir) {
+		$dir = wp_normalize_path($dir);
+		foreach (['style.css', 'editor.css'] as $file) {
+			$full = $dir . '/' . $file;
+			if (file_exists($full)) {
+				$editor_styles[] = ltrim(str_replace($theme_dir . '/', '', $full), '/');
+			}
 		}
 	}
 	add_editor_style($editor_styles);

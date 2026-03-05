@@ -290,7 +290,7 @@ html.js .site-nav.is-open .site-nav__menu {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 48px;
+    gap: 24px;
   }
 }
 

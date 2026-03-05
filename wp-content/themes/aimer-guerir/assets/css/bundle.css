@@ -22,10 +22,10 @@
 @import '../../blocks/newsletter/style.css';
 
 /* Patterns (éditeur + front) */
-@import '../../patterns/about/style.css';
+@import '../../patterns/about-me/style.css';
 @import '../../patterns/about-cabinet/style.css';
-@import '../../patterns/appointment-cta/style.css';
+@import '../../patterns/appointment-layout/style.css';
 @import '../../patterns/blog-home/style.css';
-@import '../../patterns/cta/style.css';
+@import '../../patterns/appointment-cta/style.css';
 @import '../../patterns/newsletter/style.css';
 @import '../../patterns/pains/style.css';
