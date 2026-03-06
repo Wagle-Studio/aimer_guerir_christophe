@@ -7,8 +7,8 @@
  * Keywords: cta, appel, bouton
  */
 ?>
-<!-- wp:group {"align":"full","className":"pattern_appointment_cta","layout":{"type":"default"}} -->
-<div class="wp-block-group alignfull pattern_appointment_cta">
+<!-- wp:group {"tagName":"section","align":"full","className":"pattern_appointment_cta","layout":{"type":"default"}} -->
+<section class="wp-block-group alignfull pattern_appointment_cta">
   <!-- wp:group {"className":"pattern_appointment_cta__wrapper","layout":{"type":"constrained"}} -->
   <div class="wp-block-group pattern_appointment_cta__wrapper">
     <!-- wp:heading {"level":2,"className":"pattern_appointment_cta__title"} -->
@@ -32,5 +32,5 @@
     <!-- /wp:buttons -->
   </div>
   <!-- /wp:group -->
-</div>
+</section>
 <!-- /wp:group -->

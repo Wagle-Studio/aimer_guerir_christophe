@@ -6,8 +6,8 @@
  * Keywords: rendez-vous, distance, séance
  */
 ?>
-<!-- wp:group {"anchor":"seance-distance","align":"full","className":"appointment-cta__session-band--primary appointment-cta__session-band--distance","layout":{"type":"default"}} -->
-<div class="wp-block-group alignfull appointment-cta__session-band--primary appointment-cta__session-band--distance" id="seance-distance">
+<!-- wp:group {"tagName":"section","anchor":"seance-distance","align":"full","className":"appointment-cta__session-band--primary appointment-cta__session-band--distance","layout":{"type":"default"}} -->
+<section class="wp-block-group alignfull appointment-cta__session-band--primary appointment-cta__session-band--distance" id="seance-distance">
   <!-- wp:group {"className":"appointment-cta__session","layout":{"type":"default"}} -->
   <div class="wp-block-group appointment-cta__session">
     <!-- wp:group {"className":"appointment-cta__bento","layout":{"type":"default"}} -->
@@ -67,5 +67,5 @@
     <!-- /wp:group -->
   </div>
   <!-- /wp:group -->
-</div>
+</section>
 <!-- /wp:group -->

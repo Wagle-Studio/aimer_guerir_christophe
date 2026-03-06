@@ -6,8 +6,8 @@
  * Keywords: rendez-vous, domicile, séance
  */
 ?>
-<!-- wp:group {"anchor":"seance-domicile","align":"full","className":"appointment-cta__session-band--secondary appointment-cta__session-band--home","layout":{"type":"default"}} -->
-<div class="wp-block-group alignfull appointment-cta__session-band--secondary appointment-cta__session-band--home" id="seance-domicile">
+<!-- wp:group {"tagName":"section","anchor":"seance-domicile","align":"full","className":"appointment-cta__session-band--secondary appointment-cta__session-band--home","layout":{"type":"default"}} -->
+<section class="wp-block-group alignfull appointment-cta__session-band--secondary appointment-cta__session-band--home" id="seance-domicile">
   <!-- wp:group {"className":"appointment-cta__session","layout":{"type":"default"}} -->
   <div class="wp-block-group appointment-cta__session">
     <!-- wp:group {"className":"appointment-cta__bento","layout":{"type":"default"}} -->
@@ -71,5 +71,5 @@
     <!-- /wp:group -->
   </div>
   <!-- /wp:group -->
-</div>
+</section>
 <!-- /wp:group -->

@@ -6,8 +6,8 @@
  * Keywords: cabinet, propos, presentation
  */
 ?>
-<!-- wp:group {"align":"wide","className":"pattern_about_cabinet","layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide pattern_about_cabinet">
+<!-- wp:group {"tagName":"section","align":"wide","className":"pattern_about_cabinet","layout":{"type":"default"}} -->
+<section class="wp-block-group alignwide pattern_about_cabinet">
   <!-- wp:group {"className":"pattern_about_cabinet__header","layout":{"type":"default"}} -->
   <div class="wp-block-group pattern_about_cabinet__header">
     <!-- wp:group {"className":"pattern_about_cabinet__header_wrapper","layout":{"type":"default"}} -->
@@ -27,5 +27,5 @@
     <!-- /wp:paragraph -->
   </div>
   <!-- /wp:group -->
-</div>
+</section>
 <!-- /wp:group -->
