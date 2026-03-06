@@ -19,6 +19,8 @@
 
   --picture-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.18);
   --card-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+
+  --header-height: 160px;
 }
 
 *,
@@ -31,6 +33,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: var(--header-height, 160px);
 }
 
 body {
@@ -70,18 +73,18 @@ main {
   z-index: 10000;
 }
 
-.entry-content > * {
+/* .entry-content > * {
   width: 100%;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 24px;
-  padding-right: 24px;
-}
+  padding-right: 24px;  
+} */
 
-.entry-content > .alignwide {
+/* .entry-content > .alignwide {
   max-width: var(--wp--style--global--wide-size);
-}
+} */
 
 .entry-content .alignfull {
   width: 100vw;
@@ -181,6 +184,10 @@ button {
 }
 
 @media screen and (min-width: 768px) {
+  :root {
+    --header-height: 120px;
+  }
+
   .btn {
     width: max-content;
   }
@@ -205,7 +212,7 @@ button {
   transition: 100ms ease-out;
 }
 
-.btn--secondary:hover {
+.btn.btn--secondary:hover {
   border: 2px solid var(--primary);
   color: var(--primary);
 }

@@ -1,5 +1,5 @@
 .pattern-newsletter {
-  background: var(--cream);
+  background: var(--primary);
 }
 
 .pattern-newsletter .newsletter__wrapper {
@@ -8,7 +8,7 @@
   justify-content: center;
   gap: 32px;
   max-width: 1280px;
-  padding: 82px 24px;
+  padding: 80px 24px;
   margin: 0 auto;
 }
 
@@ -20,7 +20,7 @@
 
 .pattern-newsletter .newsletter__title,
 .pattern-newsletter .newsletter__subtitle {
-  color: var(--black);
+  color: var(--white);
   text-align: center;
 }
 
@@ -63,15 +63,10 @@
 
 .pattern-newsletter .newsletter__btn {
   width: 100%;
-  justify-content: center;
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {
-  .pattern-newsletter .newsletter__subtitle {
-    max-width: unset !important;
-    margin: 0 auto;
-  }
-
   .pattern-newsletter .newsletter__form {
     flex-direction: row;
     align-items: stretch;

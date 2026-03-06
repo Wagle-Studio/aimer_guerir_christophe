@@ -1,0 +1,98 @@
+.pattern-appointment-header {
+  width: 100%;
+  background-color: var(--cream);
+}
+
+.pattern-appointment-header__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.pattern-appointment-header .wp-block-buttons {
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.pattern-appointment-header .btn--icon::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  display: inline-block;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%200%2024%2024' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5%2012h14'/%3E%3Cpath d='m12%205%207%207-7%207'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%200%2024%2024' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5%2012h14'/%3E%3Cpath d='m12%205%207%207-7%207'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+}
+
+.appointment-cta__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.appointment-cta__schedules {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.appointment-cta__schedules > p {
+  font-weight: 600;
+}
+
+.appointment-cta__info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+.appointment-cta__card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 10px;
+  border: 1px solid var(--primary-15);
+  background-color: var(--white);
+  text-align: left;
+}
+
+.appointment-cta__card > p {
+  text-align: justify;
+}
+
+.appointment-cta__card__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.appointment-cta__card__title span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--primary-75);
+  flex: 0 0 auto;
+}
+
+.appointment-cta__card__title span svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .appointment-cta__info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,137 @@
+.appointment-cta__session-band--home {
+  width: 100%;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 80px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: left;
+}
+
+.appointment-cta__session-band--home .appointment-cta__bento {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: max-content;
+  padding: 24px;
+  background-color: var(--white);
+  border-radius: 12px;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-content > p {
+  text-align: justify;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-content > p:first-of-type {
+  font-weight: 600;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-content__title {
+  position: relative;
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-content__title span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--primary-75);
+  flex: 0 0 auto;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-content__title span svg {
+  width: 18px;
+  height: 18px;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-content__title::after {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  width: 100%;
+  height: 5px;
+  background-color: var(--primary-75);
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-media {
+  width: 100%;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-actions {
+  margin-top: 24px;
+}
+
+.appointment-cta__session-band--home .appointment-cta__session-actions .wp-block-buttons,
+.appointment-cta__session-band--home .appointment-cta__session-actions .wp-block-button,
+.appointment-cta__session-band--home .appointment-cta__session-actions .wp-block-button__link {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .appointment-cta__session-band--home .appointment-cta__bento {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    column-gap: 24px;
+    row-gap: 48px;
+  }
+
+  .appointment-cta__session-band--home .appointment-cta__session-content {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .appointment-cta__session-band--home .appointment-cta__session-media {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .appointment-cta__session-band--home .appointment-cta__session-actions .wp-block-buttons,
+  .appointment-cta__session-band--home .appointment-cta__session-actions .wp-block-button,
+  .appointment-cta__session-band--home .appointment-cta__session-actions .wp-block-button__link {
+    width: max-content;
+    display: inline-block;
+  }
+
+  .appointment-cta__session-band--home .appointment-cta__session-image {
+    aspect-ratio: unset;
+    height: 100%;
+  }
+}
