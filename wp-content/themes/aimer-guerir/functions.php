@@ -215,13 +215,52 @@ add_action('wp_enqueue_scripts', function () {
 	$theme   = wp_get_theme();
 	$version = $theme->get('Version');
 
-	// Charge le CSS principal du thème (bundle compilé) avec cache-busting automatique
-	wp_enqueue_style(
-		'aimer-guerir',
-		get_theme_file_uri('/assets/css/bundle.css'),
-		[],
-		aimer_guerir_css_version()
-	);
+	if (defined('WP_DEBUG') && WP_DEBUG) {
+		// Développement : chaque fichier CSS est chargé individuellement.
+		// Les modifications sont visibles immédiatement sans rebuild.
+		$sources = [
+			'aimer-guerir-tokens'                        => 'assets/css/tokens.css',
+			'aimer-guerir-main'                          => 'assets/css/main.css',
+			'aimer-guerir-header'                        => 'partials/site-header.css',
+			'aimer-guerir-footer'                        => 'partials/site-footer.css',
+			'aimer-guerir-hero'                          => 'blocks/hero/style.css',
+			'aimer-guerir-pains'                         => 'blocks/pains/style.css',
+			'aimer-guerir-therapeutic-support'           => 'blocks/therapeutic-support/style.css',
+			'aimer-guerir-cta'                           => 'blocks/cta/style.css',
+			'aimer-guerir-about'                         => 'blocks/about/style.css',
+			'aimer-guerir-testimonials'                  => 'blocks/testimonials/style.css',
+			'aimer-guerir-choose-practitioner'           => 'blocks/choose-practitioner/style.css',
+			'aimer-guerir-services'                      => 'blocks/services/style.css',
+			'aimer-guerir-newsletter'                    => 'blocks/newsletter/style.css',
+			'aimer-guerir-pattern-about-me'              => 'patterns/about-me/style.css',
+			'aimer-guerir-pattern-about-cabinet'         => 'patterns/about-cabinet/style.css',
+			'aimer-guerir-pattern-appointment-header'    => 'patterns/appointment-header/style.css',
+			'aimer-guerir-pattern-appointment-clinic'    => 'patterns/appointment-session-clinic/style.css',
+			'aimer-guerir-pattern-appointment-distance'  => 'patterns/appointment-session-distance/style.css',
+			'aimer-guerir-pattern-appointment-home'      => 'patterns/appointment-session-home/style.css',
+			'aimer-guerir-pattern-blog-home'             => 'patterns/blog-home/style.css',
+			'aimer-guerir-pattern-appointment-cta'       => 'patterns/appointment-cta/style.css',
+			'aimer-guerir-pattern-newsletter-cta'        => 'patterns/newsletter-cta/style.css',
+			'aimer-guerir-pattern-appointment-about'     => 'patterns/appointment-about/style.css',
+			'aimer-guerir-pattern-pains-list'            => 'patterns/pains-list/style.css',
+		];
+
+		$prev = [];
+		foreach ($sources as $handle => $path) {
+			if (file_exists(get_theme_file_path($path))) {
+				wp_enqueue_style($handle, get_theme_file_uri($path), $prev, filemtime(get_theme_file_path($path)));
+				$prev = [$handle];
+			}
+		}
+	} else {
+		// Production : bundle compilé par build.sh, un seul fichier chargé.
+		wp_enqueue_style(
+			'aimer-guerir',
+			get_theme_file_uri('/assets/css/bundle.css'),
+			[],
+			aimer_guerir_css_version()
+		);
+	}
 
 	// Charge le JS du header (menu burger, navigation responsive…)
 	// true = placé avant </body> plutôt que dans <head>

@@ -89,3 +89,9 @@
   color: var(--black);
   border-color: var(--primary-50);
 }
+
+/* Cache le titre de page dans le canvas — éditable via le menu "Page" à droite */
+.editor-post-title,
+.wp-block-post-title {
+  display: none !important;
+}

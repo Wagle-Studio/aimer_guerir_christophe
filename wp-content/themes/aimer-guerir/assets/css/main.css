@@ -54,6 +54,32 @@ main {
   z-index: 10000;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Conteneur de contenu éditorial
+   .entry-content          → commun pages + articles
+   .page .entry-content    → pages uniquement
+   .single .entry-content  → articles uniquement
+   ───────────────────────────────────────────────────────────── */
+
+/* Commun : s'applique sur les pages ET les articles */
+.entry-content {
+  /* max-width: 800px;
+  margin-inline: auto;
+  padding-inline: 24px; */
+}
+
+/* Pages uniquement : le contenu est géré par les patterns Gutenberg,
+   on retire la contrainte de largeur pour laisser les blocs s'étendre */
+.page .entry-content {
+  /* max-width: none; */
+  /* padding-inline: 0; */
+}
+
+/* Articles uniquement : mise en page typographique optimisée pour la lecture */
+.single .entry-content {
+  /* padding-block: 64px; */
+}
+
 /* Blocs en pleine largeur dans le contenu des pages (éditeur) */
 .entry-content .alignfull {
   width: 100vw;
