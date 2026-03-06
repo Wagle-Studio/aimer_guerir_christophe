@@ -1,0 +1,37 @@
+/* =============================================================
+   Design tokens — source unique de vérité pour les variables CSS.
+   Importé par editor.css et concaténé en tête de bundle.css.
+   Ne pas dupliquer ces valeurs ailleurs.
+   ============================================================= */
+
+:root {
+  --font-heading:
+    "Playfair Display", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  --font-body:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --primary:    #a40027;
+  --primary-05: #b7273c05;
+  --primary-15: #b7273c15;
+  --primary-25: #b7273c25;
+  --primary-50: #b7273c50;
+  --primary-75: #b7273c75;
+
+  --beige:      #d4c9b9b3;
+  --cream:      #efe6d8b3;
+  --black:      #440e0e;
+  --white:      #ffffff;
+  --background: #faf9f6;
+
+  --picture-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.18);
+  --card-shadow:    0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+
+  --header-height: 160px;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --header-height: 120px;
+  }
+}

@@ -1,5 +1,4 @@
 #Ai
-CLAUDE.md
 
 # Environment
 .env
@@ -14,7 +13,7 @@ wp-config.php
 /readme.html
 /wp-*.php
 /xmlrpc.php
-a
+
 # Docker
 .docker/
 

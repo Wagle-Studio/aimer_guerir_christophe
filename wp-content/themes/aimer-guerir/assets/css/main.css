@@ -1,27 +1,7 @@
-:root {
-  --font-heading:
-    "Playfair Display", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
-    sans-serif;
-  --font-body:
-    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-
-  --primary: #a40027;
-  --primary-05: #b7273c05;
-  --primary-15: #b7273c15;
-  --primary-25: #b7273c25;
-  --primary-50: #b7273c50;
-  --primary-75: #b7273c75;
-  --beige: #d4c9b9b3;
-  --cream: #efe6d8b3;
-  --black: #440e0e;
-  --white: #ffffff;
-  --background: #faf9f6;
-
-  --picture-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.18);
-  --card-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
-
-  --header-height: 160px;
-}
+/* =============================================================
+   Styles de base — reset, typographie, utilitaires globaux.
+   Les variables CSS sont définies dans tokens.css.
+   ============================================================= */
 
 *,
 *::before,
@@ -49,6 +29,7 @@ main {
   margin-top: 0;
 }
 
+/* Texte réservé aux lecteurs d'écran (accessibilité) */
 .screen-reader-text {
   position: absolute;
   width: 1px;
@@ -73,19 +54,7 @@ main {
   z-index: 10000;
 }
 
-/* .entry-content > * {
-  width: 100%;
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;  
-} */
-
-/* .entry-content > .alignwide {
-  max-width: var(--wp--style--global--wide-size);
-} */
-
+/* Blocs en pleine largeur dans le contenu des pages (éditeur) */
 .entry-content .alignfull {
   width: 100vw;
   max-width: 100vw;
@@ -95,24 +64,13 @@ main {
   padding-right: 0;
 }
 
-/* .entry-content > * + * {
-  margin-top: var(--wp--style--block-gap, 20px);
-} */
-
-/* .entry-content > :first-child {
-  margin-top: var(--wp--preset--spacing--l, 48px);
-}
-
-.entry-content > :last-child {
-  margin-bottom: var(--wp--preset--spacing--l, 48px);
-} */
-
 .entry-content
   > :where(.wp-block-image.alignright, figure.alignright, img.alignright) {
   margin-left: 24px;
   margin-bottom: 16px;
 }
 
+/* Typographie */
 h1,
 h2,
 h3,
@@ -146,6 +104,7 @@ svg {
   max-width: 100%;
 }
 
+/* Alignement centré (Gutenberg) */
 .aligncenter,
 .wp-block-image.aligncenter {
   margin-left: auto;
@@ -161,6 +120,7 @@ svg {
   margin-right: auto;
 }
 
+/* Éléments de formulaire */
 input,
 button,
 textarea,
@@ -175,6 +135,7 @@ button {
   cursor: pointer;
 }
 
+/* Boutons */
 .btn {
   padding: 8px 20px;
   border-radius: 4px;
@@ -184,10 +145,6 @@ button {
 }
 
 @media screen and (min-width: 768px) {
-  :root {
-    --header-height: 120px;
-  }
-
   .btn {
     width: max-content;
   }
@@ -235,10 +192,10 @@ button {
   max-height: 18px;
 }
 
+/* Liens et texte */
 a,
 p,
 li {
-  color: inherit;
   text-decoration: none;
   color: var(--black);
 }
@@ -258,6 +215,7 @@ table {
   border-spacing: 0;
 }
 
+/* Boutons Gutenberg (wp-block-button) */
 .wp-block-button__link {
   padding: 8px 20px;
   border-radius: 4px;

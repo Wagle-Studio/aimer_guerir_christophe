@@ -5,5 +5,10 @@ COPY wp-content/plugins /var/www/html/wp-content/plugins
 COPY wp-content/languages /var/www/html/wp-content/languages
 COPY wp-content/index.php /var/www/html/wp-content/index.php
 
+# Supprime les thèmes WordPress par défaut (garde uniquement aimer-guerir)
 RUN find /var/www/html/wp-content/themes -maxdepth 1 -mindepth 1 -type d ! -name 'aimer-guerir' -exec rm -rf {} +
+
+# Génère bundle.css à partir des sources CSS (tokens + main + partials + blocs + patterns)
+RUN bash /var/www/html/wp-content/themes/aimer-guerir/build.sh
+
 RUN chown -R www-data:www-data /var/www/html/wp-content
