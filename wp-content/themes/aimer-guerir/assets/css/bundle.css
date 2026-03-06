@@ -323,22 +323,29 @@ table {
    Articles (single.php) — mise en page typographique pour la lecture.
    ============================================================= */
 
-.single__title {
-  max-width: 1280px;
-  padding: 72px 24px 0;
-  margin: 0 auto;
+.single__pill {
+  width: max-content;
+  text-align: center;
+  margin: 72px auto 0;
+  padding: 6px 24px;
+  border-radius: 24px;
+  background-color: var(--primary-25);
+  font-weight: 500;
+  font-size: 14px;
 }
 
-@media screen and (min-width: 768px) {
-  .single__title {
-    padding-top: 100px;
-  }
+.single__title {
+  max-width: 980px;
+  padding: 32px 24px 0;
+  margin: 0 auto;
+  text-align: center;
+  letter-spacing: 0.5px;
 }
 
 .single .entry-content {
   display: flex;
   flex-direction: column;
-  max-width: 1280px;
+  max-width: 980px;
   padding: 100px 24px;
   margin: 0 auto;
 }
@@ -354,6 +361,23 @@ table {
 }
 
 /* Titres (espacement dans le flux) */
+
+.single .entry-content h2 {
+  position: relative;
+  width: max-content;
+  margin-bottom: 32px !important;
+}
+
+.single .entry-content h2::after {
+  position: absolute;
+  bottom: -12px;
+  left: 5%;
+  content: "";
+  width: 90%;
+  height: 3px;
+  background-color: var(--primary-50);
+}
+
 .single .entry-content h2,
 .single .entry-content h3,
 .single .entry-content h4 {
@@ -368,10 +392,75 @@ table {
 
 .single .entry-content figcaption {
   font-size: 14px;
+  font-style: italic;
   color: var(--black);
   opacity: 0.6;
   text-align: center;
   margin-top: 8px;
+}
+
+.single .entry-content .wp-block-image img {
+  border-radius: 4px;
+  box-shadow: var(--card-shadow);
+}
+
+.single .entry-content .wp-block-image.alignright,
+.single .entry-content .wp-block-image.alignleft {
+  max-width: 320px;
+  width: 40%;
+}
+
+.single .entry-content .wp-block-image.alignright {
+  float: right;
+  margin: 0 0 24px 32px;
+}
+
+.single .entry-content .wp-block-image.alignleft {
+  float: left;
+  margin: 0 32px 24px 0;
+}
+
+.single .entry-content > div::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 767px) {
+  .single__pill {
+    margin-top: 40px;
+  }
+
+  .single__title {
+    font-size: 28px;
+  }
+
+  .single .entry-content {
+    padding-top: 48px;
+    padding-bottom: 64px;
+  }
+
+  /* Empêche le débordement des H2 longs sur petits écrans */
+  .single .entry-content h2 {
+    width: 100%;
+    font-size: 24px;
+  }
+
+  .single .entry-content h3 {
+    font-size: 20px;
+  }
+
+  .single .entry-content blockquote {
+    font-size: 17px;
+  }
+
+  .single .entry-content .wp-block-image.alignright,
+  .single .entry-content .wp-block-image.alignleft {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 24px 0;
+  }
 }
 
 /* Listes */
@@ -392,13 +481,19 @@ table {
   margin-bottom: 8px;
 }
 
+.single .entry-content li::marker {
+  color: var(--primary);
+}
+
 /* Citation (wp:quote) */
 .single .entry-content blockquote {
-  border-left: 3px solid var(--primary);
-  padding-left: 24px;
-  margin: 32px 0;
+  border-left: 4px solid var(--primary-50);
+  padding: 4px 0 4px 28px;
+  margin: 40px 0;
+  font-family: var(--font-heading);
   font-style: italic;
-  opacity: 0.8;
+  font-size: 19px;
+  opacity: 0.85;
 }
 
 /* Séparateur (wp:separator) */
@@ -1052,6 +1147,8 @@ html.js .site-nav.is-open .site-nav__menu {
   background-color: var(--beige);
 }
 
+/* ── Intro principale ── */
+
 .therapeutic-support-main__wrapper {
   display: flex;
   flex-direction: column;
@@ -1081,7 +1178,7 @@ html.js .site-nav.is-open .site-nav__menu {
   position: absolute;
   bottom: -15px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   content: "";
   width: 100px;
   height: 5px;
@@ -1089,13 +1186,15 @@ html.js .site-nav.is-open .site-nav__menu {
 }
 
 .therapeutic-support-main__intro {
-  text-align: justify;
+  text-align: center;
 }
 
+/* ── Cartes ── */
+
 .therapeutic-support__cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
@@ -1105,50 +1204,99 @@ html.js .site-nav.is-open .site-nav__menu {
 .therapeutic-support__card {
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
-  border: 1px solid var(--primary-25);
-  background-color: var(--white);
-  overflow: hidden;
-  box-shadow: var(--card-shadow);
+  align-items: center;
+  gap: 48px;
+  text-align: center;
 }
 
 .therapeutic-support__card-media {
   width: 100%;
-  aspect-ratio: var(--ts-image-ratio, 4 / 3);
-  overflow: hidden;
+  max-width: 460px;
+  aspect-ratio: var(--ts-image-ratio, auto);
 }
 
 .therapeutic-support__card-image {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: var(--picture-shadow);
 }
 
 .therapeutic-support__card-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 24px;
+  justify-content: center;
+  align-items: center;
 }
 
 .therapeutic-support__card-title {
-  font-family: var(--font-heading);
+  position: relative;
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.therapeutic-support__card-title::after {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  content: "";
+  width: 100px;
+  height: 5px;
+  background-color: var(--primary-75);
 }
 
 .therapeutic-support__card-intro {
+  margin-top: 60px;
   text-align: justify;
 }
 
+/* ── Tablette (768px+) : layout côte à côte, alternance gauche/droite ── */
+
 @media screen and (min-width: 768px) {
-  .therapeutic-support__cards {
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(2, 1fr);
+  .therapeutic-support__card {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .therapeutic-support__card:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .therapeutic-support__card-media {
+    max-width: clamp(288px, 28.8vw, 468px);
+    flex: 0 0 clamp(288px, 28.8vw, 468px);
+  }
+
+  .therapeutic-support__card-content {
+    flex: 0 1 clamp(280px, 40vw, 560px);
+    max-width: clamp(280px, 40vw, 560px);
+    align-items: flex-start;
+  }
+
+  .therapeutic-support-main__title,
+  .therapeutic-support__card-title {
+    max-width: 75%;
+  }
+
+  .therapeutic-support-main__intro {
+    max-width: 75%;
   }
 }
 
+/* ── Desktop (1024px+) ── */
+
 @media screen and (min-width: 1024px) {
-  .therapeutic-support-main__intro {max-width: 75%;
+  .therapeutic-support__card-media {
+    max-width: clamp(324px, 25.2vw, 504px);
+    flex-basis: clamp(324px, 25.2vw, 504px);
+  }
+
+  .therapeutic-support-main__title,
+  .therapeutic-support__card-title {
+    max-width: 55%;
   }
 }
 

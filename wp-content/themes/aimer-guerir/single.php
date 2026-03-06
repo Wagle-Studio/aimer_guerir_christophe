@@ -5,12 +5,13 @@
 	if (have_posts()) :
 		while (have_posts()) :
 			the_post();
-			?>
+	?>
+			<p class="single__pill">Article</p>
 			<h1 class="single__title"><?php the_title(); ?></h1>
 			<div class="entry-content">
 				<?php the_content(); ?>
 			</div>
-			<?php
+	<?php
 		endwhile;
 	endif;
 	?>

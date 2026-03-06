@@ -2,22 +2,29 @@
    Articles (single.php) — mise en page typographique pour la lecture.
    ============================================================= */
 
-.single__title {
-  max-width: 1280px;
-  padding: 72px 24px 0;
-  margin: 0 auto;
+.single__pill {
+  width: max-content;
+  text-align: center;
+  margin: 72px auto 0;
+  padding: 6px 24px;
+  border-radius: 24px;
+  background-color: var(--primary-25);
+  font-weight: 500;
+  font-size: 14px;
 }
 
-@media screen and (min-width: 768px) {
-  .single__title {
-    padding-top: 100px;
-  }
+.single__title {
+  max-width: 980px;
+  padding: 32px 24px 0;
+  margin: 0 auto;
+  text-align: center;
+  letter-spacing: 0.5px;
 }
 
 .single .entry-content {
   display: flex;
   flex-direction: column;
-  max-width: 1280px;
+  max-width: 980px;
   padding: 100px 24px;
   margin: 0 auto;
 }
@@ -33,6 +40,23 @@
 }
 
 /* Titres (espacement dans le flux) */
+
+.single .entry-content h2 {
+  position: relative;
+  width: max-content;
+  margin-bottom: 32px !important;
+}
+
+.single .entry-content h2::after {
+  position: absolute;
+  bottom: -12px;
+  left: 5%;
+  content: "";
+  width: 90%;
+  height: 3px;
+  background-color: var(--primary-50);
+}
+
 .single .entry-content h2,
 .single .entry-content h3,
 .single .entry-content h4 {
@@ -47,10 +71,75 @@
 
 .single .entry-content figcaption {
   font-size: 14px;
+  font-style: italic;
   color: var(--black);
   opacity: 0.6;
   text-align: center;
   margin-top: 8px;
+}
+
+.single .entry-content .wp-block-image img {
+  border-radius: 4px;
+  box-shadow: var(--card-shadow);
+}
+
+.single .entry-content .wp-block-image.alignright,
+.single .entry-content .wp-block-image.alignleft {
+  max-width: 320px;
+  width: 40%;
+}
+
+.single .entry-content .wp-block-image.alignright {
+  float: right;
+  margin: 0 0 24px 32px;
+}
+
+.single .entry-content .wp-block-image.alignleft {
+  float: left;
+  margin: 0 32px 24px 0;
+}
+
+.single .entry-content > div::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 767px) {
+  .single__pill {
+    margin-top: 40px;
+  }
+
+  .single__title {
+    font-size: 28px;
+  }
+
+  .single .entry-content {
+    padding-top: 48px;
+    padding-bottom: 64px;
+  }
+
+  /* Empêche le débordement des H2 longs sur petits écrans */
+  .single .entry-content h2 {
+    width: 100%;
+    font-size: 24px;
+  }
+
+  .single .entry-content h3 {
+    font-size: 20px;
+  }
+
+  .single .entry-content blockquote {
+    font-size: 17px;
+  }
+
+  .single .entry-content .wp-block-image.alignright,
+  .single .entry-content .wp-block-image.alignleft {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 24px 0;
+  }
 }
 
 /* Listes */
@@ -71,13 +160,19 @@
   margin-bottom: 8px;
 }
 
+.single .entry-content li::marker {
+  color: var(--primary);
+}
+
 /* Citation (wp:quote) */
 .single .entry-content blockquote {
-  border-left: 3px solid var(--primary);
-  padding-left: 24px;
-  margin: 32px 0;
+  border-left: 4px solid var(--primary-50);
+  padding: 4px 0 4px 28px;
+  margin: 40px 0;
+  font-family: var(--font-heading);
   font-style: italic;
-  opacity: 0.8;
+  font-size: 19px;
+  opacity: 0.85;
 }
 
 /* Séparateur (wp:separator) */

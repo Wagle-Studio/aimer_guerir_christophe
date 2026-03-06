@@ -37,6 +37,9 @@ add_action('after_setup_theme', function () {
 
 	// Permet aux blocs d'utiliser les alignements "wide" et "full"
 	add_theme_support('align-wide');
+	// Active les champs "Image mise en avant" et "Extrait" dans la sidebar Gutenberg
+	add_theme_support('post-thumbnails');
+	add_post_type_support('post', 'excerpt');
 	// Applique les styles CSS natifs des blocs WordPress (bordures, espacements…)
 	add_theme_support('wp-block-styles');
 	// Rend les iframes embarquées (YouTube, etc.) responsives
