@@ -1,0 +1,88 @@
+/* =============================================================
+   Articles (single.php) — mise en page typographique pour la lecture.
+   ============================================================= */
+
+.single__title {
+  max-width: 1280px;
+  padding: 72px 24px 0;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .single__title {
+    padding-top: 100px;
+  }
+}
+
+.single .entry-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  padding: 100px 24px;
+  margin: 0 auto;
+}
+
+.single .entry-content > div {
+  margin: 32px 0;
+}
+
+/* Paragraphes */
+.single .entry-content p {
+  text-align: justify;
+  line-height: 1.8;
+}
+
+/* Titres (espacement dans le flux) */
+.single .entry-content h2,
+.single .entry-content h3,
+.single .entry-content h4 {
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+/* Images */
+.single .entry-content figure {
+  margin: 32px 0;
+}
+
+.single .entry-content figcaption {
+  font-size: 14px;
+  color: var(--black);
+  opacity: 0.6;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Listes */
+.single .entry-content ul,
+.single .entry-content ol {
+  padding-left: 24px;
+}
+
+.single .entry-content ul {
+  list-style: disc;
+}
+
+.single .entry-content ol {
+  list-style: decimal;
+}
+
+.single .entry-content li {
+  margin-bottom: 8px;
+}
+
+/* Citation (wp:quote) */
+.single .entry-content blockquote {
+  border-left: 3px solid var(--primary);
+  padding-left: 24px;
+  margin: 32px 0;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Séparateur (wp:separator) */
+.single .entry-content hr {
+  border: none;
+  border-top: 1px solid var(--primary-15);
+  margin: 48px 0;
+}

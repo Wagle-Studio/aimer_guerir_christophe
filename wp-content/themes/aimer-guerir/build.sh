@@ -16,6 +16,7 @@ SOURCES=(
   "$THEME_DIR/assets/css/tokens.css"
   # Styles de base
   "$THEME_DIR/assets/css/main.css"
+  "$THEME_DIR/assets/css/single.css"
   # Partials (header, footer)
   "$THEME_DIR/partials/site-header.css"
   "$THEME_DIR/partials/site-footer.css"

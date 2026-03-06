@@ -221,6 +221,7 @@ add_action('wp_enqueue_scripts', function () {
 		$sources = [
 			'aimer-guerir-tokens'                        => 'assets/css/tokens.css',
 			'aimer-guerir-main'                          => 'assets/css/main.css',
+			'aimer-guerir-single'                        => 'assets/css/single.css',
 			'aimer-guerir-header'                        => 'partials/site-header.css',
 			'aimer-guerir-footer'                        => 'partials/site-footer.css',
 			'aimer-guerir-hero'                          => 'blocks/hero/style.css',
