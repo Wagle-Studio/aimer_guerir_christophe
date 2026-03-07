@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
                 <label class="newsletter__label" for="newsletter-email">Email</label>
                 <input class="newsletter__input" type="email" id="newsletter-email" name="email" placeholder="ex : marie@exemple.fr" autocomplete="email" required>
             </div>
-            <button class="newsletter__btn btn btn--secondary" type="submit">
+            <button class="newsletter__btn btn btn--thirdary" type="submit">
                 S'inscrire
             </button>
         </form>

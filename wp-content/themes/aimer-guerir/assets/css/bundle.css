@@ -25,11 +25,11 @@
   --primary-50: #b7273c50;
   --primary-75: #b7273c75;
 
-  --beige:      #d4c9b9b3;
-  --cream:      #efe6d8b3;
-  --black:      #440e0e;
-  --white:      #ffffff;
-  --background: #faf9f6;
+  --beige:      #e8e4df;
+  --cream:      #f5efe6;
+  --black:      ##3d2b1f;
+  --white:      #fffdf9;
+  --background: #faf6f0;
 
   --picture-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.18);
   --card-shadow:    0px 4px 20px 0px rgba(0, 0, 0, 0.08);
@@ -95,7 +95,7 @@ main {
   padding: 8px 12px;
   background: var(--white);
   color: var(--black);
-  border-radius: 4px;
+  border-radius: 3px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   z-index: 10000;
 }
@@ -202,7 +202,7 @@ button {
 /* Boutons */
 .btn {
   padding: 8px 20px;
-  border-radius: 4px;
+  border-radius: 3px;
   font-weight: 600;
   text-align: center;
   width: 100%;
@@ -218,7 +218,7 @@ button {
   background: var(--primary);
   color: var(--white);
   border: 2px solid var(--primary);
-  transition: 100ms ease-out;
+  transition: 0.1s ease;
 }
 
 .btn--primary:hover {
@@ -229,12 +229,24 @@ button {
 .btn.btn--secondary {
   background: var(--white);
   color: var(--black);
-  border: 2px solid var(--primary-50);
-  transition: 100ms ease-out;
+  border: 2px solid var(--primary);
+  transition: 0.1s ease;
 }
 
 .btn.btn--secondary:hover {
   border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn.btn--thirdary {
+  background: transparent;
+  color: var(--background);
+  border: 2px solid var(--background);
+  transition: 0.1s ease;
+}
+
+.btn.btn--thirdary:hover {
+  background: var(--background);
   color: var(--primary);
 }
 
@@ -244,7 +256,7 @@ button {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  transition: 100ms ease-out;
+  transition: 0.1s ease;
 }
 
 .btn--icon > svg {
@@ -282,20 +294,27 @@ table {
 /* Boutons Gutenberg (wp-block-button) */
 .wp-block-button__link {
   padding: 8px 20px;
-  border-radius: 4px;
+  border-radius: 3px;
   font-weight: 600;
   text-align: center;
   border: 2px solid var(--primary);
   background: var(--primary);
   color: var(--white);
-  transition: 100ms ease-out;
+  transition: 0.1s ease;
 }
 
 .wp-block-button__link.btn--secondary,
 .wp-block-button.btn--secondary .wp-block-button__link {
   background: var(--white);
   color: var(--black);
-  border-color: var(--primary-50);
+  border-color: var(--primary);
+}
+
+.wp-block-button__link.btn--thirdary,
+.wp-block-button.btn--thirdary .wp-block-button__link {
+  background: transparent;
+  color: var(--background);
+  border-color: var(--background);
 }
 
 .wp-block-button.is-style-outline .wp-block-button__link {
@@ -316,6 +335,13 @@ table {
   border-color: var(--primary);
   color: var(--primary);
   background-color: var(--white);
+}
+
+.wp-block-button__link.btn--thirdary:hover,
+.wp-block-button.btn--thirdary .wp-block-button__link:hover {
+  background-color: var(--background);
+  color: var(--primary);
+  border-color: var(--background);
 }
 
 /* --- assets/css/single.css --- */
@@ -400,7 +426,7 @@ table {
 }
 
 .single .entry-content .wp-block-image img {
-  border-radius: 4px;
+  border-radius: 3px;
   box-shadow: var(--card-shadow);
 }
 
@@ -555,11 +581,12 @@ body.admin-bar .site-header {
 .custom-logo {
   display: block;
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
   height: auto;
 }
 
 .site-header__brand-tagline {
+  display: none;
   font-size: 16px;
   opacity: 0.8;
 }
@@ -597,10 +624,10 @@ body.admin-bar .site-header {
   gap: 12px;
   max-width: 1280px;
   width: calc(100% - 48px);
-  padding: 12px 16px;
+  padding: 6px 8px;
   margin: 0 auto -16px;
   border: 2px solid var(--background);
-  border-radius: 6px;
+  border-radius: 3px;
   background: var(--primary);
 }
 
@@ -666,7 +693,7 @@ body.admin-bar .site-header {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border-radius: 4px;
+  border-radius: 3px;
   color: var(--white);
   font-weight: 600;
   letter-spacing: 0.8px;
@@ -691,7 +718,7 @@ html:not(.js) .site-nav__toggle {
   width: 20px;
   height: 2px;
   background: var(--white);
-  border-radius: 2px;
+  border-radius: 3px;
   transition:
     transform 0.2s ease,
     background 0.2s ease;
@@ -705,7 +732,7 @@ html:not(.js) .site-nav__toggle {
   width: 20px;
   height: 2px;
   background: var(--white);
-  border-radius: 2px;
+  border-radius: 3px;
   transition:
     transform 0.2s ease,
     top 0.2s ease;
@@ -751,6 +778,10 @@ html.js .site-nav.is-open .site-nav__menu {
 
   .site-header__brand {
     flex-shrink: 0;
+  }
+
+  .site-header__brand-tagline {
+    display: inline-block;
   }
 
   .site-header__contact {
@@ -993,7 +1024,7 @@ html.js .site-nav.is-open .site-nav__menu {
     height: auto;
     aspect-ratio: var(--hero-image-ratio, auto);
     object-fit: contain;
-    border-radius: 6px;
+    border-radius: 3px;
     box-shadow: var(--picture-shadow);
   }
 }
@@ -1056,7 +1087,7 @@ html.js .site-nav.is-open .site-nav__menu {
   gap: 20px;
   margin-top: 16px;
   padding: 12px 0;
-  border-radius: 6px;
+  border-radius: 3px;
   border: 1px solid var(--primary-15);
   background-color: var(--primary-05);
 }
@@ -1119,7 +1150,7 @@ html.js .site-nav.is-open .site-nav__menu {
   height: auto;
   aspect-ratio: var(--pains-image-ratio, auto);
   object-fit: contain;
-  border-radius: 4px;
+  border-radius: 3px;
   box-shadow: var(--picture-shadow);
 }
 
@@ -1222,7 +1253,7 @@ html.js .site-nav.is-open .site-nav__menu {
   width: 100%;
   height: auto;
   object-fit: contain;
-  border-radius: 6px;
+  border-radius: 3px;
   box-shadow: var(--picture-shadow);
 }
 
@@ -1369,7 +1400,7 @@ html.js .site-nav.is-open .site-nav__menu {
   width: 100%;
   margin: 0;
   aspect-ratio: var(--about-image-ratio, auto);
-  border-radius: 4px;
+  border-radius: 3px;
   box-shadow: var(--card-shadow);
   overflow: hidden;
 }
@@ -1489,7 +1520,7 @@ img.about__image {
   gap: 16px;
   margin: 0;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 14px;
+  border-radius: 3px;
   padding: 20px;
   background: var(--white);
   box-shadow: var(--card-shadow);
@@ -1688,7 +1719,7 @@ img.about__image {
   flex-direction: column;
   gap: 32px;
   padding: 24px;
-  border-radius: 6px;
+  border-radius: 3px;
   border: 1px solid var(--primary-25);
   background-color: var(--cream);
 }
@@ -1796,7 +1827,7 @@ img.about__image {
 .newsletter__input {
   width: 100%;
   padding: 12px 16px;
-  border-radius: 4px;
+  border-radius: 3px;
   border: 1px solid var(--primary-50);
   background: var(--white);
 }
@@ -1868,7 +1899,7 @@ img.about__image {
   width: 100%;
   margin: 0;
   aspect-ratio: var(--about-image-ratio, auto);
-  border-radius: 4px;
+  border-radius: 3px;
   box-shadow: var(--card-shadow);
   overflow: hidden;
 }
@@ -2052,7 +2083,7 @@ img.pattern_about__image {
   flex-direction: column;
   gap: 16px;
   padding: 24px;
-  border-radius: 10px;
+  border-radius: 3px;
   border: 1px solid var(--primary-15);
   background-color: var(--white);
   text-align: left;
@@ -2120,7 +2151,7 @@ img.pattern_about__image {
   height: max-content;
   padding: 24px;
   background-color: var(--white);
-  border-radius: 12px;
+  border-radius: 3px;
 }
 
 .appointment-cta__session-band--clinic .appointment-cta__session-content > p {
@@ -2175,7 +2206,7 @@ img.pattern_about__image {
 .appointment-cta__session-band--clinic .appointment-cta__map {
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 12px;
+  border-radius: 3px;
   overflow: hidden;
   border: 1px solid var(--primary-15);
   background: var(--primary-05);
@@ -2203,7 +2234,7 @@ img.pattern_about__image {
 .appointment-cta__session-band--clinic .appointment-cta__session-image {
   width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: 12px;
+  border-radius: 3px;
   overflow: hidden;
   margin: 0;
 }
@@ -2294,7 +2325,7 @@ img.pattern_about__image {
   height: max-content;
   padding: 24px;
   background-color: var(--white);
-  border-radius: 12px;
+  border-radius: 3px;
 }
 
 .appointment-cta__session-band--distance .appointment-cta__session-content > p {
@@ -2349,7 +2380,7 @@ img.pattern_about__image {
 .appointment-cta__session-band--distance .appointment-cta__session-image {
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 12px;
+  border-radius: 3px;
   overflow: hidden;
   margin: 0;
 }
@@ -2433,7 +2464,7 @@ img.pattern_about__image {
   height: max-content;
   padding: 24px;
   background-color: var(--white);
-  border-radius: 12px;
+  border-radius: 3px;
 }
 
 .appointment-cta__session-band--home .appointment-cta__session-content > p {
@@ -2488,7 +2519,7 @@ img.pattern_about__image {
 .appointment-cta__session-band--home .appointment-cta__session-image {
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 12px;
+  border-radius: 3px;
   overflow: hidden;
   margin: 0;
 }
@@ -2599,7 +2630,7 @@ img.pattern_about__image {
 .pattern-blog-home__item {
   border: 1px solid var(--primary-15);
   background-color: var(--primary-05);
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
 .pattern-blog-home__link {
@@ -2646,9 +2677,9 @@ img.pattern_about__image {
   background: var(--primary);
 }
 
-.pattern_appointment_cta .wp-block-button.btn--secondary {
+.pattern_appointment_cta .wp-block-button.btn--thirdary {
   border: 2px solid transparent;
-  transition: 100ms ease-out;
+  transition: 0.1s ease;
 }
 
 .pattern_appointment_cta__wrapper {
@@ -2734,7 +2765,7 @@ img.pattern_about__image {
 .pattern-newsletter .newsletter__input {
   width: 100%;
   padding: 12px 16px;
-  border-radius: 4px;
+  border-radius: 3px;
   border: 1px solid var(--primary-50);
   background: var(--white);
 }
@@ -2828,8 +2859,7 @@ img.pattern_about__image {
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  border-radius: 10px;
-  border: 1px solid var(--primary-15);
+  border-radius: 3px;
   background-color: var(--white);
   transition: border-color 0.2s ease;
 }
@@ -2849,6 +2879,8 @@ img.pattern_about__image {
 
 .appointment-about__session-card:has(a:hover)::after {
   transform: rotate(45deg) translate(2px, -2px);
+  border-top: 2px solid var(--primary);
+  border-right: 2px solid var(--primary);
 }
 
 .appointment-about__session-card:has(a:hover) {
@@ -2866,7 +2898,7 @@ img.pattern_about__image {
   background: transparent;
   color: transparent;
   font-size: 0;
-  border-radius: 10px;
+  border-radius: 6px;
   z-index: 1;
   padding: 0;
   min-height: 0;
@@ -2971,7 +3003,7 @@ img.pattern_about__image {
 .pattern-pains__media {
   display: none;
   min-height: 250px;
-  border-radius: 10px;
+  border-radius: 3px;
   overflow: hidden;
 }
 
@@ -3004,7 +3036,7 @@ img.pattern_about__image {
   padding: 24px 0 12px 0;
   padding-left: 0;
   list-style: none;
-  border-radius: 6px;
+  border-radius: 3px;
   border: 1px solid var(--primary-15);
   background-color: var(--background);
 }
@@ -3044,7 +3076,7 @@ img.pattern_about__image {
   max-width: unset;
   margin: 0;
   padding: 16px 20px;
-  border-radius: 6px;
+  border-radius: 3px;
   border: 1px solid var(--primary-15);
   background-color: var(--background);
 }
@@ -3071,7 +3103,7 @@ img.pattern_about__image {
     grid-row: 1;
     grid-column: 1;
     max-height: 450px;
-    border-radius: 10px;
+    border-radius: 3px;
     overflow: hidden;
   }
 
@@ -3098,13 +3130,15 @@ img.pattern_about__image {
 
 /* Bandeau titre */
 .pattern_blog_posts_grid__header {
-  text-align: center;
+  width: 100%;
+  max-width: 970px;
+  padding: 0 24px;
+  margin: 0 auto;
 }
 
 .pattern_blog_posts_grid__title {
   position: relative;
   display: inline-block;
-  margin: 0 auto;
   letter-spacing: 1.25px;
 }
 
@@ -3117,7 +3151,7 @@ img.pattern_about__image {
   width: 80px;
   height: 4px;
   background-color: var(--primary-75);
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 /* Wrapper liste */
@@ -3125,8 +3159,8 @@ img.pattern_about__image {
   display: flex;
   flex-direction: column;
   gap: 48px;
-  max-width: 1280px;
-  padding: 0;
+  max-width: 980px;
+  padding: 0 24px;
   margin: 0 auto;
   width: 100%;
 }
@@ -3147,7 +3181,7 @@ img.pattern_about__image {
   align-items: stretch;
   background-color: var(--white);
   border: 1px solid var(--primary-15);
-  border-radius: 10px;
+  border-radius: 3px;
   overflow: hidden;
   box-shadow: var(--card-shadow);
   transition: box-shadow 0.2s ease;
@@ -3161,7 +3195,7 @@ img.pattern_about__image {
 .pattern_blog_posts_grid__card_image {
   flex: 0 0 180px;
   width: 180px;
-  max-height: 140px;
+  max-height: auto;
   overflow: hidden;
 }
 
@@ -3170,7 +3204,7 @@ img.pattern_about__image {
 .pattern_blog_posts_grid__card_image a img {
   display: block;
   width: 100%;
-  height: 140px;
+  height: auto;
   object-fit: cover;
 }
 
@@ -3250,12 +3284,12 @@ img.pattern_about__image {
   .pattern_blog_posts_grid__card_image {
     flex: 0 0 220px;
     width: 220px;
-    max-height: 140px;
+    max-height: 150px;
   }
 
   .pattern_blog_posts_grid__card_image img,
   .pattern_blog_posts_grid__card_image a img {
-    height: 140px;
+    height: 150px;
   }
 }
 

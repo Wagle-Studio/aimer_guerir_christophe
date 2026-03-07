@@ -57,10 +57,9 @@
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  border-radius: 10px;
-  border: 1px solid var(--primary-15);
+  border-radius: 3px;
   background-color: var(--white);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.1s ease;
 }
 
 .appointment-about__session-card::after {
@@ -73,11 +72,13 @@
   border-top: 2px solid var(--primary-75);
   border-right: 2px solid var(--primary-75);
   transform: rotate(45deg);
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease;
 }
 
 .appointment-about__session-card:has(a:hover)::after {
   transform: rotate(45deg) translate(2px, -2px);
+  border-top: 2px solid var(--primary);
+  border-right: 2px solid var(--primary);
 }
 
 .appointment-about__session-card:has(a:hover) {
@@ -95,7 +96,7 @@
   background: transparent;
   color: transparent;
   font-size: 0;
-  border-radius: 10px;
+  border-radius: 6px;
   z-index: 1;
   padding: 0;
   min-height: 0;
@@ -113,7 +114,6 @@
   align-items: center;
   gap: 12px;
   margin: 0;
-  font-family: var(--font-heading);
   font-weight: 700;
   color: var(--black);
   font-size: 18px;

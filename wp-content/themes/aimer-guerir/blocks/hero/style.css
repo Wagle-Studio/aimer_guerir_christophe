@@ -82,7 +82,7 @@
     height: auto;
     aspect-ratio: var(--hero-image-ratio, auto);
     object-fit: contain;
-    border-radius: 6px;
+    border-radius: 3px;
     box-shadow: var(--picture-shadow);
   }
 }

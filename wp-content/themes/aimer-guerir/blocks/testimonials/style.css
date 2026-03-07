@@ -67,7 +67,7 @@
   gap: 16px;
   margin: 0;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 14px;
+  border-radius: 3px;
   padding: 20px;
   background: var(--white);
   box-shadow: var(--card-shadow);

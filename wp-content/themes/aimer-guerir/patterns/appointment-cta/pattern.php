@@ -21,8 +21,8 @@
 
     <!-- wp:buttons -->
     <div class="wp-block-buttons">
-      <!-- wp:button {"className":"btn--secondary"} -->
-      <div class="wp-block-button btn--secondary">
+      <!-- wp:button {"className":"btn--thirdary"} -->
+      <div class="wp-block-button btn--thirdary">
         <a class="wp-block-button__link pattern_appointment_cta__btn btn" href="#">
           Réserver une séance
         </a>

@@ -2,9 +2,9 @@
   background: var(--primary);
 }
 
-.pattern_appointment_cta .wp-block-button.btn--secondary {
+.pattern_appointment_cta .wp-block-button.btn--thirdary {
   border: 2px solid transparent;
-  transition: 100ms ease-out;
+  transition: 0.1s ease;
 }
 
 .pattern_appointment_cta__wrapper {

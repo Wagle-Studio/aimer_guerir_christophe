@@ -26,7 +26,7 @@
   height: max-content;
   padding: 24px;
   background-color: var(--white);
-  border-radius: 12px;
+  border-radius: 3px;
 }
 
 .appointment-cta__session-band--home .appointment-cta__session-content > p {
@@ -81,7 +81,7 @@
 .appointment-cta__session-band--home .appointment-cta__session-image {
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 12px;
+  border-radius: 3px;
   overflow: hidden;
   margin: 0;
 }

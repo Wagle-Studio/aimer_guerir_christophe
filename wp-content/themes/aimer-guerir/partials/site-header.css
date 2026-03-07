@@ -95,7 +95,7 @@ body.admin-bar .site-header {
   padding: 6px 8px;
   margin: 0 auto -16px;
   border: 2px solid var(--background);
-  border-radius: 6px;
+  border-radius: 3px;
   background: var(--primary);
 }
 
@@ -120,7 +120,7 @@ body.admin-bar .site-header {
   font-weight: 600;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  transition: color 0.2s ease;
+  transition: color 0.1s ease;
 }
 
 .site-nav__list a::after {
@@ -131,7 +131,7 @@ body.admin-bar .site-header {
   width: 0;
   height: 1px;
   background: var(--background);
-  transition: width 0.25s ease;
+  transition: width 0.1s ease;
 }
 
 .site-nav__list a:hover,
@@ -161,7 +161,7 @@ body.admin-bar .site-header {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border-radius: 4px;
+  border-radius: 3px;
   color: var(--white);
   font-weight: 600;
   letter-spacing: 0.8px;
@@ -186,7 +186,7 @@ html:not(.js) .site-nav__toggle {
   width: 20px;
   height: 2px;
   background: var(--white);
-  border-radius: 2px;
+  border-radius: 3px;
   transition:
     transform 0.2s ease,
     background 0.2s ease;
@@ -200,7 +200,7 @@ html:not(.js) .site-nav__toggle {
   width: 20px;
   height: 2px;
   background: var(--white);
-  border-radius: 2px;
+  border-radius: 3px;
   transition:
     transform 0.2s ease,
     top 0.2s ease;

@@ -58,7 +58,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 24px;
-  border-radius: 10px;
+  border-radius: 3px;
   border: 1px solid var(--primary-15);
   background-color: var(--white);
   text-align: left;

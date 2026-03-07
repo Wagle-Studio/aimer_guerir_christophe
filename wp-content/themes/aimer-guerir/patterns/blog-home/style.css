@@ -53,7 +53,7 @@
 .pattern-blog-home__item {
   border: 1px solid var(--primary-15);
   background-color: var(--primary-05);
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
 .pattern-blog-home__link {
