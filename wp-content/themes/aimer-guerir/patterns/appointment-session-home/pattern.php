@@ -3,6 +3,7 @@
  * Title: Rendez-vous — Séance à domicile
  * Slug: aimer-guerir/appointment-session-home
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: rendez-vous, domicile, séance
  */
 ?>

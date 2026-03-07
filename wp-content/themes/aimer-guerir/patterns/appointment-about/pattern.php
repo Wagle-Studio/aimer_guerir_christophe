@@ -4,6 +4,7 @@
  * Title: Séances — À propos
  * Slug: aimer-guerir/appointment-about
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: séances, cabinet, distance, domicile
  */
 ?>

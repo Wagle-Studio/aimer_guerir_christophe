@@ -4,6 +4,7 @@
  * Title: Newsletter CTA
  * Slug: aimer-guerir/newsletter-cta
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: newsletter, inscription, formulaire
  */
 ?>

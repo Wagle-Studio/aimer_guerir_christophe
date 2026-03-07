@@ -3,6 +3,7 @@
  * Title: Rendez-vous — En-tête
  * Slug: aimer-guerir/appointment-header
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: rendez-vous, horaires, contact
  */
 ?>

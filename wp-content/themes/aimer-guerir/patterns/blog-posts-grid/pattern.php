@@ -3,6 +3,7 @@
  * Title: Articles — Grille
  * Slug: aimer-guerir/blog-posts-grid
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: articles, blog, grille, liste
  */
 ?>

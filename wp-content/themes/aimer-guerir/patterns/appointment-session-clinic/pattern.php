@@ -3,6 +3,7 @@
  * Title: Rendez-vous — Séance au cabinet
  * Slug: aimer-guerir/appointment-session-clinic
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: rendez-vous, cabinet, séance, maps
  */
 ?>

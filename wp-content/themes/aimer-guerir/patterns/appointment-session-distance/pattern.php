@@ -3,6 +3,7 @@
  * Title: Rendez-vous — Séance à distance
  * Slug: aimer-guerir/appointment-session-distance
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: rendez-vous, distance, séance
  */
 ?>

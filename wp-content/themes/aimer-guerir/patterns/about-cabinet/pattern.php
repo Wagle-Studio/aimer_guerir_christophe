@@ -3,6 +3,7 @@
  * Title: À propos du cabinet
  * Slug: aimer-guerir/about-cabinet
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: cabinet, propos, presentation
  */
 ?>

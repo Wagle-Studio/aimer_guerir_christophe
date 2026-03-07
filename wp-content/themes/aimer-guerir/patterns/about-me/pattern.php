@@ -3,6 +3,7 @@
  * Title: À propos de moi
  * Slug: aimer-guerir/about-me
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: propos, presentation, praticien
  */
 ?>

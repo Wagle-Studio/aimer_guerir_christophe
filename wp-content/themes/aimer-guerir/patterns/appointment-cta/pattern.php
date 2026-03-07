@@ -4,6 +4,7 @@
  * Title: Appel à l'action
  * Slug: aimer-guerir/appointment-cta
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: cta, appel, bouton
  */
 ?>

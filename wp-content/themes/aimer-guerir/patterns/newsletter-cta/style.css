@@ -8,7 +8,7 @@
   justify-content: center;
   gap: 32px;
   max-width: 1280px;
-  padding: 80px 24px;
+  padding: 48px 24px;
   margin: 0 auto;
 }
 
@@ -16,6 +16,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.newsletter__title::after {
+  background-color: var(--white) !important;
 }
 
 .pattern-newsletter .newsletter__title,

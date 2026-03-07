@@ -4,6 +4,7 @@
  * Title: Douleurs — Liste
  * Slug: aimer-guerir/pains-list
  * Categories: aimer-guerir
+ * Post Types: page
  * Keywords: douleurs, liste, disclaimer
  */
 ?>

@@ -110,6 +110,15 @@ add_action('init', function () {
 	}
 
 	$theme = wp_get_theme();
+
+	// En mode développement (WP_DEBUG), on vide systématiquement le cache à chaque
+	// chargement admin — garantit que tout nouveau pattern est immédiatement visible
+	// sans avoir à attendre la rotation du cache.
+	if (defined('WP_DEBUG') && WP_DEBUG) {
+		$theme->delete_pattern_cache();
+		return;
+	}
+
 	$pattern_dir = wp_normalize_path($theme->get_stylesheet_directory() . '/patterns');
 	if (!is_dir($pattern_dir)) {
 		return;
@@ -138,8 +147,7 @@ add_action('init', function () {
 	$option_key = 'aimer_guerir_patterns_signature';
 	$stored_signature = (string) get_option($option_key, '');
 	if ($signature !== $stored_signature) {
-		$cache_hash = md5($theme->get_theme_root() . '/' . $theme->get_stylesheet());
-		delete_site_transient('wp_theme_files_patterns-' . $cache_hash);
+		$theme->delete_pattern_cache();
 		// Sauvegarde la nouvelle signature pour la prochaine comparaison
 		update_option($option_key, $signature, false);
 	}
@@ -174,6 +182,7 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 		'core/spacer',
 		'core/separator',
 		'core/html',
+		'core/shortcode',
 		'core/embed',
 		'core/query',
 		'core/post-template',
@@ -191,7 +200,8 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 // du thème. Utilisé comme numéro de version lors de l'enregistrement des styles,
 // ce qui force les navigateurs à recharger le CSS quand un fichier change.
 // ─────────────────────────────────────────────────────────────────────────────
-function aimer_guerir_css_version(): string {
+function aimer_guerir_css_version(): string
+{
 	$theme_dir = wp_normalize_path(get_theme_file_path());
 
 	// Liste tous les fichiers CSS surveillés : global, partials, blocs et patterns
@@ -249,12 +259,12 @@ add_action('wp_enqueue_scripts', function () {
 			'aimer-guerir-pattern-appointment-clinic'    => 'patterns/appointment-session-clinic/style.css',
 			'aimer-guerir-pattern-appointment-distance'  => 'patterns/appointment-session-distance/style.css',
 			'aimer-guerir-pattern-appointment-home'      => 'patterns/appointment-session-home/style.css',
-			'aimer-guerir-pattern-blog-home'             => 'patterns/blog-home/style.css',
 			'aimer-guerir-pattern-appointment-cta'       => 'patterns/appointment-cta/style.css',
 			'aimer-guerir-pattern-newsletter-cta'        => 'patterns/newsletter-cta/style.css',
 			'aimer-guerir-pattern-appointment-about'     => 'patterns/appointment-about/style.css',
 			'aimer-guerir-pattern-pains-list'            => 'patterns/pains-list/style.css',
 			'aimer-guerir-pattern-blog-posts-grid'       => 'patterns/blog-posts-grid/style.css',
+			'aimer-guerir-pattern-temoignages-categories' => 'patterns/temoignages-categories/style.css',
 		];
 
 		$prev = [];
@@ -300,3 +310,388 @@ require_once get_theme_file_path('/blocks/testimonials/customizer.php');
 require_once get_theme_file_path('/blocks/choose-practitioner/customizer.php');
 require_once get_theme_file_path('/blocks/services/customizer.php');
 require_once get_theme_file_path('/partials/customizer.php');
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CPT Témoignage — Enregistrement
+// ─────────────────────────────────────────────────────────────────────────────
+add_action('init', function () {
+	register_post_type('temoignage', [
+		'labels' => [
+			'name'               => 'Témoignages',
+			'singular_name'      => 'Témoignage',
+			'add_new'            => 'Ajouter',
+			'add_new_item'       => 'Ajouter un témoignage',
+			'edit_item'          => 'Modifier le témoignage',
+			'new_item'           => 'Nouveau témoignage',
+			'view_item'          => 'Voir le témoignage',
+			'search_items'       => 'Rechercher des témoignages',
+			'not_found'          => 'Aucun témoignage trouvé',
+			'not_found_in_trash' => 'Aucun témoignage dans la corbeille',
+			'all_items'          => 'Tous les témoignages',
+			'menu_name'          => 'Témoignages',
+		],
+		'public'       => true,
+		'has_archive'  => 'temoignages',
+		'rewrite'      => ['slug' => 'temoignage'],
+		'supports'     => ['title', 'thumbnail'],
+		'show_in_rest' => false,
+		'menu_icon'    => 'dashicons-format-quote',
+		'menu_position' => 25,
+	]);
+
+	register_taxonomy('categorie_temoignage', 'temoignage', [
+		'labels' => [
+			'name'              => 'Catégories',
+			'singular_name'     => 'Catégorie',
+			'search_items'      => 'Rechercher une catégorie',
+			'all_items'         => 'Toutes les catégories',
+			'edit_item'         => 'Modifier la catégorie',
+			'update_item'       => 'Mettre à jour la catégorie',
+			'add_new_item'      => 'Ajouter une catégorie',
+			'new_item_name'     => 'Nouvelle catégorie',
+			'menu_name'         => 'Catégories',
+		],
+		'hierarchical'      => true,
+		'public'            => true,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'rewrite'           => ['slug' => 'temoignages/categorie'],
+		'show_in_rest'      => false,
+	]);
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CPT Témoignage — Metabox texte
+// ─────────────────────────────────────────────────────────────────────────────
+function temoignage_add_metabox(): void
+{
+	add_meta_box(
+		'temoignage_texte',
+		'Texte du témoignage',
+		'temoignage_render_metabox',
+		'temoignage',
+		'normal',
+		'high'
+	);
+}
+add_action('add_meta_boxes', 'temoignage_add_metabox');
+
+function temoignage_render_metabox(WP_Post $post): void
+{
+	wp_nonce_field('temoignage_save_texte', 'temoignage_nonce');
+	$value = get_post_meta($post->ID, '_temoignage_texte', true);
+	echo '<textarea name="temoignage_texte" rows="6" style="width:100%;">'
+		. esc_textarea($value)
+		. '</textarea>';
+}
+
+function temoignage_save_metabox(int $post_id): void
+{
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+		return;
+	}
+	if (
+		! isset($_POST['temoignage_nonce']) ||
+		! wp_verify_nonce($_POST['temoignage_nonce'], 'temoignage_save_texte')
+	) {
+		return;
+	}
+	if (! current_user_can('edit_post', $post_id)) {
+		return;
+	}
+	if (isset($_POST['temoignage_texte'])) {
+		update_post_meta(
+			$post_id,
+			'_temoignage_texte',
+			sanitize_textarea_field($_POST['temoignage_texte'])
+		);
+	}
+}
+add_action('save_post_temoignage', 'temoignage_save_metabox');
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CPT Témoignage — Nettoyage de l'écran d'édition
+// ─────────────────────────────────────────────────────────────────────────────
+function temoignage_remove_meta_boxes(): void
+{
+	foreach (['postexcerpt', 'commentsdiv', 'revisionsdiv', 'authordiv', 'pageparentdiv'] as $id) {
+		remove_meta_box($id, 'temoignage', 'normal');
+		remove_meta_box($id, 'temoignage', 'side');
+		remove_meta_box($id, 'temoignage', 'advanced');
+	}
+}
+add_action('add_meta_boxes', 'temoignage_remove_meta_boxes');
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CPT Témoignage — Colonne image dans la liste admin
+// ─────────────────────────────────────────────────────────────────────────────
+add_action('admin_head', function () {
+	$screen = get_current_screen();
+	if (!$screen) {
+		return;
+	}
+	if ($screen->post_type === 'temoignage') {
+		echo '<style>.column-temoignage_photo { width: 80px; }</style>';
+	}
+	if ($screen->taxonomy === 'categorie_temoignage') {
+		echo '<style>.column-cat_temoignage_image { width: 80px; }</style>';
+	}
+});
+
+add_filter('manage_temoignage_posts_columns', function (array $columns): array {
+	$new = [];
+	foreach ($columns as $key => $label) {
+		if ($key === 'title') {
+			$new['temoignage_photo'] = 'Photo';
+		}
+		$new[$key] = $label;
+	}
+	return $new;
+});
+
+add_action('manage_temoignage_posts_custom_column', function (string $column, int $post_id): void {
+	if ($column !== 'temoignage_photo') {
+		return;
+	}
+	if (has_post_thumbnail($post_id)) {
+		echo '<img src="' . esc_url(get_the_post_thumbnail_url($post_id, 'thumbnail')) . '" style="width:60px;height:60px;object-fit:cover;border-radius:4px;">';
+	} else {
+		echo '<span style="color:#aaa;font-size:11px;">—</span>';
+	}
+}, 10, 2);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CPT Témoignage — Colonne image dans la liste des catégories admin
+// ─────────────────────────────────────────────────────────────────────────────
+add_filter('manage_categorie_temoignage_columns', function (array $columns): array {
+	$new = [];
+	foreach ($columns as $key => $label) {
+		if ($key === 'name') {
+			$new['cat_temoignage_image'] = 'Image';
+		}
+		$new[$key] = $label;
+	}
+	return $new;
+});
+
+add_filter('manage_categorie_temoignage_custom_column', function (string $content, string $column, int $term_id): string {
+	if ($column !== 'cat_temoignage_image') {
+		return $content;
+	}
+	$image_id = (int) get_term_meta($term_id, '_temoignage_cat_image_id', true);
+	if ($image_id) {
+		return '<img src="' . esc_url(wp_get_attachment_image_url($image_id, 'thumbnail')) . '" style="width:60px;height:60px;object-fit:cover;border-radius:4px;">';
+	}
+	return '<span style="color:#aaa;font-size:11px;">—</span>';
+}, 10, 3);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CPT Témoignage — Image des catégories
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Charge la médiathèque WordPress sur les pages de la taxonomie
+add_action('admin_enqueue_scripts', function (string $hook) {
+	if (!in_array($hook, ['edit-tags.php', 'term.php'], true)) {
+		return;
+	}
+	if (!isset($_GET['taxonomy']) || $_GET['taxonomy'] !== 'categorie_temoignage') {
+		return;
+	}
+	wp_enqueue_media();
+	wp_add_inline_script('media-editor', '
+		(function() {
+			var frame;
+			document.addEventListener("click", function(e) {
+				var btn = e.target.closest(".temoignage-cat-image-btn");
+				if (!btn) return;
+				e.preventDefault();
+				var wrap = btn.closest(".temoignage-cat-image-wrap");
+				if (frame) { frame.open(); return; }
+				frame = wp.media({ title: "Choisir une image", button: { text: "Sélectionner" }, multiple: false });
+				frame.on("select", function() {
+					var att = frame.state().get("selection").first().toJSON();
+					wrap.querySelector(".temoignage-cat-image-id").value = att.id;
+					wrap.querySelector(".temoignage-cat-image-preview").innerHTML = "<img src=\"" + att.url + "\" style=\"max-width:80px;max-height:80px;object-fit:cover;border-radius:4px;margin-top:8px;\">";
+					wrap.querySelector(".temoignage-cat-image-remove").style.display = "inline";
+				});
+				frame.open();
+			});
+			document.addEventListener("click", function(e) {
+				var btn = e.target.closest(".temoignage-cat-image-remove");
+				if (!btn) return;
+				e.preventDefault();
+				var wrap = btn.closest(".temoignage-cat-image-wrap");
+				wrap.querySelector(".temoignage-cat-image-id").value = "";
+				wrap.querySelector(".temoignage-cat-image-preview").innerHTML = "";
+				btn.style.display = "none";
+			});
+		})();
+	');
+});
+
+// Affichage du champ sur le formulaire "Ajouter une catégorie"
+add_action('categorie_temoignage_add_form_fields', function () {
+	echo '<div class="form-field temoignage-cat-image-wrap">
+		<label>Image de la catégorie</label>
+		<input type="hidden" name="temoignage_cat_image_id" class="temoignage-cat-image-id" value="">
+		<div class="temoignage-cat-image-preview"></div>
+		<button type="button" class="button temoignage-cat-image-btn">Choisir une image</button>
+		<button type="button" class="button temoignage-cat-image-remove" style="display:none;margin-left:4px;">Supprimer</button>
+	</div>';
+});
+
+// Affichage du champ sur le formulaire "Modifier la catégorie"
+add_action('categorie_temoignage_edit_form_fields', function (WP_Term $term) {
+	$image_id = (int) get_term_meta($term->term_id, '_temoignage_cat_image_id', true);
+	$preview  = $image_id ? '<img src="' . esc_url(wp_get_attachment_image_url($image_id, 'thumbnail')) . '" style="max-width:80px;max-height:80px;object-fit:cover;border-radius:4px;margin-top:8px;">' : '';
+	echo '<tr class="form-field temoignage-cat-image-wrap">
+		<th><label>Image de la catégorie</label></th>
+		<td>
+			<input type="hidden" name="temoignage_cat_image_id" class="temoignage-cat-image-id" value="' . esc_attr($image_id ?: '') . '">
+			<div class="temoignage-cat-image-preview">' . $preview . '</div>
+			<button type="button" class="button temoignage-cat-image-btn" style="margin-top:8px;">Choisir une image</button>
+			<button type="button" class="button temoignage-cat-image-remove" style="margin-left:4px;margin-top:8px;' . ($image_id ? '' : 'display:none;') . '">Supprimer</button>
+		</td>
+	</tr>';
+});
+
+// Sauvegarde à la création
+add_action('create_categorie_temoignage', function (int $term_id) {
+	if (isset($_POST['temoignage_cat_image_id'])) {
+		update_term_meta($term_id, '_temoignage_cat_image_id', (int) $_POST['temoignage_cat_image_id']);
+	}
+});
+
+// Sauvegarde à la modification
+add_action('edited_categorie_temoignage', function (int $term_id) {
+	if (isset($_POST['temoignage_cat_image_id'])) {
+		update_term_meta($term_id, '_temoignage_cat_image_id', (int) $_POST['temoignage_cat_image_id']);
+	}
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CPT Témoignage — Shortcode [temoignages]
+// ─────────────────────────────────────────────────────────────────────────────
+$temoignage_css_needed = false;
+
+function temoignage_shortcode(array $atts): string
+{
+	global $temoignage_css_needed;
+	$temoignage_css_needed = true;
+
+	$atts = shortcode_atts([
+		'nombre' => 6,
+		'ordre'  => 'DESC',
+	], $atts, 'temoignages');
+
+	$nombre = (int) $atts['nombre'];
+	$ordre  = in_array(strtoupper($atts['ordre']), ['ASC', 'DESC'], true) ? strtoupper($atts['ordre']) : 'DESC';
+
+	$args = [
+		'post_type'      => 'temoignage',
+		'order'          => $ordre,
+		'orderby'        => 'date',
+		'posts_per_page' => $nombre === -1 ? -1 : $nombre,
+	];
+	if ($nombre === -1) {
+		$args['nopaging'] = true;
+	}
+
+	$query = new WP_Query($args);
+
+	if (! $query->have_posts()) {
+		return '';
+	}
+
+	ob_start();
+	echo '<div class="temoignages-grille">';
+	while ($query->have_posts()) {
+		$query->the_post();
+		$texte = get_post_meta(get_the_ID(), '_temoignage_texte', true);
+		echo '<div class="temoignage-item">';
+		if (has_post_thumbnail()) {
+			echo '<div class="temoignage-image">' . get_the_post_thumbnail(null, 'thumbnail') . '</div>';
+		}
+		echo '<div class="temoignage-contenu">';
+		echo '<p class="temoignage-texte">' . esc_html($texte) . '</p>';
+		echo '<p class="temoignage-nom">— ' . esc_html(get_the_title()) . '</p>';
+		echo '</div>';
+		echo '</div>';
+	}
+	echo '</div>';
+	wp_reset_postdata();
+
+	return ob_get_clean();
+}
+add_shortcode('temoignages', 'temoignage_shortcode');
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CPT Témoignage — Shortcode [temoignages_categories]
+// ─────────────────────────────────────────────────────────────────────────────
+function temoignages_categories_shortcode(): string
+{
+	$terms = get_terms(['taxonomy' => 'categorie_temoignage', 'hide_empty' => false]);
+
+	if (empty($terms) || is_wp_error($terms)) {
+		return '';
+	}
+
+	$placeholder = get_theme_file_uri('assets/images/pattern-placeholder-400.svg');
+
+	ob_start();
+	echo '<div class="pattern_temoignages_categories__grid">';
+	foreach ($terms as $term) {
+		$image_id  = (int) get_term_meta($term->term_id, '_temoignage_cat_image_id', true);
+		$image_url = $image_id ? wp_get_attachment_image_url($image_id, 'medium') : $placeholder;
+		$term_url  = get_term_link($term);
+		echo '<a href="' . esc_url($term_url) . '" class="pattern_temoignages_categories__card">';
+		echo '<div class="pattern_temoignages_categories__card_image">';
+		echo '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($term->name) . '">';
+		echo '</div>';
+		echo '<p class="pattern_temoignages_categories__card_name">' . esc_html($term->name) . '</p>';
+		echo '</a>';
+	}
+	echo '</div>';
+	return ob_get_clean();
+}
+add_shortcode('temoignages_categories', 'temoignages_categories_shortcode');
+
+// Injection du CSS dans wp_footer (shortcodes s'exécutent après wp_head)
+add_action('wp_footer', function () {
+	global $temoignage_css_needed;
+	if (! $temoignage_css_needed && ! is_post_type_archive('temoignage')) {
+		return;
+	}
+	echo '<style>
+.temoignages-grille {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+	padding: 2rem 0;
+}
+.temoignage-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	flex: 1 1 280px;
+	max-width: 360px;
+	text-align: center;
+}
+.temoignage-image img {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+.temoignage-texte {
+	font-style: italic;
+	margin: 0;
+}
+.temoignage-nom {
+	font-weight: 600;
+	margin: 0;
+}
+</style>' . "\n";
+});

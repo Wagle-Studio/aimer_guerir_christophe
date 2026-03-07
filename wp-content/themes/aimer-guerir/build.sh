@@ -37,12 +37,12 @@ SOURCES=(
   "$THEME_DIR/patterns/appointment-session-clinic/style.css"
   "$THEME_DIR/patterns/appointment-session-distance/style.css"
   "$THEME_DIR/patterns/appointment-session-home/style.css"
-  "$THEME_DIR/patterns/blog-home/style.css"
   "$THEME_DIR/patterns/appointment-cta/style.css"
   "$THEME_DIR/patterns/newsletter-cta/style.css"
   "$THEME_DIR/patterns/appointment-about/style.css"
   "$THEME_DIR/patterns/pains-list/style.css"
   "$THEME_DIR/patterns/blog-posts-grid/style.css"
+  "$THEME_DIR/patterns/temoignages-categories/style.css"
 )
 
 {
