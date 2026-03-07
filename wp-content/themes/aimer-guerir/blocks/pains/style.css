@@ -100,6 +100,9 @@
   aspect-ratio: var(--pains-image-ratio, auto);
   max-width: 360px;
   margin: 0 auto;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: var(--picture-shadow);
 }
 
 .pains__image {
@@ -108,8 +111,11 @@
   height: auto;
   aspect-ratio: var(--pains-image-ratio, auto);
   object-fit: contain;
-  border-radius: 3px;
-  box-shadow: var(--picture-shadow);
+  transition: transform 0.4s ease;
+}
+
+.pains__media:hover .pains__image {
+  transform: scale(1.04);
 }
 
 @media screen and (min-width: 768px) {

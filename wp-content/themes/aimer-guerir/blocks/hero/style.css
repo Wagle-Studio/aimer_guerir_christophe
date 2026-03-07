@@ -74,6 +74,9 @@
     aspect-ratio: var(--hero-image-ratio, auto);
     max-width: 300px;
     margin: 0 auto;
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: var(--picture-shadow);
   }
 
   .hero_identity_image {
@@ -82,8 +85,11 @@
     height: auto;
     aspect-ratio: var(--hero-image-ratio, auto);
     object-fit: contain;
-    border-radius: 3px;
-    box-shadow: var(--picture-shadow);
+    transition: transform 0.4s ease;
+  }
+
+  .hero__identity:hover .hero_identity_image {
+    transform: scale(1.04);
   }
 }
 

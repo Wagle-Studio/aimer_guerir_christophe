@@ -53,6 +53,14 @@
 
         </div>
         <!-- /wp:group -->
+
+        <!-- wp:buttons {"className":"pattern_about__actions"} -->
+        <div class="wp-block-buttons pattern_about__actions">
+          <!-- wp:button {"className":"btn btn--secondary"} -->
+          <div class="wp-block-button"><a class="wp-block-button__link btn--secondary" href="#">En savoir plus sur les séances</a></div>
+          <!-- /wp:button -->
+        </div>
+        <!-- /wp:buttons -->
       </div>
       <!-- /wp:group -->
     </div>

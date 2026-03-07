@@ -7,8 +7,8 @@
  * Keywords: témoignages, catégories, grille, thèmes
  */
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"pattern_temoignages_categories","layout":{"type":"default"}} -->
-<section class="wp-block-group alignfull pattern_temoignages_categories">
+<!-- wp:group {"tagName":"section", "anchor":"temoignages", "align":"full","className":"pattern_temoignages_categories","layout":{"type":"default"}} -->
+<section id="temoignages" class="wp-block-group alignfull pattern_temoignages_categories">
 
   <!-- wp:group {"className":"pattern_temoignages_categories__header","layout":{"type":"default"}} -->
   <div class="wp-block-group pattern_temoignages_categories__header">

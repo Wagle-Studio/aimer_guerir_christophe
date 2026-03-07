@@ -28,6 +28,11 @@
   background-color: var(--primary-25);
   font-weight: 500;
   font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.therapeutic-support-main__pill:hover {
+  transform: scale(1.03);
 }
 
 .therapeutic-support-main__title {
@@ -73,6 +78,9 @@
   width: 100%;
   max-width: 460px;
   aspect-ratio: var(--ts-image-ratio, auto);
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: var(--picture-shadow);
 }
 
 .therapeutic-support__card-image {
@@ -80,8 +88,11 @@
   width: 100%;
   height: auto;
   object-fit: contain;
-  border-radius: 3px;
-  box-shadow: var(--picture-shadow);
+  transition: transform 0.4s ease;
+}
+
+.therapeutic-support__card:hover .therapeutic-support__card-image {
+  transform: scale(1.04);
 }
 
 .therapeutic-support__card-content {

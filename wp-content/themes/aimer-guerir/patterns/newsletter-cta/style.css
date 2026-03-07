@@ -58,6 +58,13 @@
   border-radius: 3px;
   border: 1px solid var(--primary-50);
   background: var(--white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pattern-newsletter .newsletter__input:focus {
+  outline: none;
+  border-color: var(--primary-50);
+  box-shadow: 0 0 0 3px var(--primary-05);
 }
 
 .pattern-newsletter .newsletter__input::placeholder {

@@ -38,6 +38,9 @@ $primary_url   = get_theme_mod('aimer_guerir_testimonials_primary_url', '');
 $primary_label = trim($primary_label);
 $primary_url   = esc_url(trim($primary_url));
 
+$google_label = trim(get_theme_mod('aimer_guerir_testimonials_google_label', ''));
+$google_url   = esc_url(trim(get_theme_mod('aimer_guerir_testimonials_google_url', '')));
+
 if (
     $title === '' ||
     $subtitle === '' ||
@@ -65,6 +68,12 @@ ob_start();
         <a class="btn btn--primary" href="<?php echo $primary_url; ?>">
             <?php echo esc_html($primary_label); ?>
         </a>
+        <?php if ($google_label !== '' && $google_url !== '') : ?>
+        <a class="btn btn--secondary btn--icon" href="<?php echo $google_url; ?>" target="_blank" rel="noopener noreferrer">
+            <?php include get_theme_file_path('assets/icons/icon-google.php'); ?>
+            <?php echo esc_html($google_label); ?>
+        </a>
+        <?php endif; ?>
     </div>
     <div class="testimonials__list">
         <?php foreach ($testimonials as $testimonial) : ?>

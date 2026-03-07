@@ -8,8 +8,8 @@
  * Keywords: séances, cabinet, distance, domicile
  */
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"appointment-about","layout":{"type":"default"}} -->
-<section class="wp-block-group alignfull appointment-about">
+<!-- wp:group {"tagName":"section","anchor":"a-propos-des-seances","align":"full","className":"appointment-about","layout":{"type":"default"}} -->
+<section id="a-propos-des-seances" class="wp-block-group alignfull appointment-about">
   <!-- wp:group {"className":"appointment-about__wrapper","layout":{"type":"default"}} -->
   <div class="wp-block-group appointment-about__wrapper">
     <!-- wp:heading {"level":2} -->

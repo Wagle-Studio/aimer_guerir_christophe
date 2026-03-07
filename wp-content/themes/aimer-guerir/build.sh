@@ -44,6 +44,7 @@ SOURCES=(
   "$THEME_DIR/patterns/blog-posts-grid/style.css"
   "$THEME_DIR/patterns/temoignages-categories/style.css"
   "$THEME_DIR/patterns/social-links/style.css"
+  "$THEME_DIR/patterns/contenu-editorial/style.css"
 )
 
 {

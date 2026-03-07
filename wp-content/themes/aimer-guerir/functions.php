@@ -263,6 +263,7 @@ add_action('wp_enqueue_scripts', function () {
 			'aimer-guerir-pattern-newsletter-cta'        => 'patterns/newsletter-cta/style.css',
 			'aimer-guerir-pattern-appointment-about'     => 'patterns/appointment-about/style.css',
 			'aimer-guerir-pattern-pains-list'            => 'patterns/pains-list/style.css',
+			'aimer-guerir-pattern-contenu-editorial'     => 'patterns/contenu-editorial/style.css',
 			'aimer-guerir-pattern-blog-posts-grid'       => 'patterns/blog-posts-grid/style.css',
 			'aimer-guerir-pattern-temoignages-categories' => 'patterns/temoignages-categories/style.css',
 			'aimer-guerir-pattern-social-links'           => 'patterns/social-links/style.css',

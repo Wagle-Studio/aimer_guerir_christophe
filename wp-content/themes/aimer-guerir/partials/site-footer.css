@@ -28,6 +28,39 @@
   opacity: 0.8;
 }
 
+.site-footer__tagline--link {
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.site-footer__social {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.site-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  transition: color 0.1s ease;
+}
+
+.site-footer__social-link:hover {
+  color: var(--primary);
+}
+
+.site-footer__social-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .site-footer__contact {
   display: flex;
   flex-direction: column;
@@ -52,6 +85,12 @@
 .site-footer__contact-value {
   font-weight: 600;
   font-size: 16px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .site-footer__contact-item--email {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 768px) {

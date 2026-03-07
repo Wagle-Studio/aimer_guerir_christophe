@@ -20,6 +20,11 @@
   background-color: var(--primary-25);
   font-weight: 500;
   font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.choose-practitioner__pill:hover {
+  transform: scale(1.03);
 }
 
 .choose-practitioner__main,

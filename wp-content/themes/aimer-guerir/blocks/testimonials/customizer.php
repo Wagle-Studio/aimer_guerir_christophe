@@ -151,4 +151,26 @@ add_action('customize_register', function ($wp_customize) {
         'section' => 'aimer_guerir_home_testimonials',
         'type'    => 'url',
     ]);
+
+    $wp_customize->add_setting('aimer_guerir_testimonials_google_label', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('aimer_guerir_testimonials_google_label', [
+        'label'       => 'Bouton Google - libellé',
+        'description' => 'Ex : « Voir nos avis Google ». Laisser vide pour masquer le bouton.',
+        'section'     => 'aimer_guerir_home_testimonials',
+        'type'        => 'text',
+    ]);
+
+    $wp_customize->add_setting('aimer_guerir_testimonials_google_url', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_url',
+    ]);
+    $wp_customize->add_control('aimer_guerir_testimonials_google_url', [
+        'label'       => 'Bouton Google - URL',
+        'description' => 'Lien vers la fiche Google Business (avis Google).',
+        'section'     => 'aimer_guerir_home_testimonials',
+        'type'        => 'url',
+    ]);
 });
