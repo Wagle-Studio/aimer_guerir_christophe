@@ -94,5 +94,9 @@ jobs:
             sed -i "s#^WORDPRESS_DB_USER=.*#WORDPRESS_DB_USER=${DB_USER}#" .env
             sed -i "s#^WORDPRESS_DB_PASSWORD=.*#WORDPRESS_DB_PASSWORD=${DB_PASSWORD}#" .env
             sed -i "s#^WORDPRESS_DB_ROOT_PASSWORD=.*#WORDPRESS_DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}#" .env
-            docker compose -p ${CONTAINER_PREFIX} up -d --pull always
+            docker compose -p ${CONTAINER_PREFIX} down
+            docker rmi ${GHCR_NAMESPACE}:latest || true
+            docker pull ${GHCR_NAMESPACE}:${IMAGE_TAG}
+            docker tag ${GHCR_NAMESPACE}:${IMAGE_TAG} ${GHCR_NAMESPACE}:latest
+            docker compose -p ${CONTAINER_PREFIX} up -d
           EOF
