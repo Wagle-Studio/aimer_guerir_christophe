@@ -265,6 +265,7 @@ add_action('wp_enqueue_scripts', function () {
 			'aimer-guerir-pattern-pains-list'            => 'patterns/pains-list/style.css',
 			'aimer-guerir-pattern-blog-posts-grid'       => 'patterns/blog-posts-grid/style.css',
 			'aimer-guerir-pattern-temoignages-categories' => 'patterns/temoignages-categories/style.css',
+			'aimer-guerir-pattern-social-links'           => 'patterns/social-links/style.css',
 		];
 
 		$prev = [];
@@ -310,6 +311,7 @@ require_once get_theme_file_path('/blocks/testimonials/customizer.php');
 require_once get_theme_file_path('/blocks/choose-practitioner/customizer.php');
 require_once get_theme_file_path('/blocks/services/customizer.php');
 require_once get_theme_file_path('/partials/customizer.php');
+require_once get_theme_file_path('/blocks/social-links/customizer.php');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CPT Témoignage — Enregistrement
@@ -656,10 +658,51 @@ function temoignages_categories_shortcode(): string
 }
 add_shortcode('temoignages_categories', 'temoignages_categories_shortcode');
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Shortcode [social_links]
+// ─────────────────────────────────────────────────────────────────────────────
+function social_links_shortcode(): string
+{
+	$networks = [
+		'instagram' => [
+			'url'   => get_theme_mod('aimer_guerir_social_instagram', ''),
+			'label' => 'Instagram',
+			'icon'  => get_theme_file_path('assets/icons/icon-instagram.php'),
+		],
+		'facebook' => [
+			'url'   => get_theme_mod('aimer_guerir_social_facebook', ''),
+			'label' => 'Facebook',
+			'icon'  => get_theme_file_path('assets/icons/icon-facebook.php'),
+		],
+		'linkedin' => [
+			'url'   => get_theme_mod('aimer_guerir_social_linkedin', ''),
+			'label' => 'LinkedIn',
+			'icon'  => get_theme_file_path('assets/icons/icon-linkedin.php'),
+		],
+	];
+
+	$links = array_filter($networks, fn($n) => ! empty($n['url']));
+	if (empty($links)) {
+		return '';
+	}
+
+	ob_start();
+	echo '<div class="pattern_social_links__list">';
+	foreach ($links as $network) {
+		echo '<a href="' . esc_url($network['url']) . '" class="pattern_social_links__link" target="_blank" rel="noopener noreferrer">';
+		include $network['icon'];
+		echo '<span>' . esc_html($network['label']) . '</span>';
+		echo '</a>';
+	}
+	echo '</div>';
+	return ob_get_clean();
+}
+add_shortcode('social_links', 'social_links_shortcode');
+
 // Injection du CSS dans wp_footer (shortcodes s'exécutent après wp_head)
 add_action('wp_footer', function () {
 	global $temoignage_css_needed;
-	if (! $temoignage_css_needed && ! is_post_type_archive('temoignage')) {
+	if (! $temoignage_css_needed && ! is_post_type_archive('temoignage') && ! is_tax('categorie_temoignage')) {
 		return;
 	}
 	echo '<style>
@@ -692,6 +735,116 @@ add_action('wp_footer', function () {
 .temoignage-nom {
 	font-weight: 600;
 	margin: 0;
+}
+.temoignages-tax-list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.temoignages-tax-card {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--white);
+	border: 1px solid var(--primary-15);
+	border-radius: 3px;
+	overflow: hidden;
+	box-shadow: var(--card-shadow);
+}
+.temoignages-tax-card__image {
+	width: 100%;
+	max-height: 200px;
+}
+.temoignages-tax-card__image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	max-height: 200px;
+	object-fit: cover;
+}
+.temoignages-tax-card__body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 8px;
+	padding: 20px 24px;
+}
+.temoignages-tax-card__texte {
+	font-style: italic;
+	margin: 0;
+	line-height: 1.6;
+}
+.temoignages-tax-card__nom {
+	font-weight: 600;
+	margin: 0;
+}
+@media screen and (min-width: 768px) {
+	.temoignages-tax-card {
+		flex-direction: row;
+		align-items: stretch;
+	}
+	.temoignages-tax-card__image {
+		flex: 0 0 180px;
+		width: 180px;
+		max-height: none;
+	}
+	.temoignages-tax-card__image img {
+		max-height: none;
+	}
+}
+.temoignages-tax-archive {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 48px 24px;
+}
+.temoignages-tax-archive__header {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-bottom: 48px;
+}
+.temoignages-tax-archive__header-image img {
+	width: 100%;
+	max-height: 220px;
+	object-fit: cover;
+	border-radius: 3px;
+}
+.temoignages-tax-archive__title {
+	font-size: 2rem;
+	margin: 0 0 8px;
+}
+.temoignages-tax-archive__description {
+	margin: 0 0 12px;
+	opacity: 0.75;
+}
+.temoignages-tax-archive__back {
+	display: inline-block;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--primary);
+	text-decoration: none;
+}
+.temoignages-tax-archive__back:hover {
+	text-decoration: underline;
+}
+.temoignages-tax-archive__empty {
+	text-align: center;
+	opacity: 0.6;
+}
+@media screen and (min-width: 768px) {
+	.temoignages-tax-archive {
+		padding: 72px 24px;
+	}
+	.temoignages-tax-archive__header {
+		flex-direction: row;
+		align-items: center;
+	}
+	.temoignages-tax-archive__header-image {
+		flex: 0 0 280px;
+	}
+	.temoignages-tax-archive__header-image img {
+		max-height: 180px;
+	}
 }
 </style>' . "\n";
 });
