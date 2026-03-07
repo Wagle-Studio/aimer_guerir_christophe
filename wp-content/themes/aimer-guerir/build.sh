@@ -42,6 +42,7 @@ SOURCES=(
   "$THEME_DIR/patterns/newsletter-cta/style.css"
   "$THEME_DIR/patterns/appointment-about/style.css"
   "$THEME_DIR/patterns/pains-list/style.css"
+  "$THEME_DIR/patterns/blog-posts-grid/style.css"
 )
 
 {

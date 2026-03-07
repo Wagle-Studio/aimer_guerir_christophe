@@ -175,6 +175,13 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 		'core/separator',
 		'core/html',
 		'core/embed',
+		'core/query',
+		'core/post-template',
+		'core/post-featured-image',
+		'core/post-title',
+		'core/post-excerpt',
+		'core/read-more',
+		'core/query-no-results',
 	];
 }, 10, 2);
 
@@ -247,6 +254,7 @@ add_action('wp_enqueue_scripts', function () {
 			'aimer-guerir-pattern-newsletter-cta'        => 'patterns/newsletter-cta/style.css',
 			'aimer-guerir-pattern-appointment-about'     => 'patterns/appointment-about/style.css',
 			'aimer-guerir-pattern-pains-list'            => 'patterns/pains-list/style.css',
+			'aimer-guerir-pattern-blog-posts-grid'       => 'patterns/blog-posts-grid/style.css',
 		];
 
 		$prev = [];

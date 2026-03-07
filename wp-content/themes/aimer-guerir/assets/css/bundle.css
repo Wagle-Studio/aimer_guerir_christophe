@@ -1016,6 +1016,8 @@ html.js .site-nav.is-open .site-nav__menu {
 .pains__wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 48px;
   max-width: 1280px;
   margin: 0 auto;
@@ -1186,7 +1188,7 @@ html.js .site-nav.is-open .site-nav__menu {
 }
 
 .therapeutic-support-main__intro {
-  text-align: center;
+  text-align: justify;
 }
 
 /* ── Cartes ── */
@@ -1232,24 +1234,10 @@ html.js .site-nav.is-open .site-nav__menu {
 }
 
 .therapeutic-support__card-title {
-  position: relative;
-  font-size: 32px;
   margin-bottom: 16px;
 }
 
-.therapeutic-support__card-title::after {
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  content: "";
-  width: 100px;
-  height: 5px;
-  background-color: var(--primary-75);
-}
-
 .therapeutic-support__card-intro {
-  margin-top: 60px;
   text-align: justify;
 }
 
@@ -1259,6 +1247,7 @@ html.js .site-nav.is-open .site-nav__menu {
   .therapeutic-support__card {
     flex-direction: row;
     text-align: left;
+    margin: 0 auto;
   }
 
   .therapeutic-support__card:nth-child(even) {
@@ -1276,13 +1265,8 @@ html.js .site-nav.is-open .site-nav__menu {
     align-items: flex-start;
   }
 
-  .therapeutic-support-main__title,
-  .therapeutic-support__card-title {
-    max-width: 75%;
-  }
-
   .therapeutic-support-main__intro {
-    max-width: 75%;
+    max-width: 83%;
   }
 }
 
@@ -1292,11 +1276,6 @@ html.js .site-nav.is-open .site-nav__menu {
   .therapeutic-support__card-media {
     max-width: clamp(324px, 25.2vw, 504px);
     flex-basis: clamp(324px, 25.2vw, 504px);
-  }
-
-  .therapeutic-support-main__title,
-  .therapeutic-support__card-title {
-    max-width: 55%;
   }
 }
 
@@ -3104,6 +3083,179 @@ img.pattern_about__image {
   .pattern-pains__disclaimer {
     grid-row: 2;
     grid-column: 1 / 3;
+  }
+}
+
+/* --- patterns/blog-posts-grid/style.css --- */
+/* Section globale */
+.pattern_blog_posts_grid {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 48px 24px;
+  background-color: var(--background);
+}
+
+/* Bandeau titre */
+.pattern_blog_posts_grid__header {
+  text-align: center;
+}
+
+.pattern_blog_posts_grid__title {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+  letter-spacing: 1.25px;
+}
+
+.pattern_blog_posts_grid__title::after {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  content: "";
+  width: 80px;
+  height: 4px;
+  background-color: var(--primary-75);
+  border-radius: 2px;
+}
+
+/* Wrapper liste */
+.pattern_blog_posts_grid__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 1280px;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Liste des articles — colonne simple */
+.pattern_blog_posts_grid .wp-block-post-template {
+  display: flex !important;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Carte horizontale : image à gauche, contenu à droite */
+.pattern_blog_posts_grid .wp-block-post {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background-color: var(--white);
+  border: 1px solid var(--primary-15);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.2s ease;
+}
+
+.pattern_blog_posts_grid .wp-block-post:hover {
+  box-shadow: var(--picture-shadow);
+}
+
+/* Image — colonne gauche fixe */
+.pattern_blog_posts_grid__card_image {
+  flex: 0 0 180px;
+  width: 180px;
+  max-height: 140px;
+  overflow: hidden;
+}
+
+.pattern_blog_posts_grid__card_image img,
+.pattern_blog_posts_grid__card_image a,
+.pattern_blog_posts_grid__card_image a img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+/* Colonne droite : empile titre / extrait / lien */
+.pattern_blog_posts_grid .wp-block-post .pattern_blog_posts_grid__card_body {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+  flex: 1;
+  min-width: 0;
+  padding: 16px 20px 14px;
+  gap: 0;
+}
+
+/* Titre */
+.pattern_blog_posts_grid__card_title {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.pattern_blog_posts_grid__card_title a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.pattern_blog_posts_grid__card_title a:hover {
+  color: var(--primary);
+}
+
+/* Extrait — prend l'espace disponible pour pousser le lien en bas */
+.pattern_blog_posts_grid__card_excerpt {
+  flex: 1;
+  margin: 8px 0 0;
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--black);
+  opacity: 0.75;
+  line-height: 1.6;
+}
+
+/* Lien "Lire l'article" */
+.pattern_blog_posts_grid__card_link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.pattern_blog_posts_grid__card_link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile : carte en colonne (image au-dessus) */
+@media screen and (max-width: 479px) {
+  .pattern_blog_posts_grid .wp-block-post {
+    flex-direction: column;
+  }
+
+  .pattern_blog_posts_grid__card_image {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 160px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .pattern_blog_posts_grid {
+    padding: 64px 24px;
+  }
+
+  .pattern_blog_posts_grid__card_image {
+    flex: 0 0 220px;
+    width: 220px;
+    max-height: 140px;
+  }
+
+  .pattern_blog_posts_grid__card_image img,
+  .pattern_blog_posts_grid__card_image a img {
+    height: 140px;
   }
 }
 
