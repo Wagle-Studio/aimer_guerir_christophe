@@ -2,6 +2,22 @@
    Articles (single.php) — mise en page typographique pour la lecture.
    ============================================================= */
 
+.single__back {
+  display: inline-block;
+  margin: 48px auto 0;
+  padding: 0 24px;
+  width: 100%;
+  max-width: 980px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.single__back:hover {
+  text-decoration: underline;
+}
+
 .single__pill {
   width: max-content;
   text-align: center;
@@ -50,9 +66,9 @@
 .single .entry-content h2::after {
   position: absolute;
   bottom: -12px;
-  left: 5%;
+  left: 0;
   content: "";
-  width: 90%;
+  width: 100%;
   height: 3px;
   background-color: var(--primary-50);
 }
@@ -114,15 +130,15 @@
     font-size: 28px;
   }
 
-  .single .entry-content {
-    padding-top: 48px;
-    padding-bottom: 64px;
-  }
-
   /* Empêche le débordement des H2 longs sur petits écrans */
   .single .entry-content h2 {
     width: 100%;
     font-size: 24px;
+  }
+
+  .single .entry-content {
+    padding-top: 48px;
+    padding-bottom: 64px;
   }
 
   .single .entry-content h3 {

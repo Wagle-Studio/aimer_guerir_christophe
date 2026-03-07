@@ -349,6 +349,19 @@ table {
    Articles (single.php) — mise en page typographique pour la lecture.
    ============================================================= */
 
+.single__back {
+  display: inline-block;
+  margin: 48px 24px 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.single__back:hover {
+  text-decoration: underline;
+}
+
 .single__pill {
   width: max-content;
   text-align: center;
@@ -3342,6 +3355,7 @@ img.pattern_about__image {
   background-color: var(--white);
   border-top: 1px solid var(--primary-15);
   border-bottom: 1px solid var(--primary-15);
+  padding: 0 24px;
 }
 
 .pattern_social_links__list {

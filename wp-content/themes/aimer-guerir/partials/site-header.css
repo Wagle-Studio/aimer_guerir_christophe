@@ -303,6 +303,10 @@ html.js .site-nav.is-open .site-nav__menu {
   .site-header__contact {
     display: none;
   }
+
+  .site-nav {
+    width: calc(100% - 24px);
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -322,5 +326,54 @@ html.js .site-nav.is-open .site-nav__menu {
 @media screen and (max-width: 782px) {
   body.admin-bar .site-header {
     top: 0;
+  }
+}
+
+/* ── Mobile menu : état ouvert ──────────────────────────────────────────── */
+@media screen and (max-width: 767px) {
+  .site-nav.is-open .site-nav__list {
+    gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .site-nav.is-open .site-nav__list li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .site-nav.is-open .site-nav__list li:last-child {
+    border-bottom: none;
+  }
+
+  .site-nav.is-open .site-nav__list a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 10px 12px;
+    font-size: 15px;
+    letter-spacing: 0.6px;
+    border-radius: 2px;
+    transition:
+      background 0.15s ease,
+      color 0.1s ease;
+  }
+
+  /* Désactive le soulignement (inadapté aux grands items verticaux) */
+  .site-nav.is-open .site-nav__list a::after {
+    display: none;
+  }
+
+  /* Hover / focus : fond semi-transparent */
+  .site-nav.is-open .site-nav__list a:hover,
+  .site-nav.is-open .site-nav__list a:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+  }
+
+  /* Page courante : fond légèrement plus marqué */
+  .site-nav.is-open .site-nav__list .current-menu-item > a,
+  .site-nav.is-open .site-nav__list .current_page_item > a,
+  .site-nav.is-open .site-nav__list .current-menu-ancestor > a {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--white);
   }
 }
