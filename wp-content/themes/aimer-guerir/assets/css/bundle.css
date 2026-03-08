@@ -2197,7 +2197,19 @@ img.pattern_about__image {
 /* --- patterns/appointment-header/style.css --- */
 .pattern-appointment-header {
   width: 100%;
-  background-color: var(--cream);
+  background-color: var(--black); /* fallback */
+  background-image: url("../../assets/images/cabinet_from_street.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.pattern-appointment-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(210, 225, 245, 0.65);
+  z-index: 0;
 }
 
 .pattern-appointment-header__wrapper {
@@ -2208,6 +2220,14 @@ img.pattern_about__image {
   margin: 0 auto;
   padding: 80px 24px;
   text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.appointment-cta__header h1,
+.appointment-cta__header h2,
+.appointment-cta__header p {
+  color: var(--black);
 }
 
 .pattern-appointment-header .wp-block-buttons {
