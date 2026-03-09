@@ -612,9 +612,13 @@ function temoignage_shortcode(array $atts): string
 		$query->the_post();
 		$texte = get_post_meta(get_the_ID(), '_temoignage_texte', true);
 		echo '<div class="temoignage-item">';
+		echo '<div class="temoignage-image">';
 		if (has_post_thumbnail()) {
-			echo '<div class="temoignage-image">' . get_the_post_thumbnail(null, 'thumbnail') . '</div>';
+			echo get_the_post_thumbnail(null, 'thumbnail');
+		} else {
+			echo '<div class="temoignage-image__placeholder"></div>';
 		}
+		echo '</div>';
 		echo '<div class="temoignage-contenu">';
 		echo '<p class="temoignage-texte">' . esc_html($texte) . '</p>';
 		echo '<p class="temoignage-nom">— ' . esc_html(get_the_title()) . '</p>';
@@ -729,6 +733,13 @@ add_action('wp_footer', function () {
 	border-radius: 50%;
 	object-fit: cover;
 }
+.temoignage-image__placeholder {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background-color: var(--beige, #e8e0d5);
+	margin: 0 auto;
+}
 .temoignage-texte {
 	font-style: italic;
 	margin: 0;
@@ -761,6 +772,9 @@ add_action('wp_footer', function () {
 	height: 100%;
 	max-height: 200px;
 	object-fit: cover;
+}
+.temoignages-tax-card__image--placeholder {
+	background-color: var(--beige, #e8e0d5);
 }
 .temoignages-tax-card__body {
 	display: flex;
@@ -802,7 +816,7 @@ add_action('wp_footer', function () {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
-	margin-bottom: 48px;
+	margin: 48px;
 }
 .temoignages-tax-archive__header-image img {
 	width: 100%;
@@ -818,15 +832,34 @@ add_action('wp_footer', function () {
 	margin: 0 0 12px;
 	opacity: 0.75;
 }
+.temoignages-tax-archive__back-wrapper {
+	position: sticky;
+	top: 193px;
+	z-index: 10000;
+	width: 100%;
+	margin: 0 auto;
+	padding: 16px 24px 12px;
+	background-color: #faf9f6;
+}
+@media screen and (max-width: 767px) {
+	.temoignages-tax-archive__back-wrapper {
+		top: 126px;
+	}
+}
 .temoignages-tax-archive__back {
 	display: inline-block;
+	padding: 4px 20px;
+	border-radius: 3px;
 	font-size: 0.875rem;
 	font-weight: 600;
-	color: var(--primary);
+	background: var(--white);
+	color: var(--black);
+	border: 2px solid var(--primary);
 	text-decoration: none;
+	transition: color 0.1s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 .temoignages-tax-archive__back:hover {
-	text-decoration: underline;
+	color: var(--primary);
 }
 .temoignages-tax-archive__empty {
 	text-align: center;
@@ -834,7 +867,7 @@ add_action('wp_footer', function () {
 }
 @media screen and (min-width: 768px) {
 	.temoignages-tax-archive {
-		padding: 72px 24px;
+		padding: 48px 24px 72px 24px;
 	}
 	.temoignages-tax-archive__header {
 		flex-direction: row;

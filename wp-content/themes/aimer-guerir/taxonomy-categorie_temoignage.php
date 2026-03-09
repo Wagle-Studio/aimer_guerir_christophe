@@ -9,6 +9,12 @@ get_header();
 
 	<section class="temoignages-tax-archive">
 
+		<div class="temoignages-tax-archive__back-wrapper">
+			<a href="/articles-et-temoignages#temoignages" class="temoignages-tax-archive__back">
+				← Toutes les catégories
+			</a>
+		</div>
+
 		<header class="temoignages-tax-archive__header">
 			<?php if ($image_id) : ?>
 				<div class="temoignages-tax-archive__header-image">
@@ -23,9 +29,6 @@ get_header();
 				<?php if ($term->description) : ?>
 					<p class="temoignages-tax-archive__description"><?php echo esc_html($term->description); ?></p>
 				<?php endif; ?>
-				<a href="/articles-et-temoignages" class="temoignages-tax-archive__back">
-					← Toutes les catégories
-				</a>
 			</div>
 		</header>
 
@@ -34,11 +37,11 @@ get_header();
 				<div class="temoignages-tax-list">
 					<?php while (have_posts()) : the_post(); ?>
 						<div class="temoignages-tax-card">
-							<?php if (has_post_thumbnail()) : ?>
-								<div class="temoignages-tax-card__image">
+							<div class="temoignages-tax-card__image<?php echo has_post_thumbnail() ? '' : ' temoignages-tax-card__image--placeholder'; ?>">
+								<?php if (has_post_thumbnail()) : ?>
 									<?php the_post_thumbnail('medium'); ?>
-								</div>
-							<?php endif; ?>
+								<?php endif; ?>
+							</div>
 							<div class="temoignages-tax-card__body">
 								<p class="temoignages-tax-card__texte"><?php echo esc_html(get_post_meta(get_the_ID(), '_temoignage_texte', true)); ?></p>
 								<p class="temoignages-tax-card__nom">— <?php the_title(); ?></p>

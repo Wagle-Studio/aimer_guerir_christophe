@@ -14,7 +14,7 @@
   <div class="wp-block-group pattern_temoignages_categories__header">
 
     <!-- wp:heading {"level":2,"className":"pattern_temoignages_categories__title","textAlign":"center"} -->
-    <h2 class="pattern_temoignages_categories__title has-text-align-center">Témoignages par thème</h2>
+    <h2 class="pattern_temoignages_categories__title has-text-align-center">Témoignages</h2>
     <!-- /wp:heading -->
 
   </div>

@@ -2,20 +2,35 @@
    Articles (single.php) — mise en page typographique pour la lecture.
    ============================================================= */
 
-.single__back {
-  display: inline-block;
-  margin: 48px auto 0;
-  padding: 0 24px;
+.single__back-wrapper {
+  z-index: 10000;
+  position: sticky;
+  top: 193px;
   width: 100%;
   max-width: 980px;
+  margin: 48px auto 0;
+  padding: 16px 24px 12px;
+  background-color: #faf9f6;
+}
+
+.single__back {
+  display: inline-block;
+  padding: 4px 20px;
+  border-radius: 3px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--primary);
+  background: var(--white);
+  color: var(--black);
+  border: 2px solid var(--primary);
   text-decoration: none;
+  transition:
+    color 0.1s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .single__back:hover {
-  text-decoration: underline;
+  color: var(--primary);
 }
 
 .single__pill {
@@ -121,6 +136,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  .single__back-wrapper {
+    top: 126px;
+  }
+
   .single__pill {
     margin-top: 40px;
   }

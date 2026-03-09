@@ -89,6 +89,16 @@ img.about__image {
   margin-top: 16px;
 }
 
+@media screen and (max-width: 767px) {
+  .about_header_title {
+    font-size: 24px;
+  }
+
+  .about_header_subtitle {
+    font-size: 20px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .about__content {
     grid-template-columns: minmax(0, clamp(280px, 40vw, 520px)) minmax(0, 1fr);
