@@ -209,6 +209,110 @@ function aimer_guerir_css_version(): string
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Helper — Lecture des avis clients depuis le fichier JSON
+// Retourne un tableau d'avis validés, ou un tableau vide en cas d'erreur.
+// ─────────────────────────────────────────────────────────────────────────────
+function aimer_guerir_get_reviews(): array {
+    $json_path = WP_CONTENT_DIR . '/client-testimonials-data.json';
+
+    if (!file_exists($json_path)) {
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            error_log('[aimer-guerir] client-testimonials-data.json introuvable : ' . $json_path);
+        }
+        return [];
+    }
+
+    $raw = file_get_contents($json_path);
+    if ($raw === false) {
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            error_log('[aimer-guerir] Impossible de lire client-testimonials-data.json');
+        }
+        return [];
+    }
+
+    $data = json_decode($raw, true);
+    if (!is_array($data) || !isset($data['reviews']) || !is_array($data['reviews'])) {
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            error_log('[aimer-guerir] client-testimonials-data.json : structure JSON invalide');
+        }
+        return [];
+    }
+
+    $reviews = [];
+    foreach ($data['reviews'] as $item) {
+        if (!is_array($item)) continue;
+        $name   = isset($item['name'])   ? trim(wp_strip_all_tags((string) $item['name']))   : '';
+        $body   = isset($item['body'])   ? trim(wp_strip_all_tags((string) $item['body']))   : '';
+        $rating = isset($item['rating']) ? (int) $item['rating']                             : 5;
+        $date   = isset($item['date'])   ? trim(wp_strip_all_tags((string) $item['date']))   : '';
+
+        if ($name === '' || $body === '') continue;
+        $rating = max(1, min(5, $rating));
+
+        $reviews[] = [
+            'name'   => $name,
+            'body'   => $body,
+            'rating' => $rating,
+            'date'   => $date,
+        ];
+    }
+
+    return $reviews;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Schema JSON-LD — HealthAndBeautyBusiness + AggregateRating + Review[]
+// Injecté dans le <head> de la page d'accueil uniquement.
+// ─────────────────────────────────────────────────────────────────────────────
+add_action('wp_head', function () {
+    if (!is_front_page()) return;
+
+    $reviews = aimer_guerir_get_reviews();
+    if (empty($reviews)) return;
+
+    $total  = count($reviews);
+    $sum    = array_sum(array_column($reviews, 'rating'));
+    $avg    = round($sum / $total, 1);
+
+    $schema_reviews = [];
+    foreach ($reviews as $r) {
+        $entry = [
+            '@type'         => 'Review',
+            'author'        => ['@type' => 'Person', 'name' => $r['name']],
+            'reviewBody'    => $r['body'],
+            'reviewRating'  => [
+                '@type'       => 'Rating',
+                'ratingValue' => $r['rating'],
+                'bestRating'  => 5,
+                'worstRating' => 1,
+            ],
+        ];
+        if ($r['date'] !== '') {
+            $entry['datePublished'] = $r['date'];
+        }
+        $schema_reviews[] = $entry;
+    }
+
+    $schema = [
+        '@context'        => 'https://schema.org',
+        '@type'           => 'HealthAndBeautyBusiness',
+        'name'            => 'Aimer Guérir — Christophe Rebours',
+        'description'     => 'Magnétiseur guérisseur à Vernon (Eure, Normandie). Soins énergétiques, magnétisme, guérison.',
+        'areaServed'      => 'Vernon, Eure, Normandie',
+        'aggregateRating' => [
+            '@type'       => 'AggregateRating',
+            'ratingValue' => $avg,
+            'reviewCount' => $total,
+            'bestRating'  => 5,
+            'worstRating' => 1,
+        ],
+        'review'          => $schema_reviews,
+    ];
+
+    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Chargement des assets (CSS et JS) sur le front-end
 // ─────────────────────────────────────────────────────────────────────────────
 add_action('wp_enqueue_scripts', function () {
@@ -275,6 +379,17 @@ add_action('wp_enqueue_scripts', function () {
 		$version,
 		true
 	);
+
+	// Marquee testimonials — pause au survol, uniquement sur la page d'accueil
+	if (is_front_page()) {
+		wp_enqueue_script(
+			'aimer-guerir-testimonials-marquee',
+			get_theme_file_uri('/blocks/testimonials/marquee.js'),
+			[],
+			filemtime(get_theme_file_path('/blocks/testimonials/marquee.js')),
+			true
+		);
+	}
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

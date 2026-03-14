@@ -13,7 +13,7 @@
   <div class="wp-block-group pattern-appointment-header__wrapper">
     <!-- wp:group {"className":"appointment-cta__header","layout":{"type":"default"}} -->
     <div class="wp-block-group appointment-cta__header">
-      <!-- wp:heading {"level":2} -->
+      <!-- wp:heading {"level":1} -->
       <h1>Horaires d'ouverture du cabinet</h1>
       <!-- /wp:heading -->
 

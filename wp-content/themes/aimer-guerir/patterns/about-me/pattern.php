@@ -27,8 +27,8 @@
       <div class="wp-block-group pattern_about__text">
         <!-- wp:group {"className":"pattern_about__header","layout":{"type":"default"}} -->
         <div class="wp-block-group pattern_about__header">
-          <!-- wp:heading {"level":2,"className":"pattern_about__header_title"} -->
-          <h2 class="pattern_about__header_title">Je suis Christophe Rebours</h2>
+          <!-- wp:heading {"level":1,"className":"pattern_about__header_title"} -->
+          <h1 class="pattern_about__header_title">Je suis Christophe Rebours</h1>
           <!-- /wp:heading -->
 
           <!-- wp:paragraph {"className":"pattern_about__header_subtitle"} -->

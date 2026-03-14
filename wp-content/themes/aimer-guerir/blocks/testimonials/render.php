@@ -3,54 +3,31 @@
 $title_raw        = get_theme_mod('aimer_guerir_testimonials_title', '');
 $subtitle_raw     = get_theme_mod('aimer_guerir_testimonials_subtitle', '');
 $introduction_raw = get_theme_mod('aimer_guerir_testimonials_introduction', '');
-$c1_name_raw      = get_theme_mod('aimer_guerir_testimonials_customer_1_name', '');
-$c1_feedback_raw  = get_theme_mod('aimer_guerir_testimonials_customer_1_feedback', '');
-$c2_name_raw      = get_theme_mod('aimer_guerir_testimonials_customer_2_name', '');
-$c2_feedback_raw  = get_theme_mod('aimer_guerir_testimonials_customer_2_feedback', '');
-$c3_name_raw      = get_theme_mod('aimer_guerir_testimonials_customer_3_name', '');
-$c3_feedback_raw  = get_theme_mod('aimer_guerir_testimonials_customer_3_feedback', '');
 
 $title        = trim(wp_strip_all_tags($title_raw));
 $subtitle     = trim(wp_strip_all_tags($subtitle_raw));
 $introduction = trim(wp_strip_all_tags($introduction_raw));
 
-$testimonials = [
-    [
-        'name' => trim(wp_strip_all_tags($c1_name_raw)),
-        'feedback' => trim(wp_strip_all_tags($c1_feedback_raw)),
-    ],
-    [
-        'name' => trim(wp_strip_all_tags($c2_name_raw)),
-        'feedback' => trim(wp_strip_all_tags($c2_feedback_raw)),
-    ],
-    [
-        'name' => trim(wp_strip_all_tags($c3_name_raw)),
-        'feedback' => trim(wp_strip_all_tags($c3_feedback_raw)),
-    ],
-];
-
-$testimonials = array_values(array_filter($testimonials, function ($t) {
-    return $t['name'] !== '' && $t['feedback'] !== '';
-}));
-
-$primary_label = get_theme_mod('aimer_guerir_testimonials_primary_label', '');
-$primary_url   = get_theme_mod('aimer_guerir_testimonials_primary_url', '');
-$primary_label = trim($primary_label);
-$primary_url   = esc_url(trim($primary_url));
+$primary_label = trim(get_theme_mod('aimer_guerir_testimonials_primary_label', ''));
+$primary_url   = esc_url(trim(get_theme_mod('aimer_guerir_testimonials_primary_url', '')));
 
 $google_label = trim(get_theme_mod('aimer_guerir_testimonials_google_label', ''));
 $google_url   = esc_url(trim(get_theme_mod('aimer_guerir_testimonials_google_url', '')));
+
+$reviews = aimer_guerir_get_reviews();
 
 if (
     $title === '' ||
     $subtitle === '' ||
     $introduction === '' ||
-    count($testimonials) !== 3 ||
+    empty($reviews) ||
     '' === $primary_label ||
     '' === $primary_url
 ) {
     return '';
 }
+
+$display_reviews = array_merge($reviews, $reviews);
 
 ob_start();
 ?>
@@ -75,18 +52,20 @@ ob_start();
         </a>
         <?php endif; ?>
     </div>
-    <div class="testimonials__list">
-        <?php foreach ($testimonials as $testimonial) : ?>
-            <figure class="testimonials__item">
-                <blockquote class="testimonials__quote">
-                    <?php echo nl2br(esc_html($testimonial['feedback'])); ?>
-                </blockquote>
-                <figcaption class="testimonials__name">
-                    <?php echo esc_html($testimonial['name']); ?>
-                    <span class="testimonials__stars" aria-label="5 étoiles sur 5">⭐⭐⭐⭐⭐</span>
-                </figcaption>
-            </figure>
-        <?php endforeach; ?>
+    <div class="testimonials__list" role="region" aria-label="Avis clients">
+        <div class="testimonials__track" aria-live="off">
+            <?php foreach ($display_reviews as $review) : ?>
+                <figure class="testimonials__item">
+                    <blockquote class="testimonials__quote">
+                        <?php echo nl2br(esc_html($review['body'])); ?>
+                    </blockquote>
+                    <figcaption class="testimonials__name">
+                        <?php echo esc_html($review['name']); ?>
+                        <span class="testimonials__stars" aria-label="<?php echo esc_attr($review['rating']); ?> étoiles sur 5"><?php echo str_repeat('⭐', (int) $review['rating']); ?></span>
+                    </figcaption>
+                </figure>
+            <?php endforeach; ?>
+        </div>
     </div>
 </section>
 <?php

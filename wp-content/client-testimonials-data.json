@@ -1,0 +1,34 @@
+{
+  "reviews": [
+    {
+      "name": "Marie D.",
+      "body": "Une séance incroyable qui m'a apporté une profonde sérénité. Christophe est à l'écoute et bienveillant. Je recommande vivement !",
+      "rating": 5,
+      "date": "2025-11-15"
+    },
+    {
+      "name": "Jean-Pierre M.",
+      "body": "J'avais des douleurs chroniques depuis des années. Après seulement deux séances, j'ai ressenti un soulagement notable. Merci infiniment.",
+      "rating": 5,
+      "date": "2025-10-22"
+    },
+    {
+      "name": "Sophie L.",
+      "body": "Christophe possède un don véritable. Sa douceur et son professionnalisme m'ont permis de retrouver équilibre et bien-être. Je suis très reconnaissante.",
+      "rating": 5,
+      "date": "2025-09-30"
+    },
+    {
+      "name": "Nathalie R.",
+      "body": "Une expérience hors du commun. Je me sens régénérée après chaque séance. Le cabinet est accueillant et l'ambiance très apaisante.",
+      "rating": 5,
+      "date": "2025-08-14"
+    },
+    {
+      "name": "Thomas B.",
+      "body": "Suite à un stress important au travail, j'ai consulté Christophe. En quelques séances, j'ai retrouvé calme et sérénité. Je le conseille à tous !",
+      "rating": 5,
+      "date": "2025-07-05"
+    }
+  ]
+}
