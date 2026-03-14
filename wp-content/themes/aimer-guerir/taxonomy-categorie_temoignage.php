@@ -49,7 +49,7 @@ get_header();
 						</div>
 					<?php endwhile; ?>
 				</div>
-				<?php the_posts_pagination(); ?>
+				<?php the_posts_pagination(['mid_size' => 2]); ?>
 			<?php else : ?>
 				<p class="temoignages-tax-archive__empty">Aucun témoignage dans cette catégorie pour le moment.</p>
 			<?php endif; ?>

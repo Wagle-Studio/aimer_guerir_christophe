@@ -7,9 +7,21 @@
 			the_post();
 	?>
 			<div class="single__back-wrapper">
-				<a href="/articles-et-temoignages" class="single__back">← Articles et témoignages</a>
+				<?php
+				$categories = get_the_category();
+				if ($categories) {
+					$cat        = $categories[0];
+					$back_url   = get_category_link($cat->term_id);
+					$back_label = $cat->name;
+				} else {
+					$back_url   = '/articles-et-temoignages#articles';
+					$back_label = 'Articles';
+				}
+				?>
+				<a href="<?php echo esc_url($back_url); ?>" class="single__back">← <?php echo esc_html($back_label); ?></a>
 			</div>
-			<p class="single__pill">Article</p>
+				<p class="single__pill">Article</p>
+			</div>
 			<h1 class="single__title"><?php the_title(); ?></h1>
 			<div class="single__meta">
 				<span class="single__meta-author">Par <a href="<?php echo esc_url(home_url('/qui-je-suis/')); ?>">Christophe Rebours</a></span>

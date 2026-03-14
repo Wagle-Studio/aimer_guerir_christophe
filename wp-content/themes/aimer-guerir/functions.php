@@ -244,7 +244,7 @@ add_action('wp_enqueue_scripts', function () {
 			'aimer-guerir-pattern-appointment-about'     => 'patterns/appointment-about/style.css',
 			'aimer-guerir-pattern-pains-list'            => 'patterns/pains-list/style.css',
 			'aimer-guerir-pattern-contenu-editorial'     => 'patterns/contenu-editorial/style.css',
-			'aimer-guerir-pattern-blog-posts-grid'       => 'patterns/blog-posts-grid/style.css',
+			'aimer-guerir-pattern-blog-posts-categories' => 'patterns/blog-posts-categories/style.css',
 			'aimer-guerir-pattern-temoignages-categories' => 'patterns/temoignages-categories/style.css',
 			'aimer-guerir-pattern-social-links'           => 'patterns/social-links/style.css',
 		];
@@ -419,6 +419,9 @@ add_action('admin_head', function () {
 	if ($screen->taxonomy === 'categorie_temoignage') {
 		echo '<style>.column-cat_temoignage_image { width: 80px; }</style>';
 	}
+	if ($screen->taxonomy === 'category') {
+		echo '<style>.column-cat_article_image { width: 80px; }</style>';
+	}
 });
 
 add_filter('manage_temoignage_posts_columns', function (array $columns): array {
@@ -467,6 +470,115 @@ add_filter('manage_categorie_temoignage_custom_column', function (string $conten
 	}
 	return '<span style="color:#aaa;font-size:11px;">—</span>';
 }, 10, 3);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Articles natifs — Colonne image dans la liste des catégories admin
+// ─────────────────────────────────────────────────────────────────────────────
+add_filter('manage_category_columns', function (array $columns): array {
+	$new = [];
+	foreach ($columns as $key => $label) {
+		if ($key === 'name') {
+			$new['cat_article_image'] = 'Image';
+		}
+		$new[$key] = $label;
+	}
+	return $new;
+});
+
+add_filter('manage_category_custom_column', function (string $content, string $column, int $term_id): string {
+	if ($column !== 'cat_article_image') {
+		return $content;
+	}
+	$image_id = (int) get_term_meta($term_id, '_article_cat_image_id', true);
+	if ($image_id) {
+		return '<img src="' . esc_url(wp_get_attachment_image_url($image_id, 'thumbnail')) . '" style="width:60px;height:60px;object-fit:cover;border-radius:4px;">';
+	}
+	return '<span style="color:#aaa;font-size:11px;">—</span>';
+}, 10, 3);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Articles natifs — Image des catégories
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Charge la médiathèque WordPress sur les pages de la taxonomie catégorie
+add_action('admin_enqueue_scripts', function (string $hook) {
+	if (!in_array($hook, ['edit-tags.php', 'term.php'], true)) {
+		return;
+	}
+	if (!isset($_GET['taxonomy']) || $_GET['taxonomy'] !== 'category') {
+		return;
+	}
+	wp_enqueue_media();
+	wp_add_inline_script('media-editor', '
+		(function() {
+			var frame;
+			document.addEventListener("click", function(e) {
+				var btn = e.target.closest(".article-cat-image-btn");
+				if (!btn) return;
+				e.preventDefault();
+				var wrap = btn.closest(".article-cat-image-wrap");
+				if (frame) { frame.open(); return; }
+				frame = wp.media({ title: "Choisir une image", button: { text: "Sélectionner" }, multiple: false });
+				frame.on("select", function() {
+					var att = frame.state().get("selection").first().toJSON();
+					wrap.querySelector(".article-cat-image-id").value = att.id;
+					wrap.querySelector(".article-cat-image-preview").innerHTML = "<img src=\"" + att.url + "\" style=\"max-width:80px;max-height:80px;object-fit:cover;border-radius:4px;margin-top:8px;\">";
+					wrap.querySelector(".article-cat-image-remove").style.display = "inline";
+				});
+				frame.open();
+			});
+			document.addEventListener("click", function(e) {
+				var btn = e.target.closest(".article-cat-image-remove");
+				if (!btn) return;
+				e.preventDefault();
+				var wrap = btn.closest(".article-cat-image-wrap");
+				wrap.querySelector(".article-cat-image-id").value = "";
+				wrap.querySelector(".article-cat-image-preview").innerHTML = "";
+				btn.style.display = "none";
+			});
+		})();
+	');
+});
+
+// Affichage du champ sur le formulaire "Ajouter une catégorie"
+add_action('category_add_form_fields', function () {
+	echo '<div class="form-field article-cat-image-wrap">
+		<label>Image de la catégorie</label>
+		<input type="hidden" name="article_cat_image_id" class="article-cat-image-id" value="">
+		<div class="article-cat-image-preview"></div>
+		<button type="button" class="button article-cat-image-btn">Choisir une image</button>
+		<button type="button" class="button article-cat-image-remove" style="display:none;margin-left:4px;">Supprimer</button>
+	</div>';
+});
+
+// Affichage du champ sur le formulaire "Modifier la catégorie"
+add_action('category_edit_form_fields', function (WP_Term $term) {
+	$image_id = (int) get_term_meta($term->term_id, '_article_cat_image_id', true);
+	$preview  = $image_id ? '<img src="' . esc_url(wp_get_attachment_image_url($image_id, 'thumbnail')) . '" style="max-width:80px;max-height:80px;object-fit:cover;border-radius:4px;margin-top:8px;">' : '';
+	echo '<tr class="form-field article-cat-image-wrap">
+		<th><label>Image de la catégorie</label></th>
+		<td>
+			<input type="hidden" name="article_cat_image_id" class="article-cat-image-id" value="' . esc_attr($image_id ?: '') . '">
+			<div class="article-cat-image-preview">' . $preview . '</div>
+			<button type="button" class="button article-cat-image-btn" style="margin-top:8px;">Choisir une image</button>
+			<button type="button" class="button article-cat-image-remove" style="margin-left:4px;margin-top:8px;' . ($image_id ? '' : 'display:none;') . '">Supprimer</button>
+		</td>
+	</tr>';
+});
+
+// Sauvegarde à la création
+add_action('create_category', function (int $term_id) {
+	if (isset($_POST['article_cat_image_id'])) {
+		update_term_meta($term_id, '_article_cat_image_id', (int) $_POST['article_cat_image_id']);
+	}
+});
+
+// Sauvegarde à la modification
+add_action('edited_category', function (int $term_id) {
+	if (isset($_POST['article_cat_image_id'])) {
+		update_term_meta($term_id, '_article_cat_image_id', (int) $_POST['article_cat_image_id']);
+	}
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CPT Témoignage — Image des catégories
@@ -644,6 +756,37 @@ function temoignages_categories_shortcode(): string
 add_shortcode('temoignages_categories', 'temoignages_categories_shortcode');
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Articles natifs — Shortcode [articles_categories]
+// ─────────────────────────────────────────────────────────────────────────────
+function articles_categories_shortcode(): string
+{
+	$terms = get_terms(['taxonomy' => 'category', 'hide_empty' => false]);
+
+	if (empty($terms) || is_wp_error($terms)) {
+		return '';
+	}
+
+	$placeholder = get_theme_file_uri('assets/images/pattern-placeholder-400.svg');
+
+	ob_start();
+	echo '<div class="pattern_blog_posts_categories__grid">';
+	foreach ($terms as $term) {
+		$image_id  = (int) get_term_meta($term->term_id, '_article_cat_image_id', true);
+		$image_url = $image_id ? wp_get_attachment_image_url($image_id, 'medium') : $placeholder;
+		$term_url  = get_term_link($term);
+		echo '<a href="' . esc_url($term_url) . '" class="pattern_blog_posts_categories__card">';
+		echo '<div class="pattern_blog_posts_categories__card_image">';
+		echo '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($term->name) . '">';
+		echo '</div>';
+		echo '<p class="pattern_blog_posts_categories__card_name">' . esc_html($term->name) . '</p>';
+		echo '</a>';
+	}
+	echo '</div>';
+	return ob_get_clean();
+}
+add_shortcode('articles_categories', 'articles_categories_shortcode');
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Shortcode [social_links]
 // ─────────────────────────────────────────────────────────────────────────────
 function social_links_shortcode(): string
@@ -743,14 +886,14 @@ add_action('wp_footer', function () {
 	box-shadow: var(--card-shadow);
 }
 .temoignages-tax-card__image {
+	aspect-ratio: 1 / 1;
 	width: 100%;
-	max-height: 200px;
+	overflow: hidden;
 }
 .temoignages-tax-card__image img {
 	display: block;
 	width: 100%;
 	height: 100%;
-	max-height: 200px;
 	object-fit: cover;
 }
 .temoignages-tax-card__image--placeholder {
@@ -778,12 +921,8 @@ add_action('wp_footer', function () {
 		align-items: stretch;
 	}
 	.temoignages-tax-card__image {
-		flex: 0 0 180px;
-		width: 180px;
-		max-height: none;
-	}
-	.temoignages-tax-card__image img {
-		max-height: none;
+		flex: 0 0 220px;
+		width: 220px;
 	}
 }
 .temoignages-tax-archive {
@@ -796,7 +935,7 @@ add_action('wp_footer', function () {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
-	margin: 48px;
+	margin: 48px 0;
 }
 .temoignages-tax-archive__header-image img {
 	width: 100%;
@@ -858,6 +997,233 @@ add_action('wp_footer', function () {
 	}
 	.temoignages-tax-archive__header-image img {
 		max-height: 180px;
+	}
+}
+</style>' . "\n";
+});
+
+add_action('wp_footer', function () {
+	if (!is_category() && !is_tax('categorie_temoignage')) return;
+	echo '<style>
+.articles-cat-archive .pagination,
+.temoignages-tax-archive .pagination {
+	margin-top: 40px;
+}
+.articles-cat-archive .nav-links,
+.temoignages-tax-archive .nav-links {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+}
+.articles-cat-archive .page-numbers,
+.temoignages-tax-archive .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 36px;
+	height: 36px;
+	padding: 0 10px;
+	border-radius: 3px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+	color: var(--black);
+	background: var(--white);
+	border: 2px solid transparent;
+	transition: color 0.1s ease, border-color 0.1s ease;
+}
+.articles-cat-archive .page-numbers:hover,
+.temoignages-tax-archive .page-numbers:hover {
+	border-color: var(--primary);
+	color: var(--primary);
+}
+.articles-cat-archive .page-numbers.current,
+.temoignages-tax-archive .page-numbers.current {
+	background: var(--primary);
+	color: var(--white);
+	border-color: var(--primary);
+}
+.articles-cat-archive .page-numbers.dots,
+.temoignages-tax-archive .page-numbers.dots {
+	border: none;
+	background: transparent;
+	cursor: default;
+	opacity: 0.5;
+}
+.articles-cat-archive .prev.page-numbers,
+.articles-cat-archive .next.page-numbers,
+.temoignages-tax-archive .prev.page-numbers,
+.temoignages-tax-archive .next.page-numbers {
+	padding: 0 14px;
+	border-color: var(--primary-15);
+}
+</style>' . "\n";
+});
+
+add_action('wp_footer', function () {
+	if (!is_category()) return;
+	echo '<style>
+.articles-cat-archive {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 48px 24px;
+}
+.articles-cat-archive__back-wrapper {
+	position: sticky;
+	top: 193px;
+	z-index: 10000;
+	width: 100%;
+	margin: 0 auto;
+	padding: 16px 24px 12px;
+	background-color: #faf9f6;
+}
+@media screen and (max-width: 767px) {
+	.articles-cat-archive__back-wrapper {
+		top: 126px;
+	}
+}
+.articles-cat-archive__back {
+	display: inline-block;
+	padding: 4px 20px;
+	border-radius: 3px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	background: var(--white);
+	color: var(--black);
+	border: 2px solid var(--primary);
+	text-decoration: none;
+	transition: color 0.1s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.articles-cat-archive__back:hover {
+	color: var(--primary);
+}
+.articles-cat-archive__header {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin: 48px 0;
+}
+.articles-cat-archive__header-image img {
+	width: 100%;
+	max-height: 220px;
+	object-fit: cover;
+	border-radius: 3px;
+}
+.articles-cat-archive__title {
+	font-size: 2rem;
+	margin: 0 0 8px;
+}
+.articles-cat-archive__description {
+	margin: 0 0 12px;
+	opacity: 0.75;
+}
+.articles-cat-archive__empty {
+	text-align: center;
+	opacity: 0.6;
+}
+.articles-cat-list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.articles-cat-card {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--white);
+	border: 1px solid var(--primary-15);
+	border-radius: 3px;
+	overflow: hidden;
+	box-shadow: var(--card-shadow);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.articles-cat-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.articles-cat-card__image {
+	aspect-ratio: 16 / 9;
+	width: 100%;
+	overflow: hidden;
+}
+.articles-cat-card__image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.articles-cat-card__image--placeholder {
+	background-color: var(--beige, #e8e0d5);
+}
+.articles-cat-card__body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 12px;
+	padding: 20px 24px;
+	width: 100%;
+}
+.articles-cat-card__title {
+	margin: 0;
+	font-size: 1.25rem;
+}
+.articles-cat-card__title a {
+	color: var(--black);
+	text-decoration: none;
+	font-family: var(--font-heading);
+}
+.articles-cat-card__title a:hover {
+	color: var(--primary);
+}
+.articles-cat-card__excerpt {
+	margin: 0;
+	line-height: 1.6;
+	opacity: 0.85;
+	max-width: 80%;
+}
+.articles-cat-card__btn {
+	margin-left: auto;
+}
+.articles-cat-card__date {
+	font-size: 0.8rem;
+	opacity: 0.6;
+	margin: 0;
+}
+.articles-cat-card__btn {
+	padding: 5px 14px;
+}
+@media screen and (min-width: 768px) {
+	.articles-cat-archive {
+		padding: 48px 24px 72px 24px;
+	}
+	.articles-cat-archive__header {
+		flex-direction: row;
+		align-items: center;
+	}
+	.articles-cat-archive__header-image {
+		flex: 0 0 280px;
+	}
+	.articles-cat-archive__header-image img {
+		max-height: 180px;
+	}
+	.articles-cat-card {
+		flex-direction: row;
+		align-items: stretch;
+	}
+	.articles-cat-card__image {
+		flex: 0 0 220px;
+		width: 220px;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.articles-cat-card {
+		transition: none;
+	}
+	.articles-cat-card:hover {
+		transform: none;
+		box-shadow: var(--card-shadow);
 	}
 }
 </style>' . "\n";

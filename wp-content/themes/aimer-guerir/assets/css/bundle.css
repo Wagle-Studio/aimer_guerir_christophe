@@ -3285,9 +3285,9 @@ img.pattern_about__image {
   }
 }
 
-/* --- patterns/blog-posts-grid/style.css --- */
+/* --- patterns/blog-posts-categories/style.css --- */
 /* Section globale */
-.pattern_blog_posts_grid {
+.pattern_blog_posts_categories {
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -3296,19 +3296,21 @@ img.pattern_about__image {
 }
 
 /* Bandeau titre */
-.pattern_blog_posts_grid__header {
+.pattern_blog_posts_categories__header {
   width: 100%;
-  max-width: 1280px;
+  max-width: 970px;
   padding: 0 24px;
   margin: 0 auto;
+  text-align: center;
 }
 
-.pattern_blog_posts_grid__title {
+.pattern_blog_posts_categories__title {
   position: relative;
+  display: inline-block;
   letter-spacing: 1.25px;
 }
 
-.pattern_blog_posts_grid__title::after {
+.pattern_blog_posts_categories__title::after {
   position: absolute;
   bottom: -14px;
   left: 50%;
@@ -3320,168 +3322,105 @@ img.pattern_about__image {
   border-radius: 3px;
 }
 
-/* Wrapper liste */
-.pattern_blog_posts_grid__wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
+/* Grille des catégories */
+.pattern_blog_posts_categories__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
   max-width: 1280px;
-  padding: 0 24px;
-  margin: 0 auto;
   width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-/* Liste des articles — colonne simple */
-.pattern_blog_posts_grid .wp-block-post-template {
-  display: flex !important;
-  flex-direction: column;
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-}
-
-/* Carte horizontale : image à gauche, contenu à droite */
-.pattern_blog_posts_grid .wp-block-post {
+/* Carte catégorie */
+.pattern_blog_posts_categories__card {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
+  flex-direction: column;
+  height: 150px;
   background-color: var(--white);
   border: 1px solid var(--primary-15);
   border-radius: 3px;
   overflow: hidden;
   box-shadow: var(--card-shadow);
+  text-decoration: none;
+  color: var(--black);
   transition: box-shadow 0.1s ease;
 }
 
-.pattern_blog_posts_grid .wp-block-post:hover {
+.pattern_blog_posts_categories__card:hover {
   box-shadow: var(--picture-shadow);
 }
 
-/* Image — mobile (colonne, image pleine largeur) */
-.pattern_blog_posts_grid__card_image {
-  flex: 0 0 auto;
-  width: 100%;
-  height: 160px;
-  overflow: hidden;
+/* Image */
+.pattern_blog_posts_categories__card_image {
+  position: relative;
+  height: 100%;
 }
 
-.pattern_blog_posts_grid__card_image img,
-.pattern_blog_posts_grid__card_image a,
-.pattern_blog_posts_grid__card_image a img {
+.pattern_blog_posts_categories__card_image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.pattern_blog_posts_categories__card_image img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Image — à partir de 480px (carte horizontale) */
-@media screen and (min-width: 480px) {
-  .pattern_blog_posts_grid__card_image {
-    flex: 0 0 180px;
-    width: 180px;
-    height: 180px;
-    align-self: flex-start;
-  }
-
-  .pattern_blog_posts_grid__card_image a {
-    display: block;
-    height: 100%;
-  }
-}
-
-/* Colonne droite : empile titre / extrait / lien */
-.pattern_blog_posts_grid .wp-block-post .pattern_blog_posts_grid__card_body {
-  display: flex !important;
-  flex-direction: column !important;
-  flex-wrap: nowrap !important;
-  align-items: flex-start !important;
-  flex: 1;
-  min-width: 0;
-  padding: 16px 20px 14px;
-  gap: 0;
-}
-
-/* Titre */
-.pattern_blog_posts_grid__card_title {
-  margin: 0;
-  padding: 0;
+/* Nom de la catégorie */
+.pattern_blog_posts_categories__card_name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
   font-size: 1rem;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.pattern_blog_posts_grid__card_title a {
-  color: var(--black);
-  text-decoration: none;
-}
-
-.pattern_blog_posts_grid__card_title a:hover {
-  color: var(--primary);
-}
-
-/* Extrait — prend l'espace disponible pour pousser le lien en bas */
-.pattern_blog_posts_grid__card_excerpt {
-  flex: 1;
-  margin: 8px 0 0;
-  padding: 0;
-  font-size: 0.875rem;
-  color: var(--black);
-  opacity: 0.75;
-  line-height: 1.6;
-  max-width: 80%;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Lien "Lire l'article" — apparence bouton secondary */
-.pattern_blog_posts_grid__card_link {
-  display: inline-block !important;
-  margin-top: 24px;
-  align-self: flex-end;
-  padding: 4px 20px !important;
-  border-radius: 3px;
   font-weight: 600;
-  font-size: 1rem;
-  text-align: center;
-  background: var(--white);
-  color: var(--black) !important;
-  border: 2px solid var(--primary) !important;
-  text-decoration: none !important;
-  transition: color 0.1s ease, border-color 0.1s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  line-height: 1.4;
+  background-color: rgb(255, 255, 255, 0.9);
 }
 
-.pattern_blog_posts_grid__card_link:hover {
-  color: var(--primary) !important;
-  border-color: var(--primary) !important;
-  text-decoration: none !important;
+.pattern_blog_posts_categories__card_name::after {
+  content: "";
+  display: block;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--primary-75);
+  border-right: 2px solid var(--primary-75);
+  transform: rotate(45deg);
+  transition: transform 0.1s ease, border-color 0.1s ease;
 }
 
-/* Mobile : carte en colonne (image au-dessus) */
-@media screen and (max-width: 479px) {
-  .pattern_blog_posts_grid .wp-block-post {
-    flex-direction: column;
+.pattern_blog_posts_categories__card:hover .pattern_blog_posts_categories__card_name::after {
+  transform: rotate(45deg) translate(2px, -2px);
+  border-color: var(--primary);
+}
+
+/* Tablette : 2 colonnes */
+@media screen and (min-width: 480px) {
+  .pattern_blog_posts_categories__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* Desktop : 3 colonnes */
 @media screen and (min-width: 768px) {
-  .pattern_blog_posts_grid {
+  .pattern_blog_posts_categories {
     padding: 64px 24px;
   }
 
-  .pattern_blog_posts_grid__card_image {
-    flex: 0 0 220px;
-    width: 220px;
-  }
-
-  .pattern_blog_posts_grid__card_image img,
-  .pattern_blog_posts_grid__card_image a img {
-    height: 100%;
-    object-fit: cover;
+  .pattern_blog_posts_categories__grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

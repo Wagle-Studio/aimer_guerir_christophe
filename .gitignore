@@ -1,4 +1,5 @@
 #Ai
+docs
 
 # Environment
 .env
@@ -8,6 +9,7 @@ wp-config.php
 # WordPress core
 /wp-admin/
 /wp-includes/
+wp-content/plugins/*
 /index.php
 /license.txt
 /readme.html

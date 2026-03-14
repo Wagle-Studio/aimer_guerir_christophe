@@ -52,6 +52,33 @@
   letter-spacing: 0.5px;
 }
 
+.single__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 980px;
+  padding: 16px 24px 0;
+  margin: 0 auto;
+  font-size: 0.875rem;
+  color: var(--black);
+  opacity: 0.65;
+}
+
+.single__meta a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.single__meta a:hover {
+  text-decoration: underline;
+}
+
+.single__meta-separator {
+  font-size: 1rem;
+}
+
 .single .entry-content {
   display: flex;
   flex-direction: column;
