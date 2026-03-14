@@ -64,6 +64,17 @@
 
     </div>
     <!-- /wp:group -->
+
+    <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+    <div class="wp-block-buttons" style="justify-content:center;">
+      <!-- wp:button -->
+      <div class="wp-block-button">
+        <a class="wp-block-button__link btn btn--primary btn--icon" href="#">Voir la foire aux questions</a>
+      </div>
+      <!-- /wp:button -->
+    </div>
+    <!-- /wp:buttons -->
+
   </div>
   <!-- /wp:group -->
 </section>

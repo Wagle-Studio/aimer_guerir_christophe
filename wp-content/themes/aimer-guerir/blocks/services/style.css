@@ -81,14 +81,80 @@
   box-sizing: content-box;
 }
 
+.services__card-body {
+  position: relative;
+  max-height: 160px;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.services__card-body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: linear-gradient(to bottom, transparent, var(--cream));
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.services__card-body--full {
+  max-height: none;
+}
+
+.services__card--main.is-expanded .services__card-body {
+  max-height: 1200px;
+}
+
+.services__card--main.is-expanded .services__card-body::after {
+  opacity: 0;
+}
+
 .services__card-description {
   text-align: justify;
+}
+
+.services__card-toggle {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.15s ease;
+}
+
+.services__card-toggle:hover {
+  opacity: 0.75;
+}
+
+.services__card-toggle-less {
+  display: none;
+}
+
+.services__card--main.is-expanded .services__card-toggle-more {
+  display: none;
+}
+
+.services__card--main.is-expanded .services__card-toggle-less {
+  display: inline;
 }
 
 .services__main-cards {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
+  align-items: start;
 }
 
 .services__card--main,
