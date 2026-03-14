@@ -351,6 +351,7 @@ add_action('wp_enqueue_scripts', function () {
 			'aimer-guerir-pattern-blog-posts-categories' => 'patterns/blog-posts-categories/style.css',
 			'aimer-guerir-pattern-temoignages-categories' => 'patterns/temoignages-categories/style.css',
 			'aimer-guerir-pattern-social-links'           => 'patterns/social-links/style.css',
+			'aimer-guerir-pattern-faq-accordion'          => 'patterns/faq-accordion/style.css',
 		];
 
 		$prev = [];
@@ -1343,3 +1344,221 @@ add_action('wp_footer', function () {
 }
 </style>' . "\n";
 });
+
+// =============================================================
+// CPT FAQ — Enregistrement
+// =============================================================
+add_action('init', function () {
+	register_post_type('faq', [
+		'labels' => [
+			'name'               => 'FAQ',
+			'singular_name'      => 'Question',
+			'add_new'            => 'Ajouter',
+			'add_new_item'       => 'Ajouter une question',
+			'edit_item'          => 'Modifier la question',
+			'new_item'           => 'Nouvelle question',
+			'view_item'          => 'Voir la question',
+			'search_items'       => 'Rechercher des questions',
+			'not_found'          => 'Aucune question trouvée',
+			'not_found_in_trash' => 'Aucune question dans la corbeille',
+			'all_items'          => 'Toutes les questions',
+			'menu_name'          => 'FAQ',
+		],
+		'public'        => false,
+		'show_ui'       => true,
+		'supports'      => ['title'],
+		'show_in_rest'  => false,
+		'menu_icon'     => 'dashicons-editor-help',
+		'menu_position' => 26,
+	]);
+
+	register_taxonomy('categorie_faq', 'faq', [
+		'labels' => [
+			'name'          => 'Catégories',
+			'singular_name' => 'Catégorie',
+			'search_items'  => 'Rechercher une catégorie',
+			'all_items'     => 'Toutes les catégories',
+			'edit_item'     => 'Modifier la catégorie',
+			'update_item'   => 'Mettre à jour la catégorie',
+			'add_new_item'  => 'Ajouter une catégorie',
+			'new_item_name' => 'Nouvelle catégorie',
+			'menu_name'     => 'Catégories',
+		],
+		'hierarchical'      => true,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'show_in_rest'      => false,
+	]);
+});
+
+// =============================================================
+// CPT FAQ — Meta box "Réponse"
+// =============================================================
+add_action('add_meta_boxes', function () {
+	add_meta_box(
+		'faq_answer',
+		'Réponse',
+		function (WP_Post $post) {
+			wp_nonce_field('faq_save', 'faq_nonce');
+			$value = get_post_meta($post->ID, '_faq_answer', true);
+			echo '<textarea name="faq_answer" rows="6" style="width:100%;">'
+				. esc_textarea($value)
+				. '</textarea>';
+		},
+		'faq',
+		'normal',
+		'high'
+	);
+});
+
+// =============================================================
+// CPT FAQ — Sauvegarde
+// =============================================================
+add_action('save_post_faq', function (int $post_id): void {
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+		return;
+	}
+	if (
+		! isset($_POST['faq_nonce']) ||
+		! wp_verify_nonce($_POST['faq_nonce'], 'faq_save')
+	) {
+		return;
+	}
+	if (! current_user_can('edit_post', $post_id)) {
+		return;
+	}
+	if (isset($_POST['faq_answer'])) {
+		update_post_meta($post_id, '_faq_answer', sanitize_textarea_field($_POST['faq_answer']));
+	}
+});
+
+// =============================================================
+// CPT FAQ — Nettoyage de l'écran d'édition
+// =============================================================
+add_action('add_meta_boxes', function () {
+	foreach (['postexcerpt', 'commentsdiv', 'revisionsdiv', 'authordiv', 'pageparentdiv'] as $id) {
+		remove_meta_box($id, 'faq', 'normal');
+		remove_meta_box($id, 'faq', 'side');
+		remove_meta_box($id, 'faq', 'advanced');
+	}
+}, 20);
+
+// =============================================================
+// CPT FAQ — Catégories : champ "Ordre d'affichage"
+// =============================================================
+
+// Champ sur le formulaire "Ajouter une catégorie"
+add_action('categorie_faq_add_form_fields', function () {
+	echo '<div class="form-field">
+		<label for="faq_cat_order">Ordre d\'affichage</label>
+		<input type="number" id="faq_cat_order" name="faq_cat_order" value="0" min="0" step="1" style="width:80px;">
+		<p>Entier, 0 = première catégorie affichée.</p>
+	</div>';
+});
+
+// Champ sur le formulaire "Modifier la catégorie"
+add_action('categorie_faq_edit_form_fields', function (WP_Term $term) {
+	$value = (int) get_term_meta($term->term_id, '_faq_cat_order', true);
+	echo '<tr class="form-field">
+		<th><label for="faq_cat_order">Ordre d\'affichage</label></th>
+		<td>
+			<input type="number" id="faq_cat_order" name="faq_cat_order" value="' . esc_attr($value) . '" min="0" step="1" style="width:80px;">
+			<p class="description">Entier, 0 = première catégorie affichée.</p>
+		</td>
+	</tr>';
+});
+
+// Sauvegarde à la création
+add_action('create_categorie_faq', function (int $term_id) {
+	update_term_meta($term_id, '_faq_cat_order', absint($_POST['faq_cat_order'] ?? 0));
+});
+
+// Sauvegarde à la modification
+add_action('edited_categorie_faq', function (int $term_id) {
+	update_term_meta($term_id, '_faq_cat_order', absint($_POST['faq_cat_order'] ?? 0));
+});
+
+// Colonne "Ordre" dans la liste des catégories
+add_filter('manage_edit-categorie_faq_columns', function (array $columns): array {
+	$columns['faq_cat_order'] = 'Ordre';
+	return $columns;
+});
+
+add_filter('manage_categorie_faq_custom_column', function (string $content, string $column, int $term_id): string {
+	if ($column === 'faq_cat_order') {
+		return (string) (int) get_term_meta($term_id, '_faq_cat_order', true);
+	}
+	return $content;
+}, 10, 3);
+
+add_action('admin_head', function () {
+	$screen = get_current_screen();
+	if ($screen && $screen->taxonomy === 'categorie_faq') {
+		echo '<style>.column-faq_cat_order { width: 80px; }</style>';
+	}
+});
+
+// =============================================================
+// CPT FAQ — Shortcode [faq_accordion]
+// =============================================================
+function faq_accordion_shortcode(): string {
+	$terms = get_terms([
+		'taxonomy'   => 'categorie_faq',
+		'hide_empty' => true,
+		'orderby'    => 'meta_value_num',
+		'order'      => 'ASC',
+		'meta_key'   => '_faq_cat_order',
+	]);
+
+	if (is_wp_error($terms) || empty($terms)) {
+		return '';
+	}
+
+	ob_start();
+	echo '<div class="faq-accordion">';
+
+	foreach ($terms as $term) {
+		$posts = new WP_Query([
+			'post_type'      => 'faq',
+			'posts_per_page' => -1,
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+			'tax_query'      => [
+				[
+					'taxonomy' => 'categorie_faq',
+					'field'    => 'term_id',
+					'terms'    => $term->term_id,
+				],
+			],
+		]);
+
+		if (! $posts->have_posts()) {
+			wp_reset_postdata();
+			continue;
+		}
+
+		echo '<div class="faq-accordion__category">';
+		echo '<p class="faq-accordion__category-label">' . esc_html($term->name) . '</p>';
+		echo '</div>';
+
+		while ($posts->have_posts()) {
+			$posts->the_post();
+			$answer = get_post_meta(get_the_ID(), '_faq_answer', true);
+			echo '<details class="faq-accordion__item">';
+			echo '<summary class="faq-accordion__question">';
+			echo '<span>' . esc_html(get_the_title()) . '</span>';
+			echo '<span class="faq-accordion__icon" aria-hidden="true"></span>';
+			echo '</summary>';
+			echo '<div class="faq-accordion__answer">';
+			echo wp_kses_post(wpautop($answer));
+			echo '</div>';
+			echo '</details>';
+		}
+
+		wp_reset_postdata();
+	}
+
+	echo '</div>';
+	return ob_get_clean();
+}
+add_shortcode('faq_accordion', 'faq_accordion_shortcode');
