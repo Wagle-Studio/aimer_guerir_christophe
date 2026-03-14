@@ -1068,11 +1068,11 @@ add_action('wp_footer', function () {
 }
 .temoignages-tax-archive__back-wrapper {
 	position: sticky;
-	top: 193px;
+	top: 161px;
 	z-index: 10000;
 	width: 100%;
 	margin: 0 auto;
-	padding: 16px 24px 12px;
+	padding: 16px 0 12px;
 	background-color: #faf9f6;
 }
 @media screen and (max-width: 767px) {

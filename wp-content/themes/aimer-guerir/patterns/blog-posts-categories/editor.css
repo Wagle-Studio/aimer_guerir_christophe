@@ -1,0 +1,41 @@
+/* Masquer l'interface par défaut du bloc shortcode */
+.editor-styles-wrapper .pattern_blog_posts_categories .wp-block-shortcode label,
+.editor-styles-wrapper .pattern_blog_posts_categories .wp-block-shortcode textarea {
+  display: none;
+}
+
+/* Remplacer par un placeholder lisible */
+.editor-styles-wrapper .pattern_blog_posts_categories .wp-block-shortcode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 120px;
+  padding: 32px 24px;
+  border: 2px dashed rgba(164, 0, 39, 0.3);
+  border-radius: 6px;
+  background-color: rgba(164, 0, 39, 0.03);
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.editor-styles-wrapper .pattern_blog_posts_categories .wp-block-shortcode::before {
+  content: "Contenu dynamique — Articles";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(164, 0, 39, 0.7);
+}
+
+.editor-styles-wrapper .pattern_blog_posts_categories .wp-block-shortcode::after {
+  content: "Affiche automatiquement les catégories d'articles avec leurs images et liens. Le rendu réel s'affiche sur le site.";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.875rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 460px;
+}

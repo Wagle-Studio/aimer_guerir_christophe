@@ -5,11 +5,11 @@
 .single__back-wrapper {
   z-index: 10000;
   position: sticky;
-  top: 193px;
+  top: 161px;
   width: 100%;
   max-width: 980px;
   margin: 48px auto 0;
-  padding: 16px 24px 12px;
+  padding: 16px 0 12px;
   background-color: #faf9f6;
 }
 
@@ -165,6 +165,7 @@
 @media screen and (max-width: 767px) {
   .single__back-wrapper {
     top: 126px;
+    padding: 16px 24px 12px;
   }
 
   .single__pill {

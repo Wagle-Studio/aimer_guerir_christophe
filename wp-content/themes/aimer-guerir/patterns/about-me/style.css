@@ -68,6 +68,10 @@ img.pattern_about__image {
   gap: 6px;
 }
 
+.pattern_about__presentation {
+  text-align: justify;
+}
+
 .pattern_about__header_subtitle {
   color: var(--primary);
   font-family: var(--font-body);
@@ -80,6 +84,10 @@ img.pattern_about__image {
   flex: 1;
   gap: 24px;
   margin-top: 16px;
+}
+
+.pattern_about__subpart_description {
+  text-align: justify;
 }
 
 @media screen and (min-width: 768px) {
