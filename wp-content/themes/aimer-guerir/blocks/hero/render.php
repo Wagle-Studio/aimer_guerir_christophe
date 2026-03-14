@@ -53,8 +53,10 @@ $image_html = wp_get_attachment_image(
 	'full',
 	false,
 	array(
-		'class' => 'hero_identity_image',
-		'sizes' => '(max-width: 767px) 360px, 300px',
+		'class'         => 'hero_identity_image',
+		'sizes'         => '(max-width: 767px) 360px, 300px',
+		'loading'       => 'eager',
+		'fetchpriority' => 'high',
 	)
 );
 

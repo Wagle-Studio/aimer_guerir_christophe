@@ -74,27 +74,7 @@ add_filter('document_title_parts', function ($parts) {
 	return $parts;
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Balise meta description
-// Injecte une balise <meta name="description"> dans le <head> de chaque page.
-// Sur la page d'accueil : utilise la description du site (Réglages > Général).
-// Sur les autres pages : utilise l'extrait de la page courante.
-// ─────────────────────────────────────────────────────────────────────────────
-add_action('wp_head', function () {
-	if (is_front_page()) {
-		$description = get_bloginfo('description');
-	} else {
-		$description = get_the_excerpt();
-	}
-
-	// Nettoie les balises HTML et les espaces superflus
-	$description = trim(wp_strip_all_tags($description));
-	if ('' === $description) {
-		return;
-	}
-
-	echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
-}, 1);
+// Meta description gérée par Yoast SEO.
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Invalidation du cache des patterns (admin uniquement)

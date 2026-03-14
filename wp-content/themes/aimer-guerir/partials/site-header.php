@@ -25,7 +25,7 @@
 			</div>
 			<div class="site-header__contact-item">
 				<span class="site-header__contact-label">Adresse</span>
-				<span class="site-header__contact-value"><?php echo esc_html(get_theme_mod('aimer_guerir_contact_address_street', "24 rue de l'Horloge")); ?>,<br><?php echo esc_html(get_theme_mod('aimer_guerir_contact_address_city', 'Vernon 27200')); ?></span>
+				<a class="site-header__contact-value" href="https://www.google.fr/maps/place/Aimer+Gu%C3%A9rir+-+Christophe+Rebours+-+Magn%C3%A9tiseur+Energ%C3%A9ticien/@49.090221,1.4736775,17z/data=!4m15!1m8!3m7!1s0x47e6cbc2d9e0c1bb:0x66a52c1a90689d22!2s24+Rue+de+l'Horloge,+27200+Vernon!3b1!8m2!3d49.0902175!4d1.4762524!16s%2Fg%2F11c12ps144!3m5!1s0x47e6c97507576f15:0x9145d4306984bf61!8m2!3d49.0901809!4d1.4762731!16s%2Fg%2F11lkk2k5nd?hl=fr&entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer"><?php echo esc_html(get_theme_mod('aimer_guerir_contact_address_street', "24 rue de l'Horloge")); ?>,<br><?php echo esc_html(get_theme_mod('aimer_guerir_contact_address_city', 'Vernon 27200')); ?></a>
 			</div>
 		</div>
 	</div>

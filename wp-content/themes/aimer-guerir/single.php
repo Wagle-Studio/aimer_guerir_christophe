@@ -11,6 +11,11 @@
 			</div>
 			<p class="single__pill">Article</p>
 			<h1 class="single__title"><?php the_title(); ?></h1>
+			<div class="single__meta">
+				<span class="single__meta-author">Par <a href="<?php echo esc_url(home_url('/qui-je-suis/')); ?>">Christophe Rebours</a></span>
+				<span class="single__meta-separator" aria-hidden="true">·</span>
+				<time class="single__meta-date" datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('j F Y')); ?></time>
+			</div>
 			<div class="entry-content">
 				<?php the_content(); ?>
 			</div>
