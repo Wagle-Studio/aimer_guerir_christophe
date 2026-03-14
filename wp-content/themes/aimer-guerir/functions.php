@@ -1192,7 +1192,7 @@ add_action('wp_footer', function () {
 	z-index: 10000;
 	width: 100%;
 	margin: 0 auto;
-	padding: 16px 24px 12px;
+	padding: 16px 0 12px;
 	background-color: #faf9f6;
 }
 @media screen and (max-width: 767px) {
