@@ -2,9 +2,17 @@
   display: flex;
   flex-direction: column;
   gap: 64px;
+  width: 100%;
   max-width: 1280px;
   padding: 0 24px;
-  margin: 100px auto;
+  margin: 60px auto;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .testimonials {
+    margin: 100px auto;
+  }
 }
 
 .testimonials__header {
@@ -61,6 +69,8 @@
 
 .testimonials__list {
   overflow: hidden;
+  width: 100%;
+  min-width: 0;
 }
 
 .testimonials__track {
@@ -89,7 +99,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
-  flex: 0 0 320px;
+  flex: 0 0 clamp(260px, calc(100vw - 80px), 320px);
   margin: 0;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 3px;
@@ -116,6 +126,26 @@
   justify-content: center;
   gap: 16px;
   width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .testimonials {
+    gap: 40px;
+  }
+
+  .testimonials__header {
+    gap: 20px;
+  }
+
+  .testimonials__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .testimonials__actions .btn {
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 @media screen and (min-width: 900px) {
