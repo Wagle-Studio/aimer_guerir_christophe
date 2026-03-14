@@ -77,6 +77,21 @@ add_filter('document_title_parts', function ($parts) {
 // Meta description gérée par Yoast SEO.
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Forcer post_status=publish sur les archives front-end
+// WordPress inclut les posts privés pour les admins connectés. On s'assure que
+// la query principale sur les archives (catégories, tags…) ne retourne que du
+// contenu publié, quel que soit l'utilisateur.
+// ─────────────────────────────────────────────────────────────────────────────
+add_action('pre_get_posts', function (WP_Query $query): void {
+	if (is_admin() || ! $query->is_main_query()) {
+		return;
+	}
+	if ($query->is_archive() || $query->is_category() || $query->is_tag()) {
+		$query->set('post_status', 'publish');
+	}
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Invalidation du cache des patterns (admin uniquement)
 // WordPress met en cache la liste des patterns pour éviter de relire les fichiers
 // à chaque requête. Cette fonction détecte si un fichier .php de pattern a été
@@ -800,6 +815,7 @@ function temoignage_shortcode(array $atts): string
 
 	$args = [
 		'post_type'      => 'temoignage',
+		'post_status'    => 'publish',
 		'order'          => $ordre,
 		'orderby'        => 'date',
 		'posts_per_page' => $nombre === -1 ? -1 : $nombre,
@@ -845,7 +861,7 @@ add_shortcode('temoignages', 'temoignage_shortcode');
 // ─────────────────────────────────────────────────────────────────────────────
 function temoignages_categories_shortcode(): string
 {
-	$terms = get_terms(['taxonomy' => 'categorie_temoignage', 'hide_empty' => false]);
+	$terms = get_terms(['taxonomy' => 'categorie_temoignage', 'hide_empty' => true]);
 
 	if (empty($terms) || is_wp_error($terms)) {
 		return '';
@@ -876,7 +892,7 @@ add_shortcode('temoignages_categories', 'temoignages_categories_shortcode');
 // ─────────────────────────────────────────────────────────────────────────────
 function articles_categories_shortcode(): string
 {
-	$terms = get_terms(['taxonomy' => 'category', 'hide_empty' => false]);
+	$terms = get_terms(['taxonomy' => 'category', 'hide_empty' => true]);
 
 	if (empty($terms) || is_wp_error($terms)) {
 		return '';
@@ -1520,6 +1536,7 @@ function faq_accordion_shortcode(): string {
 	foreach ($terms as $term) {
 		$posts = new WP_Query([
 			'post_type'      => 'faq',
+			'post_status'    => 'publish',
 			'posts_per_page' => -1,
 			'orderby'        => 'date',
 			'order'          => 'ASC',
