@@ -17,8 +17,8 @@
       <p class="pattern_about_cabinet__title">Votre guérison est mon moteur au quotidien</p>
       <!-- /wp:paragraph -->
 
-      <!-- wp:heading {"level":1,"className":"pattern_about_cabinet__subtitle"} -->
-      <h1 class="pattern_about_cabinet__subtitle">Pourquoi j'ai dénommé mon cabinet "Aimer Guérir"</h1>
+      <!-- wp:heading {"level":2,"className":"pattern_about_cabinet__subtitle"} -->
+      <h2 class="pattern_about_cabinet__subtitle">Pourquoi j'ai dénommé mon cabinet "Aimer Guérir"</h2>
       <!-- /wp:heading -->
     </div>
     <!-- /wp:group -->
