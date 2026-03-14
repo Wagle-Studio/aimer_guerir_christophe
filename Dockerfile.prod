@@ -11,4 +11,13 @@ RUN find /var/www/html/wp-content/themes -maxdepth 1 -mindepth 1 -type d ! -name
 # Génère bundle.css à partir des sources CSS (tokens + main + partials + blocs + patterns)
 RUN bash /var/www/html/wp-content/themes/aimer-guerir/build.sh
 
+# Installe les plugins WordPress publics
+RUN apt-get update && apt-get install -y --no-install-recommends unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl -L https://downloads.wordpress.org/plugin/wordpress-seo.latest-stable.zip \
+        -o /tmp/wordpress-seo.zip \
+    && unzip /tmp/wordpress-seo.zip -d /var/www/html/wp-content/plugins/ \
+    && rm /tmp/wordpress-seo.zip
+
 RUN chown -R www-data:www-data /var/www/html/wp-content
